@@ -347,7 +347,6 @@ function divShowReading() {
         reading.classList.add('div-fade-in');
     }
 
-    /* Build summary */
     var summary = $('#divCardsSummary');
     if (!summary) return;
     summary.innerHTML = '';
@@ -358,18 +357,31 @@ function divShowReading() {
         var card = divState.drawnCards[i];
         var posLabel = config.positions[i][currentLang] || config.positions[i].zh;
         var topicKey = divState.topic;
-        var meaningKey = topicKey === 'general' ? 'advice' : topicKey;
 
-        var natureClass = 'div-nature--' + card.nature;
-        var natureLabel = card.nature === 'positive' ? (currentLang === 'zh' ? '正面' : 'Positive') :
-                          card.nature === 'negative' ? (currentLang === 'zh' ? '负面' : 'Negative') :
-                          (currentLang === 'zh' ? '中性' : 'Neutral');
+        /* 主体内容：综合→core，其他→对应领域 */
+        var meaningKey = (topicKey === 'general') ? null : topicKey;
+        var mainContent = (meaningKey && card.meanings[meaningKey])
+            ? (card.meanings[meaningKey][currentLang] || card.meanings[meaningKey].zh)
+            : (card.core[currentLang] || card.core.zh);
 
-        var keywords = (card.keywords[currentLang] || card.keywords.zh).join(' · ');
-        var coreTxt = card.core[currentLang] || card.core.zh;
-        var meaningTxt = card.meanings[meaningKey] ? (card.meanings[meaningKey][currentLang] || card.meanings[meaningKey].zh) : coreTxt;
-        var adviceTxt = card.meanings.advice ? (card.meanings.advice[currentLang] || card.meanings.advice.zh) : '';
+        /* 建议：只要不是选了「建议」本身，就单独显示 */
+        var adviceTxt = (meaningKey !== 'advice' && card.meanings.advice)
+            ? (card.meanings.advice[currentLang] || card.meanings.advice.zh)
+            : '';
+
         var timeTxt = card.time ? (card.time[currentLang] || card.time.zh) : '';
+        var natureClass = 'div-nature--' + card.nature;
+        var natureLabel = card.nature === 'positive'
+            ? (currentLang === 'zh' ? '正面' : 'Positive')
+            : card.nature === 'negative'
+            ? (currentLang === 'zh' ? '负面' : 'Negative')
+            : (currentLang === 'zh' ? '中性' : 'Neutral');
+        var keywords = (card.keywords[currentLang] || card.keywords.zh).join(' · ');
+
+        /* 主体标签：综合显示「核心牌意」，其他显示对应领域 */
+        var mainLabel = (topicKey === 'general')
+            ? (currentLang === 'zh' ? '核心牌意' : 'Core Meaning')
+            : divGetTopicLabel(topicKey);
 
         var html =
             '<div class="div-summary-card glass-card div-fade-in" style="animation-delay:' + (i * 0.1) + 's">' +
@@ -380,29 +392,27 @@ function divShowReading() {
                 '<div class="div-summary-main">' +
                     '<span class="div-summary-emoji">' + card.emoji + '</span>' +
                     '<div class="div-summary-info">' +
-                        '<div class="div-summary-name">' + (card.name[currentLang] || card.name.zh) + '<span class="mono">#' + card.id + '</span></div>' +
+                        '<div class="div-summary-name">' + (card.name[currentLang] || card.name.zh) + '<span class="mono"> #' + card.id + '</span></div>' +
                         '<div class="div-summary-keywords mono">' + keywords + '</div>' +
                     '</div>' +
                 '</div>' +
-                '<div class="div-summary-core">' + coreTxt + '</div>' +
                 '<div class="div-summary-meaning">' +
-                    '<span class="div-summary-meaning-label mono">' + divGetTopicLabel(topicKey) + '</span>' +
-                    '<p>' + meaningTxt + '</p>' +
+                    '<span class="div-summary-meaning-label mono">' + mainLabel + '</span>' +
+                    '<p>' + mainContent + '</p>' +
                 '</div>' +
-                (adviceTxt ? '<div class="div-summary-advice"><span class="div-summary-meaning-label mono">' + t('div_advice_label') + '</span><p>' + adviceTxt + '</p></div>' : '') +
+                (adviceTxt
+                    ? '<div class="div-summary-advice"><span class="div-summary-meaning-label mono">' + t('div_advice_label') + '</span><p>' + adviceTxt + '</p></div>'
+                    : '') +
                 (timeTxt ? '<div class="div-summary-time mono">⏱ ' + timeTxt + '</div>' : '') +
             '</div>';
 
         summary.innerHTML += html;
     }
 
-    /* Show AI button if configured */
+    /* AI 按钮始终显示 */
     var aiSection = $('#divAISection');
-    if (aiSection) {
-        aiSection.style.display = isAIConfigured() ? '' : 'none';
-    }
+    if (aiSection) aiSection.style.display = '';
 
-    /* Scroll to reading */
     setTimeout(function() {
         if (reading) reading.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 200);
@@ -410,18 +420,24 @@ function divShowReading() {
 
 function divGetTopicLabel(topic) {
     var map = {
-        work: t('div_topic_work'),
-        love: t('div_topic_love'),
-        health: t('div_topic_health'),
-        money: t('div_topic_money'),
+        work:    t('div_topic_work'),
+        love:    t('div_topic_love'),
+        health:  t('div_topic_health'),
+        money:   t('div_topic_money'),
         general: t('div_topic_general')
     };
     return map[topic] || map.general;
 }
 /* == END: divination-reading == */
 
+
 /* == BLOCK: divination-ai == */
 function divRequestAI() {
+        if (!isAIConfigured()) {
+        showToast('ai_not_configured');
+        setTimeout(function() { navigateTo('settings'); }, 1500);
+        return;
+    }
     var aiBtn = $('#divAIBtn');
     var aiResult = $('#divAIResult');
     var aiLoading = $('#divAILoading');
