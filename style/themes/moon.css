@@ -1,17 +1,20 @@
 /* == BLOCK: theme-moon == */
 [data-theme="moon"] {
-  --bg:           #050508;
-  --surface:      #0e0e18;
-  --accent:       #a78bfa;
-  --accent-glow:  rgba(167, 139, 250, 0.12);
-  --text:         #f0f0f8;
-  --text-muted:   rgba(240, 240, 248, 0.35);
-  --glass-bg:     rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --orb-a:        rgba(120, 80, 220, 0.12);
-  --orb-b:        rgba(60,  40, 120, 0.10);
-  --orb-c:        rgba(180, 140, 255, 0.06);
+    --bg: #0d0d1a;
+    --surface: #13132a;
+    --accent: #a78bfa;
+    --accent-glow: rgba(167, 139, 250, 0.25);
+    --text: #e8e8f0;
+    --text-muted: rgba(232, 232, 240, 0.45);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-highlight: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="moon"] .bottom-nav {
+    background: rgba(13, 13, 26, 0.6);
 }
 /* == END: theme-moon == */
+
 
 

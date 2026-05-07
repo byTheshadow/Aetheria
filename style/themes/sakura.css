@@ -1,16 +1,33 @@
 /* == BLOCK: theme-sakura == */
 [data-theme="sakura"] {
-  --bg:           #0d080b;
-  --surface:      #180d12;
-  --accent:       #f9a8d4;
-  --accent-glow:  rgba(249, 168, 212, 0.12);
-  --text:         #fdf0f5;
-  --text-muted:   rgba(253, 240, 245, 0.35);
-  --glass-bg:     rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --orb-a:        rgba(220, 80, 130, 0.10);
-  --orb-b:        rgba(180, 60, 100, 0.08);
-  --orb-c:        rgba(255, 180, 210, 0.06);
+    --bg: #fff0f5;
+    --surface: #ffe4ef;
+    --accent: #f472b6;
+    --accent-glow: rgba(244, 114, 182, 0.25);
+    --text: #4a2040;
+    --text-muted: rgba(74, 32, 64, 0.45);
+    --glass-bg: rgba(255, 255, 255, 0.35);
+    --glass-border: rgba(244, 114, 182, 0.15);
+    --glass-highlight: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="sakura"] .bottom-nav {
+    background: rgba(255, 240, 245, 0.6);
+}
+
+[data-theme="sakura"] .bg-orb {
+    opacity: 0.15;
+}
+
+[data-theme="sakura"] .orb-1 { background: #f9a8d4; }
+[data-theme="sakura"] .orb-2 { background: #fbcfe8; }
+[data-theme="sakura"] .orb-3 { background: #f472b6; }
+[data-theme="sakura"] .orb-4 { background: #fda4af; }
+
+[data-theme="sakura"] .toast {
+    background: rgba(255, 240, 245, 0.85);
+    color: var(--text);
 }
 /* == END: theme-sakura == */
+
 

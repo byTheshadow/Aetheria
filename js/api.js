@@ -1,74 +1,505 @@
-/* == BLOCK: api-wrapper == */
-window.AetheriaAPI = (function () {
-  'use strict';
+/* == BLOCK: i18n == */
+const I18N = {
+    zh: {
+        nav_home: '首页',
+        nav_divination: '占卜',
+        nav_wheel: '转盘',
+        nav_destroy: '销毁',
+        nav_daily: '日常',
+        nav_settings: '设置',
+        home_subtitle: 'JUST FOR U · Aetheria',
+        home_daily_card: '今日一卡',
+        home_tarot_hint: '点击前往占卜抽取今日卡牌',
+        home_mood: '心情速记',
+        home_mood_save: '记录',
+        div_desc: '选择你的牌阵，聆听宇宙的低语',
+        wheel_desc: '把选择交给命运',
+        destroy_desc: '写下你想摧毁的一切',
+        daily_desc: '记录你的每一天',
+        coming_soon: '即将开放',
+        set_theme: '主题',
+        set_bg: '背景',
+        set_bg_upload: '上传图片',
+        set_or: '或',
+        set_bg_url_ph: '粘贴图片 URL',
+        set_bg_apply: '应用',
+        set_bg_reset: '恢复默认背景',
+        set_lang: '语言',
+        set_ai: 'AI 服务',
+        set_ai_key_ph: 'API Key',
+        set_ai_save: '保存 AI 配置',
+        set_data: '数据',
+        set_data_export: '导出 JSON',
+        set_data_clear: '清除所有数据',
+        greeting_morning: '早安，今天也要好好的',
+        greeting_afternoon: '午后时光，慢慢来',
+        greeting_evening: '晚上好，辛苦了一天',
+        greeting_night: '夜深了，好好休息',
+        toast_mood_saved: '心情已记录 ✨',
+        toast_theme_changed: '主题已切换',
+        toast_bg_set: '背景已设置',
+        toast_bg_reset: '背景已恢复',
+        toast_ai_saved: 'AI 配置已保存',
+        toast_exported: '数据已导出',
+        toast_cleared: '所有数据已清除',
+        toast_confirm_clear: '再次点击确认清除所有数据',},
+    en: {
+        nav_home: 'Home',
+        nav_divination: 'Divine',
+        nav_wheel: 'Wheel',
+        nav_destroy: 'Destroy',
+        nav_daily: 'Daily',
+        nav_settings: 'Settings',
+        home_subtitle: 'JUST FOR U · Aetheria',
+        home_daily_card: 'Daily Card',
+        home_tarot_hint: 'Tap to draw your daily card',
+        home_mood: 'Quick Mood',
+        home_mood_save: 'Log',
+        div_desc: 'Choose your spread, listen to the cosmos',
+        wheel_desc: 'Leave it to fate',
+        destroy_desc: 'Write down what you want to destroy',
+        daily_desc: 'Track your every day',
+        coming_soon: 'Coming Soon',
+        set_theme: 'Theme',
+        set_bg: 'Background',
+        set_bg_upload: 'Upload Image',
+        set_or: 'or',
+        set_bg_url_ph: 'Paste image URL',
+        set_bg_apply: 'Apply',
+        set_bg_reset: 'Reset Background',
+        set_lang: 'Language',
+        set_ai: 'AI Provider',
+        set_ai_key_ph: 'API Key',
+        set_ai_save: 'Save AI Config',
+        set_data: 'Data',
+        set_data_export: 'Export JSON',
+        set_data_clear: 'Clear All Data',
+        greeting_morning: 'Good morning, take it easy',
+        greeting_afternoon: 'Good afternoon, slow down',
+        greeting_evening: 'Good evening, you did well today',
+        greeting_night: 'It\'s late, rest well',
+        toast_mood_saved: 'Mood logged ✨',
+        toast_theme_changed: 'Theme changed',
+        toast_bg_set: 'Background set',
+        toast_bg_reset: 'Background reset',
+        toast_ai_saved: 'AI config saved',
+        toast_exported: 'Data exported',
+        toast_cleared: 'All data cleared',
+        toast_confirm_clear: 'Click again to confirm clearing all data',
+    }
+};
+/* == END: i18n == */
 
-  function getConfig() {
-    return {
-      baseUrl: localStorage.getItem('aetheria_ai_baseurl') || 'https://api.deepseek.com',
-      apiKey:  localStorage.getItem('aetheria_ai_key')     || '',
-      model:   localStorage.getItem('aetheria_ai_model')   || 'deepseek-chat',
-    };
-  }
+/* == BLOCK: quotes == */
+const QUOTES = {
+    zh: [
+        '你不必成为任何人，你已经足够好了。',
+        '允许自己慢下来，这不是退步。',
+        '每一次呼吸都是重新开始的机会。',
+        '你值得被温柔以待。',
+        '今天的你，比昨天更勇敢了一点。',
+        '不完美也是一种完整。',
+        '你的感受是真实的，它们都值得被看见。',
+        '休息不是偷懒，是为了走更远的路。',
+        '黑夜终将过去，星光会为你留下。',
+        '你正在做的已经很好了。',
+        '温柔是一种力量，不是软弱。',
+        '允许自己不开心，也允许自己重新快乐。',
+        '你的存在本身就是一件美好的事。',
+        '慢慢来，花总会开的。',
+        '今天也是值得被记住的一天。',
+    ],
+    en: [
+        'You don\'t have to be anyone else. You are enough.',
+        'It\'s okay to slow down. That\'s not falling behind.',
+        'Every breath is a chance to begin again.',
+        'You deserve to be treated gently.',
+        'You are a little braver today than yesterday.',
+        'Imperfection is its own kind of wholeness.',
+        'Your feelings are real and they deserve to be seen.',
+        'Rest is not laziness — it\'s fuel for the journey.',
+        'The night will pass. The stars will stay for you.',
+        'What you\'re doing is already enough.',
+        'Gentleness is strength, not weakness.',
+        'It\'s okay to feel sad. It\'s also okay to feel joy again.',
+        'Your existence itself is a beautiful thing.',
+        'Take your time. Flowers always bloom eventually.',
+        'Today is a day worth remembering.',
+    ]
+};
+/* == END: quotes == */
 
-  function isConfigured() {
-    return !!getConfig().apiKey;
-  }
+/* == BLOCK: state == */
+let currentLang = localStorage.getItem('aetheria_lang') || 'zh';
+let currentTheme = localStorage.getItem('aetheria_theme') || 'moon';
+let currentPage = 'home';
+let clearConfirm = false;
+let clockInterval = null;
+/* == END: state == */
 
-  async function chat(messages, onChunk) {
-    const { baseUrl, apiKey, model } = getConfig();
-    if (!apiKey) throw new Error('未配置 API Key');
+/* == BLOCK: utils == */
+function $(sel) { return document.querySelector(sel); }
+function $$(sel) { return document.querySelectorAll(sel); }
 
-    const endpoint = baseUrl.replace(/\/$/, '') + '/chat/completions';
-    const stream   = typeof onChunk === 'function';
+function t(key) {
+    return (I18N[currentLang] && I18N[currentLang][key]) || key;
+}
 
-    const res = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type':  'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model,
-        messages,
-        stream,
-        temperature: 0.85,
-        max_tokens:  800,
-      }),
+function showToast(msgKey) {
+    const toast = $('#toast');
+    toast.textContent = t(msgKey);
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2200);
+}
+
+function formatDate(date, lang) {
+    const opts = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+    return date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', opts);
+}
+
+function formatTime(date) {
+    return date.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
+
+function getGreetingKey() {
+    const h = new Date().getHours();
+    if (h >= 5 && h < 12) return 'greeting_morning';
+    if (h >= 12 && h < 18) return 'greeting_afternoon';
+    if (h >= 18 && h < 22) return 'greeting_evening';
+    return 'greeting_night';
+}
+
+function getDailyQuote() {
+    const quotes = QUOTES[currentLang] || QUOTES.zh;
+    const today = new Date();
+    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    return quotes[seed % quotes.length];
+}
+/* == END: utils == */
+
+/* == BLOCK: i18n-apply == */
+function applyI18n() {
+    $$('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = t(key);
+    });
+    $$('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        el.placeholder = t(key);
+    });
+}
+/* == END: i18n-apply == */
+
+/* == BLOCK: theme == */
+function applyTheme(theme) {
+    currentTheme = theme;
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('aetheria_theme', theme);$$('.theme-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === theme);
+    });
+}
+/* == END: theme == */
+
+/* == BLOCK: background == */
+function applyBackground() {
+    const bgCustom = $('#bgCustom');
+    const bgData = localStorage.getItem('aetheria_bg');
+
+    if (bgData) {
+        bgCustom.style.backgroundImage = `url(${bgData})`;
+        bgCustom.classList.add('active');
+    } else {
+        bgCustom.style.backgroundImage = '';
+        bgCustom.classList.remove('active');
+    }
+}
+
+function setupBackgroundHandlers() {
+    const upload = $('#bgUpload');
+    const urlInput = $('#bgUrlInput');
+    const urlApply = $('#bgUrlApply');
+    const reset = $('#bgReset');
+
+    upload.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // Check file size (max ~2MB for localStorage safety)
+        if (file.size > 2 * 1024 * 1024) {
+            showToast('toast_bg_set');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            localStorage.setItem('aetheria_bg', ev.target.result);
+            applyBackground();
+            showToast('toast_bg_set');
+        };
+        reader.readAsDataURL(file);
     });
 
-    if (!res.ok) {
-      const err = await res.text();
-      throw new Error(`API 错误 ${res.status}: ${err}`);
+    urlApply.addEventListener('click', () => {
+        const url = urlInput.value.trim();
+        if (!url) return;
+        localStorage.setItem('aetheria_bg', url);
+        applyBackground();
+        showToast('toast_bg_set');
+        urlInput.value = '';
+    });
+
+    reset.addEventListener('click', () => {
+        localStorage.removeItem('aetheria_bg');
+        applyBackground();
+        showToast('toast_bg_reset');
+    });
+}
+/* == END: background == */
+
+/* == BLOCK: routing == */
+function navigateTo(page) {
+    if (page === currentPage) return;
+
+    const oldPage = $(`#page-${currentPage}`);
+    const newPage = $(`#page-${page}`);
+
+    if (!newPage) return;
+
+    // Animate out
+    if (oldPage) {
+        oldPage.style.opacity = '0';
+        oldPage.style.transform = 'translateY(12px)';
+        setTimeout(() => {
+            oldPage.classList.remove('page--active');
+            oldPage.style.opacity = '';
+            oldPage.style.transform = '';
+        }, 300);
     }
 
-    if (!stream) {
-      const data = await res.json();
-      return data.choices?.[0]?.message?.content || '';
+    // Animate in
+    setTimeout(() => {
+        newPage.classList.add('page--active');
+        // Force reflow
+        newPage.offsetHeight;
+        newPage.style.opacity = '1';
+        newPage.style.transform = 'translateY(0)';
+    }, oldPage ? 150 : 0);
+
+    // Update nav$$('.nav-item').forEach(item => {
+        item.classList.toggle('active', item.dataset.page === page);
+    });
+
+    currentPage = page;
+}
+
+function setupNav() {
+    $$('.nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+            navigateTo(item.dataset.page);
+        });
+    });
+
+    // Home tarot card click → navigate to divination
+    const tarotCard = $('#homeTarotCard');
+    if (tarotCard) {
+        tarotCard.addEventListener('click', () => navigateTo('divination'));
+    }
+}
+/* == END: routing == */
+
+/* == BLOCK: home == */
+function updateHome() {
+    const now = new Date();
+
+    // Greeting
+    const greetEl = $('#homeGreeting');
+    if (greetEl) greetEl.textContent = t(getGreetingKey());
+
+    // Date
+    const dateEl = $('#homeDate');
+    if (dateEl) dateEl.textContent = formatDate(now, currentLang);
+
+    // Quote
+    const quoteEl = $('#quoteText');
+    if (quoteEl) quoteEl.textContent = getDailyQuote();
+}
+
+function startClock() {
+    const clockEl = $('#homeClock');
+    if (!clockEl) return;
+
+    const tick = () => {
+        clockEl.textContent = formatTime(new Date());
+    };
+    tick();
+    clockInterval = setInterval(tick, 1000);
+}
+
+function setupMoodSlider() {
+    const slider = $('#homeMoodSlider');
+    const value = $('#homeMoodValue');
+    const saveBtn = $('#homeMoodSave');
+
+    if (!slider || !value || !saveBtn) return;
+
+    slider.addEventListener('input', () => {
+        value.textContent = slider.value;
+    });
+
+    saveBtn.addEventListener('click', () => {
+        const today = new Date().toISOString().slice(0, 10);
+        const moods = JSON.parse(localStorage.getItem('aetheria_moods') || '{}');
+        moods[today] = parseInt(slider.value);
+        localStorage.setItem('aetheria_moods', JSON.stringify(moods));
+        showToast('toast_mood_saved');
+    });
+}
+/* == END: home == */
+
+/* == BLOCK: settings-handlers == */
+function setupSettings() {
+    // Theme picker
+    const themePicker = $('#themePicker');
+    if (themePicker) {
+        themePicker.addEventListener('click', (e) => {
+            const btn = e.target.closest('.theme-btn');
+            if (!btn) return;
+            applyTheme(btn.dataset.theme);
+            showToast('toast_theme_changed');
+        });
     }
 
-    // Streaming
-    const reader  = res.body.getReader();
-    const decoder = new TextDecoder();
-    let   full    = '';
+    // Language picker
+    const langPicker = $('#langPicker');
+    if (langPicker) {
+        langPicker.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-lang]');
+            if (!btn) return;
+            currentLang = btn.dataset.lang;
+            localStorage.setItem('aetheria_lang', currentLang);
+            $$('[data-lang]').forEach(b => b.classList.toggle('active', b.dataset.lang === currentLang));
+            applyI18n();
+            updateHome();
+        });
 
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      const chunk = decoder.decode(value, { stream: true });
-      const lines = chunk.split('\n').filter(l => l.startsWith('data: '));
-      for (const line of lines) {
-        const raw = line.slice(6).trim();
-        if (raw === '[DONE]') break;
-        try {
-          const parsed = JSON.parse(raw);
-          const delta  = parsed.choices?.[0]?.delta?.content || '';
-          if (delta) { full += delta; onChunk(delta, full); }
-        } catch (_) { /* skip malformed chunks */ }
-      }
+        // Set active lang button
+        $$('[data-lang]').forEach(b => b.classList.toggle('active', b.dataset.lang === currentLang));
     }
-    return full;
-  }
 
-  return { chat, isConfigured, getConfig };
-})();
-/* == END: api-wrapper == */
+    // AI config
+    const aiSave = $('#aiSave');
+    if (aiSave) {
+        // Load existing
+        const aiConfig = JSON.parse(localStorage.getItem('aetheria_ai') || '{}');
+        if (aiConfig.baseUrl) $('#aiBaseUrl').value = aiConfig.baseUrl;
+        if (aiConfig.model) $('#aiModel').value = aiConfig.model;
+        if (aiConfig.apiKey) $('#aiApiKey').value = aiConfig.apiKey;
+
+        aiSave.addEventListener('click', () => {
+            const config = {
+                baseUrl: $('#aiBaseUrl').value.trim(),
+                apiKey: $('#aiApiKey').value.trim(),
+                model: $('#aiModel').value.trim(),};
+            localStorage.setItem('aetheria_ai', JSON.stringify(config));
+            showToast('toast_ai_saved');
+        });
+    }
+
+    // Data export
+    const dataExport = $('#dataExport');
+    if (dataExport) {
+        dataExport.addEventListener('click', () => {
+            const data = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('aetheria_')) {
+                    try {
+                        data[key] = JSON.parse(localStorage.getItem(key));
+                    } catch {
+                        data[key] = localStorage.getItem(key);
+                    }
+                }
+            }
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `aetheria-backup-${new Date().toISOString().slice(0, 10)}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('toast_exported');
+        });
+    }
+
+    // Data clear
+    const dataClear = $('#dataClear');
+    if (dataClear) {
+        dataClear.addEventListener('click', () => {
+            if (!clearConfirm) {
+                clearConfirm = true;
+                showToast('toast_confirm_clear');
+                setTimeout(() => { clearConfirm = false; }, 3000);
+                return;
+            }
+            // Clear all aetheria data
+            const keysToRemove = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('aetheria_')) keysToRemove.push(key);
+            }
+            keysToRemove.forEach(k => localStorage.removeItem(k));
+            clearConfirm = false;
+
+            // Reset to defaults
+            currentLang = 'zh';
+            currentTheme = 'moon';
+            applyTheme('moon');
+            applyI18n();
+            applyBackground();
+            updateHome();
+            showToast('toast_cleared');
+        });
+    }
+
+    // Background
+    setupBackgroundHandlers();
+}
+/* == END: settings-handlers == */
+
+/* == BLOCK: init == */
+function init() {
+    // Apply saved theme
+    applyTheme(currentTheme);
+
+    // Apply i18n
+    applyI18n();
+
+    // Apply background
+    applyBackground();
+
+    // Setup navigation
+    setupNav();
+
+    // Setup home
+    updateHome();
+    startClock();
+    setupMoodSlider();
+
+    // Setup settings
+    setupSettings();
+
+    // Initial page
+    const firstPage = $('.page--active');
+    if (firstPage) {
+        firstPage.style.opacity = '1';
+        firstPage.style.transform = 'translateY(0)';
+    }
+}
+
+// DOM Ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
+/* == END: init == */
