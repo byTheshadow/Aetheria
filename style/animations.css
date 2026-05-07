@@ -1,0 +1,56 @@
+/* ============================================================
+   ANIMATIONS: 全局动画定义
+============================================================ */
+
+/* --- 背景球漂浮 --- */
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(30px, -40px) scale(1.05); }
+  66%       { transform: translate(-20px, 20px) scale(0.97); }
+}
+
+/* --- 页面淡入 --- */
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 脉冲 --- */
+@keyframes pulse {
+  0%, 100% { transform: scale(1);    opacity: 1; }
+  50%       { transform: scale(1.08); opacity: 0.75; }
+}
+
+/* --- 液态边框形变（用于特殊卡片） --- */
+@keyframes liquidMorph {
+  0%   { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
+  25%  { border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%; }
+  50%  { border-radius: 70% 30% 50% 50% / 40% 70% 30% 60%; }
+  75%  { border-radius: 30% 70% 60% 40% / 70% 30% 50% 50%; }
+  100% { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
+}
+
+/* --- 卡片浮入 --- */
+@keyframes cardSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 旋转 --- */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* --- 闪烁光晕 --- */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
+  50%       { box-shadow: 0 0 40px var(--accent-glow), 0 0 80px var(--accent-glow); }
+}
+
+/* --- 文字渐显 --- */
+@keyframes textFadeIn {
+  from { opacity: 0; letter-spacing: 0.2em; }
+  to   { opacity: 1; letter-spacing: normal; }
+}
+/* END ANIMATIONS */
