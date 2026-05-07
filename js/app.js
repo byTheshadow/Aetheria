@@ -1,662 +1,505 @@
-/* == BLOCK: init == */
-(function () {
-  'use strict';
-
-  const state = {
-    currentPage: 'home',
-    theme: localStorage.getItem('aetheria_theme') || 'moon',
-    repulled: false,
-  };
-
-  const body           = document.body;
-  const navItems       = document.querySelectorAll('.nav-item[data-page]');
-  const sections       = document.querySelectorAll('.page-section');
-  const themeToggleBtn = document.getElementById('themeToggleBtn');
-  const themePanel     = document.getElementById('themePanel');
-  const bgImageOverlay = document.getElementById('bgImageOverlay');
-  /* == END: init == */
-
-  /* == BLOCK: routing == */
-  function navigateTo(page) {
-    if (state.currentPage === page) return;
-    state.currentPage = page;
-
-    sections.forEach(s => s.classList.remove('active'));
-    navItems.forEach(b => b.classList.remove('active'));
-
-    const target    = document.getElementById('section-' + page);
-    const activeNav = document.querySelector(`.nav-item[data-page="${page}"]`);
-    if (target)    target.classList.add('active');
-    if (activeNav) activeNav.classList.add('active');
-
-    if (page === 'daily')      initDailyPage();
-    if (page === 'divination') initDivinationPage();
-  }
-
-  navItems.forEach(btn => {
-    btn.addEventListener('click', () => navigateTo(btn.dataset.page));
-  });
-  /* == END: routing == */
-
-  /* == BLOCK: theme == */
-  const THEMES = ['moon', 'sakura', 'forest', 'void'];
-
-  function applyTheme(theme) {
-    if (!THEMES.includes(theme)) theme = 'moon';
-    state.theme = theme;
-    body.setAttribute('data-theme', theme);
-    localStorage.setItem('aetheria_theme', theme);
-
-    document.querySelectorAll('[data-theme-btn], .theme-swatch, .theme-panel-item').forEach(el => {
-      el.classList.toggle('active', el.dataset.theme === theme);
-    });
-  }
-
-  // Header theme button → toggle panel
-  themeToggleBtn?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    themePanel?.classList.toggle('open');
-  });
-
-  document.addEventListener('click', (e) => {
-    if (themePanel?.classList.contains('open')) {
-      if (!themePanel.contains(e.target) && e.target !== themeToggleBtn) {
-        themePanel.classList.remove('open');
-      }
+/* == BLOCK: i18n == */
+const I18N = {
+    zh: {
+        nav_home: '首页',
+        nav_divination: '占卜',
+        nav_wheel: '转盘',
+        nav_destroy: '销毁',
+        nav_daily: '日常',
+        nav_settings: '设置',
+        home_subtitle: 'JUST FOR U · Aetheria',
+        home_daily_card: '今日一卡',
+        home_tarot_hint: '点击前往占卜抽取今日卡牌',
+        home_mood: '心情速记',
+        home_mood_save: '记录',
+        div_desc: '选择你的牌阵，聆听宇宙的低语',
+        wheel_desc: '把选择交给命运',
+        destroy_desc: '写下你想摧毁的一切',
+        daily_desc: '记录你的每一天',
+        coming_soon: '即将开放',
+        set_theme: '主题',
+        set_bg: '背景',
+        set_bg_upload: '上传图片',
+        set_or: '或',
+        set_bg_url_ph: '粘贴图片 URL',
+        set_bg_apply: '应用',
+        set_bg_reset: '恢复默认背景',
+        set_lang: '语言',
+        set_ai: 'AI 服务',
+        set_ai_key_ph: 'API Key',
+        set_ai_save: '保存 AI 配置',
+        set_data: '数据',
+        set_data_export: '导出 JSON',
+        set_data_clear: '清除所有数据',
+        greeting_morning: '早安，今天也要好好的',
+        greeting_afternoon: '午后时光，慢慢来',
+        greeting_evening: '晚上好，辛苦了一天',
+        greeting_night: '夜深了，好好休息',
+        toast_mood_saved: '心情已记录 ✨',
+        toast_theme_changed: '主题已切换',
+        toast_bg_set: '背景已设置',
+        toast_bg_reset: '背景已恢复',
+        toast_ai_saved: 'AI 配置已保存',
+        toast_exported: '数据已导出',
+        toast_cleared: '所有数据已清除',
+        toast_confirm_clear: '再次点击确认清除所有数据',},
+    en: {
+        nav_home: 'Home',
+        nav_divination: 'Divine',
+        nav_wheel: 'Wheel',
+        nav_destroy: 'Destroy',
+        nav_daily: 'Daily',
+        nav_settings: 'Settings',
+        home_subtitle: 'JUST FOR U · Aetheria',
+        home_daily_card: 'Daily Card',
+        home_tarot_hint: 'Tap to draw your daily card',
+        home_mood: 'Quick Mood',
+        home_mood_save: 'Log',
+        div_desc: 'Choose your spread, listen to the cosmos',
+        wheel_desc: 'Leave it to fate',
+        destroy_desc: 'Write down what you want to destroy',
+        daily_desc: 'Track your every day',
+        coming_soon: 'Coming Soon',
+        set_theme: 'Theme',
+        set_bg: 'Background',
+        set_bg_upload: 'Upload Image',
+        set_or: 'or',
+        set_bg_url_ph: 'Paste image URL',
+        set_bg_apply: 'Apply',
+        set_bg_reset: 'Reset Background',
+        set_lang: 'Language',
+        set_ai: 'AI Provider',
+        set_ai_key_ph: 'API Key',
+        set_ai_save: 'Save AI Config',
+        set_data: 'Data',
+        set_data_export: 'Export JSON',
+        set_data_clear: 'Clear All Data',
+        greeting_morning: 'Good morning, take it easy',
+        greeting_afternoon: 'Good afternoon, slow down',
+        greeting_evening: 'Good evening, you did well today',
+        greeting_night: 'It\'s late, rest well',
+        toast_mood_saved: 'Mood logged ✨',
+        toast_theme_changed: 'Theme changed',
+        toast_bg_set: 'Background set',
+        toast_bg_reset: 'Background reset',
+        toast_ai_saved: 'AI config saved',
+        toast_exported: 'Data exported',
+        toast_cleared: 'All data cleared',
+        toast_confirm_clear: 'Click again to confirm clearing all data',
     }
-  });
-
-  // Theme panel items
-  document.querySelectorAll('.theme-panel-item').forEach(btn => {
-    btn.addEventListener('click', () => {
-      applyTheme(btn.dataset.theme);
-      themePanel?.classList.remove('open');
-    });
-  });
-
-  // Settings swatches
-  document.querySelectorAll('.theme-swatch').forEach(btn => {
-    btn.addEventListener('click', () => applyTheme(btn.dataset.theme));
-  });
-
-  applyTheme(state.theme);
-  /* == END: theme == */
-
-  /* == BLOCK: background == */
-  function applyBackground(src) {
-    if (!src) {
-      bgImageOverlay.style.backgroundImage = '';
-      bgImageOverlay.classList.remove('active');
-      return;
-    }
-    bgImageOverlay.style.backgroundImage = `url(${CSS.escape ? src : src})`;
-    bgImageOverlay.classList.add('active');
-  }
-
-  const bgUrlInput  = document.getElementById('bgUrlInput');
-  const setBgUrlBtn = document.getElementById('setBgUrlBtn');
-  const bgFileInput = document.getElementById('bgFileInput');
-  const clearBgBtn  = document.getElementById('clearBgBtn');
-
-  setBgUrlBtn?.addEventListener('click', () => {
-    const url = bgUrlInput?.value.trim();
-    if (!url) return;
-    localStorage.setItem('aetheria_bg', url);
-    applyBackground(url);
-    showToast('背景已更新');
-  });
-
-  bgFileInput?.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      const b64 = ev.target.result;
-      localStorage.setItem('aetheria_bg', b64);
-      applyBackground(b64);
-      showToast('背景已更新');
-    };
-    reader.readAsDataURL(file);
-  });
-
-  clearBgBtn?.addEventListener('click', () => {
-    localStorage.removeItem('aetheria_bg');
-    applyBackground(null);
-    if (bgUrlInput) bgUrlInput.value = '';
-    showToast('背景已清除');
-  });
-
-  const savedBg = localStorage.getItem('aetheria_bg');
-  if (savedBg) applyBackground(savedBg);
-  /* == END: background == */
-
-  /* == BLOCK: greeting == */
-  function updateGreeting() {
-    const h    = new Date().getHours();
-    const timeEl = document.getElementById('greetingTime');
-    const textEl = document.getElementById('greetingText');
-
-    const map = [
-      { range: [5,  12], label: 'GOOD MORNING',   msgs: ['新的一天，轻轻开始', '早安，今天也要好好的', '清晨的你，最温柔'] },
-      { range: [12, 18], label: 'GOOD AFTERNOON',  msgs: ['今天过得怎么样？', '记得喝水休息', '你已经很棒了'] },
-      { range: [18, 22], label: 'GOOD EVENING',    msgs: ['今天，你还好吗？', '辛苦了，好好休息', '今天有什么想说的吗？'] },
-      { range: [22, 29], label: 'LATE NIGHT',      msgs: ['还没睡呀', '注意休息，明天见', '深夜的你，还好吗？'] },
-    ];
-
-    const slot = map.find(m => h >= m.range[0] && h < m.range[1]) || map[3];
-    if (timeEl) timeEl.textContent = slot.label;
-    if (textEl) textEl.textContent = slot.msgs[Math.floor(Math.random() * slot.msgs.length)];
-  }
-
-  updateGreeting();
-  /* == END: greeting == */
-
-  /* == BLOCK: mood-slider == */
-  function bindMoodSlider(sliderId, displayId) {
-    const slider  = document.getElementById(sliderId);
-    const display = document.getElementById(displayId);
-    if (!slider) return;
-
-    function update() {
-      const pct = ((slider.value - 1) / 9) * 100;
-      slider.style.background = `linear-gradient(to right, var(--accent) ${pct}%, rgba(255,255,255,0.1) ${pct}%)`;
-      if (display) display.textContent = slider.value;
-    }
-
-    slider.addEventListener('input', update);
-    update();
-  }
-
-  bindMoodSlider('quickMoodSlider', 'moodScoreDisplay');
-
-  document.getElementById('saveMoodBtn')?.addEventListener('click', () => {
-    const val = document.getElementById('quickMoodSlider')?.value;
-    saveMoodEntry({ score: parseInt(val), tags: [], note: '', silent: false });
-    showToast('心情已记录');
-  });
-  /* == END: mood-slider == */
-
-  /* == BLOCK: daily-card == */
-  function initDailyCard() {
-    const today = new Date().toDateString();
-    const saved = JSON.parse(localStorage.getItem('aetheria_daily_card') || '{}');
-
-    if (saved.date === today && saved.card) {
-      renderDailyCard(saved.card);
-      if (saved.repulled) {
-        state.repulled = true;
-        const btn = document.getElementById('repullBtn');
-        if (btn) { btn.textContent = '已重抽'; btn.disabled = true; }
-      }
-    } else {
-      window.addEventListener('aetheria:tarot-ready', () => {
-        const card = window.AetheriaTarot?.drawOne?.();
-        if (card) {
-          localStorage.setItem('aetheria_daily_card', JSON.stringify({ date: today, card, repulled: false }));
-          renderDailyCard(card);
-        }
-      }, { once: true });
-    }
-  }
-
-  function renderDailyCard(card) {
-    const emojiEl    = document.getElementById('dailyCardEmoji');
-    const nameEl     = document.getElementById('dailyCardName');
-    const keywordsEl = document.getElementById('dailyCardKeywords');
-    if (emojiEl)    emojiEl.textContent    = card.emoji || '✦';
-    if (nameEl)     nameEl.textContent     = card.name  || '—';
-    if (keywordsEl) keywordsEl.textContent = card.keywords?.join(' · ') || '—';
-  }
-
-  document.getElementById('repullBtn')?.addEventListener('click', () => {
-    if (state.repulled) { showToast('今天只能重抽一次'); return; }
-    const card = window.AetheriaTarot?.drawOne?.();
-    if (!card) return;
-    state.repulled = true;
-    const today = new Date().toDateString();
-    localStorage.setItem('aetheria_daily_card', JSON.stringify({ date: today, card, repulled: true }));
-    renderDailyCard(card);
-    const btn = document.getElementById('repullBtn');
-    if (btn) { btn.textContent = '已重抽'; btn.disabled = true; }
-    showToast('新的牌面');
-  });
-
-  initDailyCard();
-  /* == END: daily-card == */
-
-  /* == BLOCK: mood-data == */
-  function saveMoodEntry(entry) {
-    const today = new Date().toISOString().slice(0, 10);
-    const all   = JSON.parse(localStorage.getItem('aetheria_mood') || '{}');
-    all[today]  = { ...all[today], ...entry, date: today };
-    localStorage.setItem('aetheria_mood', JSON.stringify(all));
-  }
-
-  function getMoodHistory(days = 7) {
-    const all = JSON.parse(localStorage.getItem('aetheria_mood') || '{}');
-    return Array.from({ length: days }, (_, i) => {
-      const d = new Date();
-      d.setDate(d.getDate() - (days - 1 - i));
-      const key = d.toISOString().slice(0, 10);
-      return { date: key, score: all[key]?.score ?? null, dow: d.getDay() };
-    });
-  }
-  /* == END: mood-data == */
-
-  /* == BLOCK: daily-page == */
-  function initDailyPage() {
-    const dateEl = document.getElementById('dailyDateDisplay');
-    if (dateEl) {
-      dateEl.textContent = new Date().toLocaleDateString('zh-CN', {
-        month: 'long', day: 'numeric', weekday: 'long'
-      });
-    }
-
-    bindMoodSlider('dailyMoodSlider', null);
-
-    // Load today's saved mood
-    const today     = new Date().toISOString().slice(0, 10);
-    const allMoods  = JSON.parse(localStorage.getItem('aetheria_mood') || '{}');
-    const todayMood = allMoods[today];
-    if (todayMood) {
-      const slider = document.getElementById('dailyMoodSlider');
-      if (slider && todayMood.score) {
-        slider.value = todayMood.score;
-        slider.dispatchEvent(new Event('input'));
-      }
-      document.querySelectorAll('#moodTags .tag-btn').forEach(t => {
-        t.classList.toggle('active', (todayMood.tags || []).includes(t.dataset.tag));
-      });
-      const noteEl = document.getElementById('moodNote');
-      if (noteEl && todayMood.note) noteEl.value = todayMood.note;
-    }
-
-    document.querySelectorAll('#moodTags .tag-btn').forEach(btn => {
-      // Remove old listeners by cloning
-      const fresh = btn.cloneNode(true);
-      btn.parentNode.replaceChild(fresh, btn);
-      fresh.addEventListener('click', () => fresh.classList.toggle('active'));
-    });
-
-    document.getElementById('silentDayBtn')?.addEventListener('click', () => {
-      const score = parseInt(document.getElementById('dailyMoodSlider')?.value || 5);
-      saveMoodEntry({ score, tags: [], note: '', silent: true });
-      showToast('静默日已记录');
-    });
-
-    document.getElementById('saveDailyMoodBtn')?.addEventListener('click', () => {
-      const score = parseInt(document.getElementById('dailyMoodSlider')?.value || 5);
-      const tags  = [...document.querySelectorAll('#moodTags .tag-btn.active')].map(t => t.dataset.tag);
-      const note  = document.getElementById('moodNote')?.value || '';
-      saveMoodEntry({ score, tags, note, silent: false });
-      showToast('心情已保存');
-    });
-
-    drawMoodChart();
-    renderTasks();
-    renderHabits();
-  }
-  /* == END: daily-page == */
-
-  /* == BLOCK: mood-chart == */
-  function drawMoodChart() {
-    const canvas = document.getElementById('moodChart');
-    if (!canvas) return;
-    const ctx  = canvas.getContext('2d');
-    const data = getMoodHistory(7);
-    const w    = canvas.offsetWidth || 400;
-    const h    = 72;
-    canvas.width  = w;
-    canvas.height = h;
-
-    const accent = getComputedStyle(body).getPropertyValue('--accent').trim();
-    const muted  = getComputedStyle(body).getPropertyValue('--text-muted').trim();
-
-    ctx.clearRect(0, 0, w, h);
-
-    const padX = 12, padY = 10;
-    const iW   = w - padX * 2;
-    const iH   = h - padY * 2 - 14; // 14px for labels
-    const step = iW / (data.length - 1);
-
-    const pts = data.map((d, i) => ({
-      x: padX + i * step,
-      y: d.score !== null ? padY + iH - ((d.score - 1) / 9) * iH : null,
-    }));
-
-    // Fill gradient
-    const validPts = pts.filter(p => p.y !== null);
-    if (validPts.length > 1) {
-      const grad = ctx.createLinearGradient(0, 0, 0, h);
-      grad.addColorStop(0, accent + '30');
-      grad.addColorStop(1, accent + '00');
-
-      ctx.beginPath();
-      let started = false;
-      pts.forEach(p => {
-        if (p.y === null) return;
-        if (!started) { ctx.moveTo(p.x, p.y); started = true; }
-        else ctx.lineTo(p.x, p.y);
-      });
-      const last  = [...pts].reverse().find(p => p.y !== null);
-      const first = pts.find(p => p.y !== null);
-      ctx.lineTo(last.x, h - padY - 14);
-      ctx.lineTo(first.x, h - padY - 14);
-      ctx.closePath();
-      ctx.fillStyle = grad;
-      ctx.fill();
-
-      // Line
-      ctx.beginPath();
-      started = false;
-      pts.forEach(p => {
-        if (p.y === null) { started = false; return; }
-        if (!started) { ctx.moveTo(p.x, p.y); started = true; }
-        else ctx.lineTo(p.x, p.y);
-      });
-      ctx.strokeStyle = accent;
-      ctx.lineWidth   = 1.5;
-      ctx.lineJoin    = 'round';
-      ctx.lineCap     = 'round';
-      ctx.stroke();
-    }
-
-    // Dots + labels
-    const days = ['日','一','二','三','四','五','六'];
-    ctx.font      = '9px Courier New, monospace';
-    ctx.textAlign = 'center';
-
-    pts.forEach((p, i) => {
-      // Day label
-      ctx.fillStyle = 'rgba(255,255,255,0.2)';
-      ctx.fillText(days[data[i].dow], p.x, h - 2);
-
-      if (p.y === null) return;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
-      ctx.fillStyle   = accent;
-      ctx.shadowColor = accent;
-      ctx.shadowBlur  = 8;
-      ctx.fill();
-      ctx.shadowBlur  = 0;
-    });
-  }
-  /* == END: mood-chart == */
-
-  /* == BLOCK: tasks == */
-  function getTasks()       { return JSON.parse(localStorage.getItem('aetheria_tasks') || '[]'); }
-  function saveTasks(tasks) { localStorage.setItem('aetheria_tasks', JSON.stringify(tasks)); }
-
-  function renderTasks() {
-    const list = document.getElementById('taskList');
-    if (!list) return;
-    const tasks = getTasks();
-    list.innerHTML = '';
-
-    if (!tasks.length) {
-      list.innerHTML = `<li class="empty-state"><span class="empty-state-icon">✦</span><span class="empty-state-text">暂无任务</span></li>`;
-      return;
-    }
-
-    tasks.forEach((task, idx) => {
-      const li = document.createElement('li');
-      li.className = `task-item${task.done ? ' done' : ''}`;
-      li.innerHTML = `
-        <div class="task-check${task.done ? ' done' : ''}" data-idx="${idx}" role="checkbox" aria-checked="${task.done}" tabindex="0"></div>
-        <span class="task-text">${escapeHtml(task.text)}</span>
-        <span class="task-priority priority-${task.priority}"></span>
-        <button class="task-delete" data-idx="${idx}" aria-label="删除">×</button>
-      `;
-      list.appendChild(li);
-    });
-
-    list.querySelectorAll('.task-check').forEach(el => {
-      el.addEventListener('click', () => {
-        const t = getTasks();
-        t[+el.dataset.idx].done = !t[+el.dataset.idx].done;
-        saveTasks(t); renderTasks();
-      });
-    });
-
-    list.querySelectorAll('.task-delete').forEach(el => {
-      el.addEventListener('click', () => {
-        const t = getTasks();
-        t.splice(+el.dataset.idx, 1);
-        saveTasks(t); renderTasks();
-      });
-    });
-  }
-
-  document.getElementById('addTaskBtn')?.addEventListener('click', () => {
-    const row = document.getElementById('taskInputRow');
-    if (!row) return;
-    const visible = row.style.display !== 'none';
-    row.style.display = visible ? 'none' : 'flex';
-    if (!visible) document.getElementById('taskInput')?.focus();
-  });
-
-  function addTask() {
-    const input    = document.getElementById('taskInput');
-    const priority = document.getElementById('taskPriority');
-    const text     = input?.value.trim();
-    if (!text) return;
-    const tasks = getTasks();
-    tasks.push({ text, priority: priority?.value || 'mid', done: false, created: Date.now() });
-    saveTasks(tasks);
-    if (input) input.value = '';
-    document.getElementById('taskInputRow').style.display = 'none';
-    renderTasks();
-    showToast('任务已添加');
-  }
-
-  document.getElementById('confirmTaskBtn')?.addEventListener('click', addTask);
-   document.getElementById('taskInput')?.addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });
-  /* == END: tasks == */
-
-  /* == BLOCK: habits == */
-  function getHabits()        { return JSON.parse(localStorage.getItem('aetheria_habits') || '[]'); }
-  function saveHabits(habits) { localStorage.setItem('aetheria_habits', JSON.stringify(habits)); }
-
-  function calcStreak(checks) {
-    if (!checks?.length) return 0;
-    const sorted = [...checks].sort().reverse();
-    let streak = 0;
-    const cursor = new Date();
-    cursor.setHours(0, 0, 0, 0);
-    for (let i = 0; i < 365; i++) {
-      const key = cursor.toISOString().slice(0, 10);
-      if (sorted.includes(key)) { streak++; cursor.setDate(cursor.getDate() - 1); }
-      else break;
-    }
-    return streak;
-  }
-
-  function renderHabits() {
-    const container = document.getElementById('habitsList');
-    if (!container) return;
-    const habits = getHabits();
-    const today  = new Date().toISOString().slice(0, 10);
-    container.innerHTML = '';
-
-    if (!habits.length) {
-      container.innerHTML = `<div class="empty-state"><span class="empty-state-icon">✦</span><span class="empty-state-text">添加你的第一个习惯</span></div>`;
-      return;
-    }
-
-    habits.forEach((habit, idx) => {
-      const checked = habit.checks?.includes(today);
-      const streak  = calcStreak(habit.checks || []);
-      const div     = document.createElement('div');
-      div.className = `habit-item${checked ? ' checked' : ''}`;
-      div.innerHTML = `
-        <div class="habit-check" aria-label="${checked ? '已完成' : '未完成'}">${checked ? '✓' : ''}</div>
-        <span class="habit-name">${escapeHtml(habit.name)}</span>
-        <span class="habit-streak${streak > 0 ? ' active' : ''}">🔥 ${streak}d</span>
-        <button class="task-delete" data-idx="${idx}" aria-label="删除习惯">×</button>
-      `;
-
-      div.querySelector('.habit-check').addEventListener('click', (e) => {
-        e.stopPropagation();
-        const h = getHabits();
-        if (!h[idx].checks) h[idx].checks = [];
-        const ci = h[idx].checks.indexOf(today);
-        if (ci === -1) h[idx].checks.push(today);
-        else h[idx].checks.splice(ci, 1);
-        saveHabits(h);
-        renderHabits();
-      });
-
-      div.querySelector('.task-delete').addEventListener('click', (e) => {
-        e.stopPropagation();
-        const h = getHabits();
-        h.splice(idx, 1);
-        saveHabits(h);
-        renderHabits();
-      });
-
-      container.appendChild(div);
-    });
-  }
-
-  document.getElementById('addHabitBtn')?.addEventListener('click', () => {
-    const name = prompt('新习惯名称：');
-    if (!name?.trim()) return;
-    const habits = getHabits();
-    habits.push({ name: name.trim(), checks: [], created: Date.now() });
-    saveHabits(habits);
-    renderHabits();
-    showToast('习惯已添加');
-  });
-  /* == END: habits == */
-
-  /* == BLOCK: divination-page == */
-  function initDivinationPage() {
-    // Tab switching
-    document.querySelectorAll('.seg-btn[data-tab]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.seg-btn[data-tab]').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const isLenormand = btn.dataset.tab === 'lenormand';
-        document.getElementById('tabTarot')?.classList.toggle('hidden', isLenormand);
-        document.getElementById('tabLenormand')?.classList.toggle('hidden', !isLenormand);
-      });
-    });
-
-    // Spread selector
-    document.querySelectorAll('.seg-btn[data-spread]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.seg-btn[data-spread]').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      });
-    });
-
-    // Draw tarot
-    document.getElementById('drawCardsBtn')?.addEventListener('click', () => {
-      const spread = document.querySelector('.seg-btn[data-spread].active')?.dataset.spread || '1';
-      window.AetheriaTarot?.drawSpread?.(spread);
-    });
-
-    // Draw lenormand
-    document.getElementById('drawLenormandBtn')?.addEventListener('click', () => {
-      window.AetheriaTarot?.drawLenormand?.();
-    });
-  }
-  /* == END: divination-page == */
-
-    /* == BLOCK: settings == */
-  document.getElementById('saveAiBtn')?.addEventListener('click', () => {
-    const baseUrl = document.getElementById('aiBaseUrl')?.value.trim();
-    const apiKey  = document.getElementById('aiApiKey')?.value.trim();
-    const model   = document.getElementById('aiModel')?.value.trim();
-    if (baseUrl) localStorage.setItem('aetheria_ai_baseurl', baseUrl);
-    if (apiKey)  localStorage.setItem('aetheria_ai_key',     apiKey);
-    if (model)   localStorage.setItem('aetheria_ai_model',   model);
-    showToast('配置已保存');
-    window.dispatchEvent(new Event('aetheria:ai-config-updated'));
-  });
-
-  // Pre-fill saved config
-  (function loadAiConfig() {
-    const baseUrl = localStorage.getItem('aetheria_ai_baseurl');
-    const model   = localStorage.getItem('aetheria_ai_model');
-    const baseUrlEl = document.getElementById('aiBaseUrl');
-    const modelEl   = document.getElementById('aiModel');
-    const keyEl     = document.getElementById('aiApiKey');
-    if (baseUrl && baseUrlEl) baseUrlEl.value = baseUrl;
-    if (model   && modelEl)   modelEl.value   = model;
-    if (keyEl && localStorage.getItem('aetheria_ai_key')) {
-      keyEl.placeholder = '已保存（重新输入以更新）';
-    }
-  })();
-
-  document.getElementById('exportDataBtn')?.addEventListener('click', () => {
-    const keys = [
-      'aetheria_mood', 'aetheria_tasks', 'aetheria_habits',
-      'aetheria_daily_card', 'aetheria_wheel_options',
-      'aetheria_theme', 'aetheria_ai_baseurl', 'aetheria_ai_model',
-    ];
-    const data = {};
-    keys.forEach(k => {
-      const v = localStorage.getItem(k);
-      if (v) {
-        try { data[k] = JSON.parse(v); }
-        catch { data[k] = v; }
-      }
-    });
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url  = URL.createObjectURL(blob);
-    const a    = Object.assign(document.createElement('a'), {
-      href: url,
-      download: `aetheria-${new Date().toISOString().slice(0, 10)}.json`,
-    });
-    a.click();
-    URL.revokeObjectURL(url);
-    showToast('数据已导出');
-  });
-
-  document.getElementById('clearDataBtn')?.addEventListener('click', () => {
-    if (!confirm('确定清除所有数据？此操作不可撤销。')) return;
-    Object.keys(localStorage)
-      .filter(k => k.startsWith('aetheria_') && k !== 'aetheria_theme')
-      .forEach(k => localStorage.removeItem(k));
-    showToast('数据已清除');
-    setTimeout(() => location.reload(), 900);
-  });
-  /* == END: settings == */
-
-  /* == BLOCK: toast == */
-  let toastTimer = null;
-
-  function showToast(msg) {
-    const toast = document.getElementById('aetheriaToast');
-    if (!toast) return;
-    toast.textContent = msg;
+};
+/* == END: i18n == */
+
+/* == BLOCK: quotes == */
+const QUOTES = {
+    zh: [
+        '你不必成为任何人，你已经足够好了。',
+        '允许自己慢下来，这不是退步。',
+        '每一次呼吸都是重新开始的机会。',
+        '你值得被温柔以待。',
+        '今天的你，比昨天更勇敢了一点。',
+        '不完美也是一种完整。',
+        '你的感受是真实的，它们都值得被看见。',
+        '休息不是偷懒，是为了走更远的路。',
+        '黑夜终将过去，星光会为你留下。',
+        '你正在做的已经很好了。',
+        '温柔是一种力量，不是软弱。',
+        '允许自己不开心，也允许自己重新快乐。',
+        '你的存在本身就是一件美好的事。',
+        '慢慢来，花总会开的。',
+        '今天也是值得被记住的一天。',
+    ],
+    en: [
+        'You don\'t have to be anyone else. You are enough.',
+        'It\'s okay to slow down. That\'s not falling behind.',
+        'Every breath is a chance to begin again.',
+        'You deserve to be treated gently.',
+        'You are a little braver today than yesterday.',
+        'Imperfection is its own kind of wholeness.',
+        'Your feelings are real and they deserve to be seen.',
+        'Rest is not laziness — it\'s fuel for the journey.',
+        'The night will pass. The stars will stay for you.',
+        'What you\'re doing is already enough.',
+        'Gentleness is strength, not weakness.',
+        'It\'s okay to feel sad. It\'s also okay to feel joy again.',
+        'Your existence itself is a beautiful thing.',
+        'Take your time. Flowers always bloom eventually.',
+        'Today is a day worth remembering.',
+    ]
+};
+/* == END: quotes == */
+
+/* == BLOCK: state == */
+let currentLang = localStorage.getItem('aetheria_lang') || 'zh';
+let currentTheme = localStorage.getItem('aetheria_theme') || 'moon';
+let currentPage = 'home';
+let clearConfirm = false;
+let clockInterval = null;
+/* == END: state == */
+
+/* == BLOCK: utils == */
+function $(sel) { return document.querySelector(sel); }
+function $$(sel) { return document.querySelectorAll(sel); }
+
+function t(key) {
+    return (I18N[currentLang] && I18N[currentLang][key]) || key;
+}
+
+function showToast(msgKey) {
+    const toast = $('#toast');
+    toast.textContent = t(msgKey);
     toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
-  }
-  /* == END: toast == */
+    setTimeout(() => toast.classList.remove('show'), 2200);
+}
 
-  /* == BLOCK: utils == */
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
-  /* == END: utils == */
+function formatDate(date, lang) {
+    const opts = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+    return date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', opts);
+}
 
-  /* == BLOCK: expose == */
-  window.AetheriaApp = {
-    showToast,
-    saveMoodEntry,
-    getMoodHistory,
-    navigateTo,
-    drawMoodChart,
-    escapeHtml,
-  };
-  /* == END: expose == */
+function formatTime(date) {
+    return date.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
 
-})();
+function getGreetingKey() {
+    const h = new Date().getHours();
+    if (h >= 5 && h < 12) return 'greeting_morning';
+    if (h >= 12 && h < 18) return 'greeting_afternoon';
+    if (h >= 18 && h < 22) return 'greeting_evening';
+    return 'greeting_night';
+}
 
+function getDailyQuote() {
+    const quotes = QUOTES[currentLang] || QUOTES.zh;
+    const today = new Date();
+    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    return quotes[seed % quotes.length];
+}
+/* == END: utils == */
+
+/* == BLOCK: i18n-apply == */
+function applyI18n() {
+    $$('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = t(key);
+    });
+    $$('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        el.placeholder = t(key);
+    });
+}
+/* == END: i18n-apply == */
+
+/* == BLOCK: theme == */
+function applyTheme(theme) {
+    currentTheme = theme;
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('aetheria_theme', theme);$$('.theme-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === theme);
+    });
+}
+/* == END: theme == */
+
+/* == BLOCK: background == */
+function applyBackground() {
+    const bgCustom = $('#bgCustom');
+    const bgData = localStorage.getItem('aetheria_bg');
+
+    if (bgData) {
+        bgCustom.style.backgroundImage = `url(${bgData})`;
+        bgCustom.classList.add('active');
+    } else {
+        bgCustom.style.backgroundImage = '';
+        bgCustom.classList.remove('active');
+    }
+}
+
+function setupBackgroundHandlers() {
+    const upload = $('#bgUpload');
+    const urlInput = $('#bgUrlInput');
+    const urlApply = $('#bgUrlApply');
+    const reset = $('#bgReset');
+
+    upload.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // Check file size (max ~2MB for localStorage safety)
+        if (file.size > 2 * 1024 * 1024) {
+            showToast('toast_bg_set');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            localStorage.setItem('aetheria_bg', ev.target.result);
+            applyBackground();
+            showToast('toast_bg_set');
+        };
+        reader.readAsDataURL(file);
+    });
+
+    urlApply.addEventListener('click', () => {
+        const url = urlInput.value.trim();
+        if (!url) return;
+        localStorage.setItem('aetheria_bg', url);
+        applyBackground();
+        showToast('toast_bg_set');
+        urlInput.value = '';
+    });
+
+    reset.addEventListener('click', () => {
+        localStorage.removeItem('aetheria_bg');
+        applyBackground();
+        showToast('toast_bg_reset');
+    });
+}
+/* == END: background == */
+
+/* == BLOCK: routing == */
+function navigateTo(page) {
+    if (page === currentPage) return;
+
+    const oldPage = $(`#page-${currentPage}`);
+    const newPage = $(`#page-${page}`);
+
+    if (!newPage) return;
+
+    // Animate out
+    if (oldPage) {
+        oldPage.style.opacity = '0';
+        oldPage.style.transform = 'translateY(12px)';
+        setTimeout(() => {
+            oldPage.classList.remove('page--active');
+            oldPage.style.opacity = '';
+            oldPage.style.transform = '';
+        }, 300);
+    }
+
+    // Animate in
+    setTimeout(() => {
+        newPage.classList.add('page--active');
+        // Force reflow
+        newPage.offsetHeight;
+        newPage.style.opacity = '1';
+        newPage.style.transform = 'translateY(0)';
+    }, oldPage ? 150 : 0);
+
+    // Update nav$$('.nav-item').forEach(item => {
+        item.classList.toggle('active', item.dataset.page === page);
+    });
+
+    currentPage = page;
+}
+
+function setupNav() {
+    $$('.nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+            navigateTo(item.dataset.page);
+        });
+    });
+
+    // Home tarot card click → navigate to divination
+    const tarotCard = $('#homeTarotCard');
+    if (tarotCard) {
+        tarotCard.addEventListener('click', () => navigateTo('divination'));
+    }
+}
+/* == END: routing == */
+
+/* == BLOCK: home == */
+function updateHome() {
+    const now = new Date();
+
+    // Greeting
+    const greetEl = $('#homeGreeting');
+    if (greetEl) greetEl.textContent = t(getGreetingKey());
+
+    // Date
+    const dateEl = $('#homeDate');
+    if (dateEl) dateEl.textContent = formatDate(now, currentLang);
+
+    // Quote
+    const quoteEl = $('#quoteText');
+    if (quoteEl) quoteEl.textContent = getDailyQuote();
+}
+
+function startClock() {
+    const clockEl = $('#homeClock');
+    if (!clockEl) return;
+
+    const tick = () => {
+        clockEl.textContent = formatTime(new Date());
+    };
+    tick();
+    clockInterval = setInterval(tick, 1000);
+}
+
+function setupMoodSlider() {
+    const slider = $('#homeMoodSlider');
+    const value = $('#homeMoodValue');
+    const saveBtn = $('#homeMoodSave');
+
+    if (!slider || !value || !saveBtn) return;
+
+    slider.addEventListener('input', () => {
+        value.textContent = slider.value;
+    });
+
+    saveBtn.addEventListener('click', () => {
+        const today = new Date().toISOString().slice(0, 10);
+        const moods = JSON.parse(localStorage.getItem('aetheria_moods') || '{}');
+        moods[today] = parseInt(slider.value);
+        localStorage.setItem('aetheria_moods', JSON.stringify(moods));
+        showToast('toast_mood_saved');
+    });
+}
+/* == END: home == */
+
+/* == BLOCK: settings-handlers == */
+function setupSettings() {
+    // Theme picker
+    const themePicker = $('#themePicker');
+    if (themePicker) {
+        themePicker.addEventListener('click', (e) => {
+            const btn = e.target.closest('.theme-btn');
+            if (!btn) return;
+            applyTheme(btn.dataset.theme);
+            showToast('toast_theme_changed');
+        });
+    }
+
+    // Language picker
+    const langPicker = $('#langPicker');
+    if (langPicker) {
+        langPicker.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-lang]');
+            if (!btn) return;
+            currentLang = btn.dataset.lang;
+            localStorage.setItem('aetheria_lang', currentLang);
+            $$('[data-lang]').forEach(b => b.classList.toggle('active', b.dataset.lang === currentLang));
+            applyI18n();
+            updateHome();
+        });
+
+        // Set active lang button
+        $$('[data-lang]').forEach(b => b.classList.toggle('active', b.dataset.lang === currentLang));
+    }
+
+    // AI config
+    const aiSave = $('#aiSave');
+    if (aiSave) {
+        // Load existing
+        const aiConfig = JSON.parse(localStorage.getItem('aetheria_ai') || '{}');
+        if (aiConfig.baseUrl) $('#aiBaseUrl').value = aiConfig.baseUrl;
+        if (aiConfig.model) $('#aiModel').value = aiConfig.model;
+        if (aiConfig.apiKey) $('#aiApiKey').value = aiConfig.apiKey;
+
+        aiSave.addEventListener('click', () => {
+            const config = {
+                baseUrl: $('#aiBaseUrl').value.trim(),
+                apiKey: $('#aiApiKey').value.trim(),
+                model: $('#aiModel').value.trim(),};
+            localStorage.setItem('aetheria_ai', JSON.stringify(config));
+            showToast('toast_ai_saved');
+        });
+    }
+
+    // Data export
+    const dataExport = $('#dataExport');
+    if (dataExport) {
+        dataExport.addEventListener('click', () => {
+            const data = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('aetheria_')) {
+                    try {
+                        data[key] = JSON.parse(localStorage.getItem(key));
+                    } catch {
+                        data[key] = localStorage.getItem(key);
+                    }
+                }
+            }
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `aetheria-backup-${new Date().toISOString().slice(0, 10)}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('toast_exported');
+        });
+    }
+
+    // Data clear
+    const dataClear = $('#dataClear');
+    if (dataClear) {
+        dataClear.addEventListener('click', () => {
+            if (!clearConfirm) {
+                clearConfirm = true;
+                showToast('toast_confirm_clear');
+                setTimeout(() => { clearConfirm = false; }, 3000);
+                return;
+            }
+            // Clear all aetheria data
+            const keysToRemove = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('aetheria_')) keysToRemove.push(key);
+            }
+            keysToRemove.forEach(k => localStorage.removeItem(k));
+            clearConfirm = false;
+
+            // Reset to defaults
+            currentLang = 'zh';
+            currentTheme = 'moon';
+            applyTheme('moon');
+            applyI18n();
+            applyBackground();
+            updateHome();
+            showToast('toast_cleared');
+        });
+    }
+
+    // Background
+    setupBackgroundHandlers();
+}
+/* == END: settings-handlers == */
+
+/* == BLOCK: init == */
+function init() {
+    // Apply saved theme
+    applyTheme(currentTheme);
+
+    // Apply i18n
+    applyI18n();
+
+    // Apply background
+    applyBackground();
+
+    // Setup navigation
+    setupNav();
+
+    // Setup home
+    updateHome();
+    startClock();
+    setupMoodSlider();
+
+    // Setup settings
+    setupSettings();
+
+    // Initial page
+    const firstPage = $('.page--active');
+    if (firstPage) {
+        firstPage.style.opacity = '1';
+        firstPage.style.transform = 'translateY(0)';
+    }
+}
+
+// DOM Ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
+/* == END: init == */
