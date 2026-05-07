@@ -1,0 +1,26 @@
+/* ============================================================
+   THEME: Moon — 深夜月光
+============================================================ */
+[data-theme="moon"] {
+  --bg-base:        #0d0d1a;
+  --bg-surface:     rgba(255, 255, 255, 0.04);
+  --bg-elevated:    rgba(255, 255, 255, 0.08);
+
+  --glass-bg:       rgba(20, 18, 40, 0.55);
+  --glass-border:   rgba(167, 139, 250, 0.15);
+  --glass-blur:     20px;
+  --glass-shadow:   0 8px 32px rgba(0, 0, 0, 0.45);
+
+  --text-primary:   rgba(235, 230, 255, 0.92);
+  --text-secondary: rgba(200, 190, 240, 0.6);
+  --text-muted:     rgba(167, 155, 210, 0.35);
+
+  --accent-1:       #a78bfa;
+  --accent-2:       #818cf8;
+  --accent-glow:    rgba(167, 139, 250, 0.35);
+
+  --orb-1:          rgba(109, 40, 217, 0.28);
+  --orb-2:          rgba(79, 70, 229, 0.22);
+  --orb-3:          rgba(139, 92, 246, 0.18);
+}
+/* END THEME: Moon */
