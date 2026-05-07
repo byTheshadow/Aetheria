@@ -1,16 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN" data-theme="moon">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aetheria — Just For U</title>
-
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet" />
-
-  <!-- Styles -->
   <link rel="stylesheet" href="style/base.css" />
   <link rel="stylesheet" href="style/themes/moon.css" />
   <link rel="stylesheet" href="style/themes/sakura.css" />
@@ -22,7 +19,9 @@
 
   <!-- == BLOCK: background-layer == -->
   <div class="bg-layer" id="bgLayer">
-    <canvas class="mesh-canvas" id="meshCanvas"></canvas>
+    <div class="bg-orb orb-1" id="orb1"></div>
+    <div class="bg-orb orb-2" id="orb2"></div>
+    <div class="bg-orb orb-3" id="orb3"></div>
     <div class="bg-image-overlay" id="bgImageOverlay"></div>
   </div>
   <!-- == END: background-layer == -->
@@ -31,63 +30,65 @@
   <div class="app-shell">
 
     <!-- Header -->
-    <header class="app-header glass-card">
+    <header class="app-header" id="appHeader">
       <div class="header-logo">
-        <span class="logo-just">JUST FOR U</span>
+        <span class="logo-tag">JUST FOR U</span>
+        <span class="logo-divider">·</span>
         <span class="logo-name">Aetheria</span>
       </div>
-      <div class="header-actions">
-        <button class="icon-btn" id="themeToggleBtn" title="切换主题" aria-label="切换主题">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-        </button>
-      </div>
+      <button class="header-theme-btn" id="themeToggleBtn" aria-label="切换主题">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
     </header>
 
-    <!-- Main content area -->
+    <!-- Main -->
     <main class="app-main" id="appMain">
 
       <!-- == BLOCK: section-home == -->
       <section class="page-section active" id="section-home" data-page="home">
         <div class="section-inner">
+
           <div class="greeting-block">
-            <p class="greeting-sub" id="greetingTime">晚上好</p>
-            <h1 class="greeting-main" id="greetingText">今天，你还好吗？</h1>
+            <p class="greeting-eyebrow" id="greetingTime">GOOD EVENING</p>
+            <h1 class="greeting-headline" id="greetingText">今天，你还好吗？</h1>
           </div>
 
           <!-- Daily card -->
-          <div class="glass-card daily-card-block">
-            <div class="block-header">
-              <span class="block-icon">🔮</span>
-              <span class="block-title">今日塔罗</span>
-              <button class="text-btn" id="repullBtn">重抽一次</button>
+          <div class="glass-card">
+            <div class="card-meta-row">
+              <span class="card-meta-label">DAILY CARD</span>
+              <button class="meta-action-btn" id="repullBtn">重抽一次</button>
             </div>
-            <div class="daily-card-display" id="dailyCardDisplay">
-              <div class="tarot-card-mini" id="dailyCardInner">
-                <div class="tarot-card-front">
-                  <span class="card-emoji" id="dailyCardEmoji">✨</span>
-                  <span class="card-name" id="dailyCardName">点击抽取</span>
-                </div>
+            <div class="daily-card-stage" id="dailyCardDisplay">
+              <div class="tarot-mini-card" id="dailyCardInner">
+                <span class="tarot-mini-emoji" id="dailyCardEmoji">✦</span>
+                <span class="tarot-mini-name" id="dailyCardName">点击抽取</span>
               </div>
+            </div>
+            <div class="divider"></div>
+            <div class="card-footer-row">
+              <span class="card-meta-label" id="dailyCardKeywords">—</span>
             </div>
           </div>
 
           <!-- Quick mood -->
-          <div class="glass-card mood-quick-block">
-            <div class="block-header">
-              <span class="block-icon">💫</span>
-              <span class="block-title">此刻心情</span>
+          <div class="glass-card">
+            <div class="card-meta-row">
+              <span class="card-meta-label">MOOD · NOW</span>
+              <span class="mood-value-badge" id="moodScoreDisplay">5</span>
             </div>
             <div class="mood-slider-wrap">
-              <span class="mood-label-left">😔</span>
-              <input type="range" min="1" max="10" value="5" class="mood-slider" id="quickMoodSlider" />
-              <span class="mood-label-right">🌟</span>
+              <input type="range" min="1" max="10" value="5"
+                     class="mood-slider" id="quickMoodSlider"
+                     aria-label="心情评分" />
             </div>
-            <div class="mood-score-display">
-              <span id="moodScoreDisplay">5</span>
-              <span class="mood-score-unit">/ 10</span>
+            <div class="mood-emoji-row">
+              <span>😔</span><span>😐</span><span>🙂</span><span>😊</span><span>🌟</span>
             </div>
-            <button class="glass-btn primary-btn" id="saveMoodBtn">记录心情</button>
+            <div class="divider"></div>
+            <button class="glass-btn primary-btn" id="saveMoodBtn">记录此刻</button>
           </div>
+
         </div>
       </section>
       <!-- == END: section-home == -->
@@ -95,35 +96,58 @@
       <!-- == BLOCK: section-divination == -->
       <section class="page-section" id="section-divination" data-page="divination">
         <div class="section-inner">
-          <div class="section-header">
-            <h2 class="section-title">占卜</h2>
-            <p class="section-sub">倾听牌面的低语</p>
+
+          <div class="greeting-block">
+            <p class="greeting-eyebrow">DIVINATION</p>
+            <h1 class="greeting-headline">倾听牌面的低语</h1>
           </div>
-          <div class="tab-bar glass-card">
-            <button class="tab-btn active" data-tab="tarot">塔罗牌</button>
-            <button class="tab-btn" data-tab="lenormand">诺曼底牌</button>
-          </div>
-          <div class="tab-content" id="tabTarot">
-            <div class="spread-selector glass-card">
-              <button class="spread-btn active" data-spread="1">单张</button>
-              <button class="spread-btn" data-spread="3">三张</button>
-              <button class="spread-btn" data-spread="celtic">凯尔特十字</button>
+
+          <div class="glass-card">
+            <div class="card-meta-row">
+              <span class="card-meta-label">DECK</span>
             </div>
+            <div class="seg-control">
+              <button class="seg-btn active" data-tab="tarot">塔罗牌</button>
+              <button class="seg-btn" data-tab="lenormand">诺曼底牌</button>
+            </div>
+          </div>
+
+          <!-- Tarot tab -->
+          <div class="tab-content" id="tabTarot">
+            <div class="glass-card">
+              <div class="card-meta-row">
+                <span class="card-meta-label">SPREAD</span>
+              </div>
+              <div class="seg-control">
+                <button class="seg-btn active" data-spread="1">单张</button>
+                <button class="seg-btn" data-spread="3">三张</button>
+                <button class="seg-btn" data-spread="celtic">凯尔特</button>
+              </div>
+            </div>
+
             <div class="cards-stage" id="cardsStage">
               <p class="stage-hint">选择牌阵，开始占卜</p>
             </div>
-            <button class="glass-btn primary-btn full-btn" id="drawCardsBtn">🔮 抽牌</button>
-            <div class="ai-reading-block glass-card" id="aiReadingBlock" style="display:none">
-              <button class="glass-btn accent-btn full-btn" id="aiReadBtn">✨ AI 解读</button>
+
+            <button class="glass-btn primary-btn full-btn" id="drawCardsBtn">抽牌</button>
+
+            <div class="glass-card ai-reading-block" id="aiReadingBlock" style="display:none">
+              <div class="card-meta-row">
+                <span class="card-meta-label">AI READING</span>
+              </div>
+              <button class="glass-btn accent-btn full-btn" id="aiReadBtn">✦ 请求解读</button>
               <div class="ai-reading-text" id="aiReadingText"></div>
             </div>
           </div>
+
+          <!-- Lenormand tab -->
           <div class="tab-content hidden" id="tabLenormand">
             <div class="cards-stage" id="lenormandStage">
-              <p class="stage-hint">诺曼底牌占卜即将开放</p>
+              <p class="stage-hint">诺曼底牌 · 三张抽取</p>
             </div>
-            <button class="glass-btn primary-btn full-btn" id="drawLenormandBtn">🃏 抽牌</button>
+            <button class="glass-btn primary-btn full-btn" id="drawLenormandBtn">抽牌</button>
           </div>
+
         </div>
       </section>
       <!-- == END: section-divination == -->
@@ -131,28 +155,35 @@
       <!-- == BLOCK: section-wheel == -->
       <section class="page-section" id="section-wheel" data-page="wheel">
         <div class="section-inner">
-          <div class="section-header">
-            <h2 class="section-title">决策转盘</h2>
-            <p class="section-sub">交给命运来决定</p>
+
+          <div class="greeting-block">
+            <p class="greeting-eyebrow">DECISION</p>
+            <h1 class="greeting-headline">交给命运来决定</h1>
           </div>
-          <div class="wheel-options-block glass-card">
-            <div class="block-header">
-              <span class="block-title">选项</span>
-              <button class="icon-btn" id="addOptionBtn" title="添加选项">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-              </button>
+
+          <div class="glass-card">
+            <div class="card-meta-row">
+              <span class="card-meta-label">OPTIONS</span>
+              <button class="meta-action-btn" id="addOptionBtn">+ 添加</button>
             </div>
+            <input type="text" class="glass-input" id="optionInput"
+                   placeholder="输入选项，回车添加" maxlength="20" />
             <div class="options-list" id="optionsList"></div>
-            <input type="text" class="glass-input" id="optionInput" placeholder="输入选项，回车添加" maxlength="20" />
           </div>
+
           <div class="wheel-stage">
-            <canvas class="wheel-canvas" id="wheelCanvas" width="320" height="320"></canvas>
+            <canvas class="wheel-canvas" id="wheelCanvas" width="300" height="300"></canvas>
           </div>
-          <button class="glass-btn primary-btn full-btn" id="spinBtn">🎡 旋转</button>
-          <div class="wheel-result glass-card" id="wheelResult" style="display:none">
-            <span class="result-label">命运选择了</span>
-            <span class="result-value" id="wheelResultText"></span>
+
+          <button class="glass-btn primary-btn full-btn" id="spinBtn">旋转</button>
+
+          <div class="glass-card result-card" id="wheelResult" style="display:none">
+            <div class="card-meta-row">
+              <span class="card-meta-label">RESULT</span>
+            </div>
+            <p class="result-value" id="wheelResultText"></p>
           </div>
+
         </div>
       </section>
       <!-- == END: section-wheel == -->
@@ -160,25 +191,47 @@
       <!-- == BLOCK: section-destroy == -->
       <section class="page-section" id="section-destroy" data-page="destroy">
         <div class="section-inner">
-          <div class="section-header">
-            <h2 class="section-title">负能量销毁室</h2>
-            <p class="section-sub">写下来，然后让它消失</p>
+
+          <div class="greeting-block">
+            <p class="greeting-eyebrow">RELEASE</p>
+            <h1 class="greeting-headline">写下来，然后让它消失</h1>
           </div>
-          <div class="glass-card destroy-input-block">
-            <textarea class="glass-textarea" id="destroyText" placeholder="把你想销毁的一切写在这里..." rows="5"></textarea>
+
+          <div class="glass-card">
+            <div class="card-meta-row">
+              <span class="card-meta-label">INPUT</span>
+            </div>
+            <textarea class="glass-textarea" id="destroyText"
+                      placeholder="把你想销毁的一切写在这里..." rows="5"></textarea>
           </div>
-          <div class="destroy-modes glass-card">
-            <p class="modes-label">选择销毁方式</p>
+
+          <div class="glass-card">
+            <div class="card-meta-row">
+              <span class="card-meta-label">MODE</span>
+            </div>
             <div class="modes-grid">
-              <button class="mode-btn active" data-mode="burn">🔥<span>燃烧</span></button>
-              <button class="mode-btn" data-mode="drown">💧<span>淹没</span></button>
-              <button class="mode-btn" data-mode="dissolve">💨<span>消散</span></button>
-              <button class="mode-btn" data-mode="void">🌀<span>虚空</span></button>
+              <button class="mode-btn active" data-mode="burn">
+                <span class="mode-icon">🔥</span>
+                <span class="mode-label">燃烧</span>
+              </button>
+              <button class="mode-btn" data-mode="drown">
+                <span class="mode-icon">💧</span>
+                <span class="mode-label">淹没</span>
+              </button>
+              <button class="mode-btn" data-mode="dissolve">
+                <span class="mode-icon">💨</span>
+                <span class="mode-label">消散</span>
+              </button>
+              <button class="mode-btn" data-mode="void">
+                <span class="mode-icon">🌀</span>
+                <span class="mode-label">虚空</span>
+              </button>
             </div>
           </div>
+
           <button class="glass-btn danger-btn full-btn" id="destroyBtn">销毁它</button>
+
         </div>
-        <!-- Full-screen destroy animation overlay -->
         <div class="destroy-overlay" id="destroyOverlay" style="display:none">
           <canvas class="destroy-canvas" id="destroyCanvas"></canvas>
         </div>
@@ -188,22 +241,21 @@
       <!-- == BLOCK: section-daily == -->
       <section class="page-section" id="section-daily" data-page="daily">
         <div class="section-inner">
-          <div class="section-header">
-            <h2 class="section-title">日常中心</h2>
-            <p class="section-sub" id="dailyDateDisplay"></p>
+
+          <div class="greeting-block">
+            <p class="greeting-eyebrow">DAILY CENTER</p>
+            <h1 class="greeting-headline" id="dailyDateDisplay">今日记录</h1>
           </div>
 
-          <!-- Mood block -->
-          <div class="glass-card mood-full-block">
-            <div class="block-header">
-              <span class="block-icon">💫</span>
-              <span class="block-title">今日心情</span>
-              <button class="text-btn silent-btn" id="silentDayBtn">静默日</button>
+          <!-- Mood -->
+          <div class="glass-card">
+            <div class="card-meta-row">
+              <span class="card-meta-label">MOOD</span>
+              <button class="meta-action-btn silent-btn" id="silentDayBtn">静默日</button>
             </div>
             <div class="mood-slider-wrap">
-              <span class="mood-label-left">😔</span>
-              <input type="range" min="1" max="10" value="5" class="mood-slider" id="dailyMoodSlider" />
-              <span class="mood-label-right">🌟</span>
+              <input type="range" min="1" max="10" value="5"
+                     class="mood-slider" id="dailyMoodSlider" aria-label="今日心情" />
             </div>
             <div class="mood-tags" id="moodTags">
               <button class="tag-btn" data-tag="平静">平静</button>
@@ -215,27 +267,24 @@
               <button class="tag-btn" data-tag="充实">充实</button>
               <button class="tag-btn" data-tag="低落">低落</button>
             </div>
-            <textarea class="glass-textarea small" id="moodNote" placeholder="今天想说点什么..." rows="2"></textarea>
-            <button class="glass-btn primary-btn" id="saveDailyMoodBtn">保存</button>
+            <textarea class="glass-textarea small" id="moodNote"
+                      placeholder="今天想说点什么..." rows="2"></textarea>
+            <button class="glass-btn primary-btn" id="saveDailyMoodBtn">保存心情</button>
           </div>
 
-          <!-- Mood chart -->
-          <div class="glass-card chart-block">
-            <div class="block-header">
-              <span class="block-icon">📈</span>
-              <span class="block-title">近7天心情</span>
+          <!-- Chart -->
+          <div class="glass-card">
+            <div class="card-meta-row">
+              <span class="card-meta-label">7-DAY TREND</span>
             </div>
-            <canvas class="mood-chart" id="moodChart" height="80"></canvas>
+            <canvas class="mood-chart" id="moodChart" height="72"></canvas>
           </div>
 
           <!-- Tasks -->
-          <div class="glass-card tasks-block">
-            <div class="block-header">
-              <span class="block-icon">✅</span>
-              <span class="block-title">任务</span>
-              <button class="icon-btn" id="addTaskBtn">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-              </button>
+          <div class="glass-card">
+            <div class="card-meta-row">
+              <span class="card-meta-label">TASKS</span>
+              <button class="meta-action-btn" id="addTaskBtn">+ 添加</button>
             </div>
             <div class="task-input-row" id="taskInputRow" style="display:none">
               <input type="text" class="glass-input" id="taskInput" placeholder="新任务..." maxlength="50" />
@@ -250,16 +299,14 @@
           </div>
 
           <!-- Habits -->
-          <div class="glass-card habits-block">
-            <div class="block-header">
-              <span class="block-icon">🌱</span>
-              <span class="block-title">习惯打卡</span>
-              <button class="icon-btn" id="addHabitBtn">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-              </button>
+          <div class="glass-card">
+            <div class="card-meta-row">
+              <span class="card-meta-label">HABITS</span>
+              <button class="meta-action-btn" id="addHabitBtn">+ 添加</button>
             </div>
             <div class="habits-list" id="habitsList"></div>
           </div>
+
         </div>
       </section>
       <!-- == END: section-daily == -->
@@ -267,21 +314,27 @@
       <!-- == BLOCK: section-settings == -->
       <section class="page-section" id="section-settings" data-page="settings">
         <div class="section-inner">
-          <div class="section-header">
-            <h2 class="section-title">设置</h2>
+
+          <div class="greeting-block">
+            <p class="greeting-eyebrow">SETTINGS</p>
+            <h1 class="greeting-headline">偏好设置</h1>
           </div>
 
           <!-- Background -->
-          <div class="glass-card settings-block">
-            <div class="block-header"><span class="block-icon">🖼️</span><span class="block-title">背景</span></div>
-            <div class="settings-row">
-              <label class="settings-label">图片 URL</label>
-              <input type="text" class="glass-input" id="bgUrlInput" placeholder="https://..." />
-              <button class="glass-btn small-btn" id="setBgUrlBtn">应用</button>
+          <div class="glass-card">
+            <div class="card-meta-row">
+              <span class="card-meta-label">BACKGROUND</span>
             </div>
-            <div class="settings-row">
-              <label class="settings-label">上传图片</label>
-              <label class="upload-label glass-btn small-btn">
+            <div class="settings-field">
+              <label class="field-label">图片 URL</label>
+              <div class="field-row">
+                <input type="text" class="glass-input" id="bgUrlInput" placeholder="https://..." />
+                <button class="glass-btn small-btn" id="setBgUrlBtn">应用</button>
+              </div>
+            </div>
+            <div class="settings-field">
+              <label class="field-label">上传图片</label>
+              <label class="glass-btn small-btn upload-label">
                 选择文件
                 <input type="file" id="bgFileInput" accept="image/*" style="display:none" />
               </label>
@@ -290,40 +343,58 @@
           </div>
 
           <!-- Theme -->
-          <div class="glass-card settings-block">
-            <div class="block-header"><span class="block-icon">🎨</span><span class="block-title">主题</span></div>
+          <div class="glass-card">
+            <div class="card-meta-row">
+              <span class="card-meta-label">THEME</span>
+            </div>
             <div class="theme-grid">
-              <button class="theme-swatch active" data-theme="moon"><span class="swatch-dot moon-dot"></span>Moon</button>
-              <button class="theme-swatch" data-theme="sakura"><span class="swatch-dot sakura-dot"></span>Sakura</button>
-              <button class="theme-swatch" data-theme="forest"><span class="swatch-dot forest-dot"></span>Forest</button>
-              <button class="theme-swatch" data-theme="void"><span class="swatch-dot void-dot"></span>Void</button>
+              <button class="theme-swatch active" data-theme="moon">
+                <span class="swatch-dot moon-dot"></span>
+                <span>Moon</span>
+              </button>
+              <button class="theme-swatch" data-theme="sakura">
+                <span class="swatch-dot sakura-dot"></span>
+                <span>Sakura</span>
+              </button>
+              <button class="theme-swatch" data-theme="forest">
+                <span class="swatch-dot forest-dot"></span>
+                <span>Forest</span>
+              </button>
+              <button class="theme-swatch" data-theme="void">
+                <span class="swatch-dot void-dot"></span>
+                <span>Void</span>
+              </button>
             </div>
           </div>
 
           <!-- AI -->
-          <div class="glass-card settings-block">
-            <div class="block-header"><span class="block-icon">🤖</span><span class="block-title">AI 配置</span></div>
-            <div class="settings-row">
-              <label class="settings-label">Base URL</label>
+          <div class="glass-card">
+            <div class="card-meta-row">
+              <span class="card-meta-label">AI CONFIG</span>
+            </div>
+            <div class="settings-field">
+              <label class="field-label">Base URL</label>
               <input type="text" class="glass-input" id="aiBaseUrl" placeholder="https://api.deepseek.com" />
             </div>
-            <div class="settings-row">
-              <label class="settings-label">API Key</label>
+            <div class="settings-field">
+              <label class="field-label">API Key</label>
               <input type="password" class="glass-input" id="aiApiKey" placeholder="sk-..." />
             </div>
-            <div class="settings-row">
-              <label class="settings-label">Model</label>
+            <div class="settings-field">
+              <label class="field-label">Model</label>
               <input type="text" class="glass-input" id="aiModel" placeholder="deepseek-chat" />
             </div>
             <button class="glass-btn primary-btn" id="saveAiBtn">保存配置</button>
           </div>
 
           <!-- Data -->
-          <div class="glass-card settings-block">
-            <div class="block-header"><span class="block-icon">💾</span><span class="block-title">数据</span></div>
-            <div class="settings-row gap">
+          <div class="glass-card">
+            <div class="card-meta-row">
+              <span class="card-meta-label">DATA</span>
+            </div>
+            <div class="field-row gap">
               <button class="glass-btn ghost-btn" id="exportDataBtn">导出 JSON</button>
-              <button class="glass-btn danger-btn" id="clearDataBtn">清除所有数据</button>
+              <button class="glass-btn danger-btn" id="clearDataBtn">清除数据</button>
             </div>
           </div>
 
@@ -331,6 +402,7 @@
             <p>JUST FOR U · Aetheria</p>
             <p>Made with 🖤 by shadow</p>
           </div>
+
         </div>
       </section>
       <!-- == END: section-settings == -->
@@ -338,30 +410,24 @@
     </main>
 
     <!-- == BLOCK: bottom-nav == -->
-    <nav class="bottom-nav glass-card" id="bottomNav">
-      <button class="nav-btn active" data-page="home">
-        <span class="nav-icon">🏠</span>
-        <span class="nav-label">主页</span>
+    <nav class="bottom-nav" id="bottomNav">
+      <button class="nav-item active" data-page="home" aria-label="主页">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       </button>
-      <button class="nav-btn" data-page="divination">
-        <span class="nav-icon">🔮</span>
-        <span class="nav-label">占卜</span>
+      <button class="nav-item" data-page="divination" aria-label="占卜">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       </button>
-      <button class="nav-btn" data-page="wheel">
-        <span class="nav-icon">🎡</span>
-        <span class="nav-label">转盘</span>
+      <button class="nav-item" data-page="wheel" aria-label="转盘">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
       </button>
-      <button class="nav-btn" data-page="destroy">
-        <span class="nav-icon">💥</span>
-        <span class="nav-label">销毁</span>
+      <button class="nav-item" data-page="destroy" aria-label="销毁">
+        <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
       </button>
-      <button class="nav-btn" data-page="daily">
-        <span class="nav-icon">📅</span>
-        <span class="nav-label">日常</span>
+      <button class="nav-item" data-page="daily" aria-label="日常">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       </button>
-      <button class="nav-btn" data-page="settings">
-        <span class="nav-icon">⚙️</span>
-        <span class="nav-label">设置</span>
+      <button class="nav-item" data-page="settings" aria-label="设置">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
       </button>
     </nav>
     <!-- == END: bottom-nav == -->
@@ -369,7 +435,17 @@
   </div>
   <!-- == END: app-shell == -->
 
-  <!-- Scripts -->
+  <!-- Toast -->
+  <div class="toast" id="aetheriaToast"></div>
+
+  <!-- Theme panel -->
+  <div class="theme-panel" id="themePanel">
+    <button class="theme-panel-item active" data-theme="moon"><span class="swatch-dot moon-dot"></span>Moon</button>
+    <button class="theme-panel-item" data-theme="sakura"><span class="swatch-dot sakura-dot"></span>Sakura</button>
+    <button class="theme-panel-item" data-theme="forest"><span class="swatch-dot forest-dot"></span>Forest</button>
+    <button class="theme-panel-item" data-theme="void"><span class="swatch-dot void-dot"></span>Void</button>
+  </div>
+
   <script src="js/app.js"></script>
   <script src="js/api.js"></script>
   <script src="js/tarot.js"></script>
@@ -378,4 +454,5 @@
   <script src="js/daily.js"></script>
 </body>
 </html>
+
 
