@@ -42,7 +42,8 @@ const I18N = {
         toast_ai_saved: 'AI 配置已保存',
         toast_exported: '数据已导出',
         toast_cleared: '所有数据已清除',
-        toast_confirm_clear: '再次点击确认清除所有数据',},
+        toast_confirm_clear: '再次点击确认清除所有数据'
+    },
     en: {
         nav_home: 'Home',
         nav_divination: 'Divine',
@@ -85,7 +86,7 @@ const I18N = {
         toast_ai_saved: 'AI config saved',
         toast_exported: 'Data exported',
         toast_cleared: 'All data cleared',
-        toast_confirm_clear: 'Click again to confirm clearing all data',
+        toast_confirm_clear: 'Click again to confirm clearing all data'
     }
 };
 /* == END: i18n == */
@@ -107,7 +108,7 @@ const QUOTES = {
         '允许自己不开心，也允许自己重新快乐。',
         '你的存在本身就是一件美好的事。',
         '慢慢来，花总会开的。',
-        '今天也是值得被记住的一天。',
+        '今天也是值得被记住的一天。'
     ],
     en: [
         'You don\'t have to be anyone else. You are enough.',
@@ -124,36 +125,43 @@ const QUOTES = {
         'It\'s okay to feel sad. It\'s also okay to feel joy again.',
         'Your existence itself is a beautiful thing.',
         'Take your time. Flowers always bloom eventually.',
-        'Today is a day worth remembering.',
+        'Today is a day worth remembering.'
     ]
 };
 /* == END: quotes == */
 
 /* == BLOCK: state == */
-let currentLang = localStorage.getItem('aetheria_lang') || 'zh';
-let currentTheme = localStorage.getItem('aetheria_theme') || 'moon';
-let currentPage = 'home';
-let clearConfirm = false;
-let clockInterval = null;
+var currentLang = localStorage.getItem('aetheria_lang') || 'zh';
+var currentTheme = localStorage.getItem('aetheria_theme') || 'moon';
+var currentPage = 'home';
+var clearConfirm = false;
+var clockInterval = null;
 /* == END: state == */
 
 /* == BLOCK: utils == */
-function $(sel) { return document.querySelector(sel); }
-function $$(sel) { return document.querySelectorAll(sel); }
+function $(sel) {
+    return document.querySelector(sel);
+}
+
+function $$(sel) {
+    return document.querySelectorAll(sel);
+}
 
 function t(key) {
     return (I18N[currentLang] && I18N[currentLang][key]) || key;
 }
 
 function showToast(msgKey) {
-    const toast = $('#toast');
+    var toast = $('#toast');
     toast.textContent = t(msgKey);
     toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2200);
+    setTimeout(function() {
+        toast.classList.remove('show');
+    }, 2200);
 }
 
 function formatDate(date, lang) {
-    const opts = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+    var opts = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
     return date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', opts);
 }
 
@@ -162,7 +170,7 @@ function formatTime(date) {
 }
 
 function getGreetingKey() {
-    const h = new Date().getHours();
+    var h = new Date().getHours();
     if (h >= 5 && h < 12) return 'greeting_morning';
     if (h >= 12 && h < 18) return 'greeting_afternoon';
     if (h >= 18 && h < 22) return 'greeting_evening';
@@ -170,23 +178,25 @@ function getGreetingKey() {
 }
 
 function getDailyQuote() {
-    const quotes = QUOTES[currentLang] || QUOTES.zh;
-    const today = new Date();
-    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    var quotes = QUOTES[currentLang] || QUOTES.zh;
+    var today = new Date();
+    var seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
     return quotes[seed % quotes.length];
 }
 /* == END: utils == */
 
 /* == BLOCK: i18n-apply == */
 function applyI18n() {
-    $$('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        el.textContent = t(key);
-    });
-    $$('[data-i18n-placeholder]').forEach(el => {
-        const key = el.getAttribute('data-i18n-placeholder');
-        el.placeholder = t(key);
-    });
+    var els = $$('[data-i18n]');
+    for (var i = 0; i < els.length; i++) {
+        var key = els[i].getAttribute('data-i18n');
+        els[i].textContent = t(key);
+    }
+    var phEls = $$('[data-i18n-placeholder]');
+    for (var j = 0; j < phEls.length; j++) {
+        var phKey = phEls[j].getAttribute('data-i18n-placeholder');
+        phEls[j].placeholder = t(phKey);
+    }
 }
 /* == END: i18n-apply == */
 
@@ -194,19 +204,25 @@ function applyI18n() {
 function applyTheme(theme) {
     currentTheme = theme;
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('aetheria_theme', theme);$$('.theme-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.theme === theme);
-    });
+    localStorage.setItem('aetheria_theme', theme);
+    var btns = $$('.theme-btn');
+    for (var i = 0; i < btns.length; i++) {
+        if (btns[i].dataset.theme === theme) {
+            btns[i].classList.add('active');
+        } else {
+            btns[i].classList.remove('active');
+        }
+    }
 }
 /* == END: theme == */
 
 /* == BLOCK: background == */
 function applyBackground() {
-    const bgCustom = $('#bgCustom');
-    const bgData = localStorage.getItem('aetheria_bg');
+    var bgCustom = $('#bgCustom');
+    var bgData = localStorage.getItem('aetheria_bg');
 
     if (bgData) {
-        bgCustom.style.backgroundImage = `url(${bgData})`;
+        bgCustom.style.backgroundImage = 'url(' + bgData + ')';
         bgCustom.classList.add('active');
     } else {
         bgCustom.style.backgroundImage = '';
@@ -215,23 +231,22 @@ function applyBackground() {
 }
 
 function setupBackgroundHandlers() {
-    const upload = $('#bgUpload');
-    const urlInput = $('#bgUrlInput');
-    const urlApply = $('#bgUrlApply');
-    const reset = $('#bgReset');
+    var upload = $('#bgUpload');
+    var urlInput = $('#bgUrlInput');
+    var urlApply = $('#bgUrlApply');
+    var reset = $('#bgReset');
 
-    upload.addEventListener('change', (e) => {
-        const file = e.target.files[0];
+    upload.addEventListener('change', function(e) {
+        var file = e.target.files[0];
         if (!file) return;
 
-        // Check file size (max ~2MB for localStorage safety)
         if (file.size > 2 * 1024 * 1024) {
             showToast('toast_bg_set');
             return;
         }
 
-        const reader = new FileReader();
-        reader.onload = (ev) => {
+        var reader = new FileReader();
+        reader.onload = function(ev) {
             localStorage.setItem('aetheria_bg', ev.target.result);
             applyBackground();
             showToast('toast_bg_set');
@@ -239,8 +254,8 @@ function setupBackgroundHandlers() {
         reader.readAsDataURL(file);
     });
 
-    urlApply.addEventListener('click', () => {
-        const url = urlInput.value.trim();
+    urlApply.addEventListener('click', function() {
+        var url = urlInput.value.trim();
         if (!url) return;
         localStorage.setItem('aetheria_bg', url);
         applyBackground();
@@ -248,7 +263,7 @@ function setupBackgroundHandlers() {
         urlInput.value = '';
     });
 
-    reset.addEventListener('click', () => {
+    reset.addEventListener('click', function() {
         localStorage.removeItem('aetheria_bg');
         applyBackground();
         showToast('toast_bg_reset');
@@ -260,95 +275,92 @@ function setupBackgroundHandlers() {
 function navigateTo(page) {
     if (page === currentPage) return;
 
-    const oldPage = $(`#page-${currentPage}`);
-    const newPage = $(`#page-${page}`);
+    var oldPage = $('#page-' + currentPage);
+    var newPage = $('#page-' + page);
 
     if (!newPage) return;
 
-    // Animate out
+    // Hide old page
     if (oldPage) {
-        oldPage.style.opacity = '0';
-        oldPage.style.transform = 'translateY(12px)';
-        setTimeout(() => {
-            oldPage.classList.remove('page--active');
-            oldPage.style.opacity = '';
-            oldPage.style.transform = '';
-        }, 300);
+        oldPage.classList.remove('page--active');
     }
 
-    // Animate in
-    setTimeout(() => {
-        newPage.classList.add('page--active');
-        // Force reflow
-        newPage.offsetHeight;
-        newPage.style.opacity = '1';
-        newPage.style.transform = 'translateY(0)';
-    }, oldPage ? 150 : 0);
+    // Show new page
+    newPage.classList.add('page--active');
 
-    // Update nav$$('.nav-item').forEach(item => {
-        item.classList.toggle('active', item.dataset.page === page);
-    });
+    // Update nav
+    var navItems = $$('.nav-item');
+    for (var i = 0; i < navItems.length; i++) {
+        if (navItems[i].dataset.page === page) {
+            navItems[i].classList.add('active');
+        } else {
+            navItems[i].classList.remove('active');
+        }
+    }
 
     currentPage = page;
 }
 
 function setupNav() {
-    $$('.nav-item').forEach(item => {
-        item.addEventListener('click', () => {
-            navigateTo(item.dataset.page);
+    var navItems = $$('.nav-item');
+    for (var i = 0; i < navItems.length; i++) {
+        navItems[i].addEventListener('click', function() {
+            navigateTo(this.dataset.page);
         });
-    });
+    }
 
     // Home tarot card click → navigate to divination
-    const tarotCard = $('#homeTarotCard');
+    var tarotCard = $('#homeTarotCard');
     if (tarotCard) {
-        tarotCard.addEventListener('click', () => navigateTo('divination'));
+        tarotCard.addEventListener('click', function() {
+            navigateTo('divination');
+        });
     }
 }
 /* == END: routing == */
 
 /* == BLOCK: home == */
 function updateHome() {
-    const now = new Date();
+    var now = new Date();
 
     // Greeting
-    const greetEl = $('#homeGreeting');
+    var greetEl = $('#homeGreeting');
     if (greetEl) greetEl.textContent = t(getGreetingKey());
 
     // Date
-    const dateEl = $('#homeDate');
+    var dateEl = $('#homeDate');
     if (dateEl) dateEl.textContent = formatDate(now, currentLang);
 
     // Quote
-    const quoteEl = $('#quoteText');
+    var quoteEl = $('#quoteText');
     if (quoteEl) quoteEl.textContent = getDailyQuote();
 }
 
 function startClock() {
-    const clockEl = $('#homeClock');
+    var clockEl = $('#homeClock');
     if (!clockEl) return;
 
-    const tick = () => {
+    function tick() {
         clockEl.textContent = formatTime(new Date());
-    };
+    }
     tick();
     clockInterval = setInterval(tick, 1000);
 }
 
 function setupMoodSlider() {
-    const slider = $('#homeMoodSlider');
-    const value = $('#homeMoodValue');
-    const saveBtn = $('#homeMoodSave');
+    var slider = $('#homeMoodSlider');
+    var value = $('#homeMoodValue');
+    var saveBtn = $('#homeMoodSave');
 
     if (!slider || !value || !saveBtn) return;
 
-    slider.addEventListener('input', () => {
+    slider.addEventListener('input', function() {
         value.textContent = slider.value;
     });
 
-    saveBtn.addEventListener('click', () => {
-        const today = new Date().toISOString().slice(0, 10);
-        const moods = JSON.parse(localStorage.getItem('aetheria_moods') || '{}');
+    saveBtn.addEventListener('click', function() {
+        var today = new Date().toISOString().slice(0, 10);
+        var moods = JSON.parse(localStorage.getItem('aetheria_moods') || '{}');
         moods[today] = parseInt(slider.value);
         localStorage.setItem('aetheria_moods', JSON.stringify(moods));
         showToast('toast_mood_saved');
@@ -359,10 +371,10 @@ function setupMoodSlider() {
 /* == BLOCK: settings-handlers == */
 function setupSettings() {
     // Theme picker
-    const themePicker = $('#themePicker');
+    var themePicker = $('#themePicker');
     if (themePicker) {
-        themePicker.addEventListener('click', (e) => {
-            const btn = e.target.closest('.theme-btn');
+        themePicker.addEventListener('click', function(e) {
+            var btn = e.target.closest('.theme-btn');
             if (!btn) return;
             applyTheme(btn.dataset.theme);
             showToast('toast_theme_changed');
@@ -370,61 +382,76 @@ function setupSettings() {
     }
 
     // Language picker
-    const langPicker = $('#langPicker');
+    var langPicker = $('#langPicker');
     if (langPicker) {
-        langPicker.addEventListener('click', (e) => {
-            const btn = e.target.closest('[data-lang]');
+        langPicker.addEventListener('click', function(e) {
+            var btn = e.target.closest('[data-lang]');
             if (!btn) return;
             currentLang = btn.dataset.lang;
             localStorage.setItem('aetheria_lang', currentLang);
-            $$('[data-lang]').forEach(b => b.classList.toggle('active', b.dataset.lang === currentLang));
+            var langBtns = $$('[data-lang]');
+            for (var i = 0; i < langBtns.length; i++) {
+                if (langBtns[i].dataset.lang === currentLang) {
+                    langBtns[i].classList.add('active');
+                } else {
+                    langBtns[i].classList.remove('active');
+                }
+            }
             applyI18n();
             updateHome();
         });
 
-        // Set active lang button
-        $$('[data-lang]').forEach(b => b.classList.toggle('active', b.dataset.lang === currentLang));
+        // Set active lang button on load
+        var langBtns = $$('[data-lang]');
+        for (var i = 0; i < langBtns.length; i++) {
+            if (langBtns[i].dataset.lang === currentLang) {
+                langBtns[i].classList.add('active');
+            } else {
+                langBtns[i].classList.remove('active');
+            }
+        }
     }
 
     // AI config
-    const aiSave = $('#aiSave');
+    var aiSave = $('#aiSave');
     if (aiSave) {
         // Load existing
-        const aiConfig = JSON.parse(localStorage.getItem('aetheria_ai') || '{}');
+        var aiConfig = JSON.parse(localStorage.getItem('aetheria_ai') || '{}');
         if (aiConfig.baseUrl) $('#aiBaseUrl').value = aiConfig.baseUrl;
         if (aiConfig.model) $('#aiModel').value = aiConfig.model;
         if (aiConfig.apiKey) $('#aiApiKey').value = aiConfig.apiKey;
 
-        aiSave.addEventListener('click', () => {
-            const config = {
+        aiSave.addEventListener('click', function() {
+            var config = {
                 baseUrl: $('#aiBaseUrl').value.trim(),
                 apiKey: $('#aiApiKey').value.trim(),
-                model: $('#aiModel').value.trim(),};
+                model: $('#aiModel').value.trim()
+            };
             localStorage.setItem('aetheria_ai', JSON.stringify(config));
             showToast('toast_ai_saved');
         });
     }
 
     // Data export
-    const dataExport = $('#dataExport');
+    var dataExport = $('#dataExport');
     if (dataExport) {
-        dataExport.addEventListener('click', () => {
-            const data = {};
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key.startsWith('aetheria_')) {
+        dataExport.addEventListener('click', function() {
+            var data = {};
+            for (var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                if (key.indexOf('aetheria_') === 0) {
                     try {
                         data[key] = JSON.parse(localStorage.getItem(key));
-                    } catch {
+                    } catch (e) {
                         data[key] = localStorage.getItem(key);
                     }
                 }
             }
-            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
+            var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
             a.href = url;
-            a.download = `aetheria-backup-${new Date().toISOString().slice(0, 10)}.json`;
+            a.download = 'aetheria-backup-' + new Date().toISOString().slice(0, 10) + '.json';
             a.click();
             URL.revokeObjectURL(url);
             showToast('toast_exported');
@@ -432,22 +459,26 @@ function setupSettings() {
     }
 
     // Data clear
-    const dataClear = $('#dataClear');
+    var dataClear = $('#dataClear');
     if (dataClear) {
-        dataClear.addEventListener('click', () => {
+        dataClear.addEventListener('click', function() {
             if (!clearConfirm) {
                 clearConfirm = true;
                 showToast('toast_confirm_clear');
-                setTimeout(() => { clearConfirm = false; }, 3000);
+                setTimeout(function() { clearConfirm = false; }, 3000);
                 return;
             }
             // Clear all aetheria data
-            const keysToRemove = [];
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key.startsWith('aetheria_')) keysToRemove.push(key);
+            var keysToRemove = [];
+            for (var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                if (key.indexOf('aetheria_') === 0) {
+                    keysToRemove.push(key);
+                }
             }
-            keysToRemove.forEach(k => localStorage.removeItem(k));
+            for (var j = 0; j < keysToRemove.length; j++) {
+                localStorage.removeItem(keysToRemove[j]);
+            }
             clearConfirm = false;
 
             // Reset to defaults
@@ -487,13 +518,6 @@ function init() {
 
     // Setup settings
     setupSettings();
-
-    // Initial page
-    const firstPage = $('.page--active');
-    if (firstPage) {
-        firstPage.style.opacity = '1';
-        firstPage.style.transform = 'translateY(0)';
-    }
 }
 
 // DOM Ready
@@ -503,3 +527,4 @@ if (document.readyState === 'loading') {
     init();
 }
 /* == END: init == */
+
