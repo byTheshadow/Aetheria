@@ -1,224 +1,157 @@
 <!DOCTYPE html>
 <html lang="zh-CN" data-theme="moon">
 <head>
-  <!-- ============================================================
-       HEAD: Meta + 资源引入
-  ============================================================ -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aetheria</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌙</text></svg>" />
+  <meta name="description" content="Just For U — 专属于你的情感空间" />
+  <title>Just For U</title>
 
-  <!-- 样式表 -->
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+Screen&family=Noto+Serif+SC:wght@300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style/base.css" />
+  <link rel="stylesheet" href="style/components.css" />
   <link rel="stylesheet" href="style/themes/moon.css" />
   <link rel="stylesheet" href="style/themes/sakura.css" />
   <link rel="stylesheet" href="style/themes/forest.css" />
   <link rel="stylesheet" href="style/themes/void.css" />
-  <link rel="stylesheet" href="style/components.css" />
-  <link rel="stylesheet" href="style/animations.css" />
-  <!-- END HEAD -->
 </head>
-
 <body>
 
-  <!-- ============================================================
-       BACKGROUND: 动态 Mesh 渐变背景
-  ============================================================ -->
-  <div class="bg-mesh">
-    <div class="bg-orb orb-1"></div>
-    <div class="bg-orb orb-2"></div>
-    <div class="bg-orb orb-3"></div>
+  <!-- == BLOCK: background == -->
+  <div class="bg-mesh" aria-hidden="true">
+    <div class="bg-blob"></div>
+    <div class="bg-blob"></div>
   </div>
-  <!-- END BACKGROUND -->
+  <div class="bg-custom" id="bgCustom" aria-hidden="true"></div>
+  <!-- == END: background == -->
 
-  <!-- ============================================================
-       APP SHELL: 主容器
-  ============================================================ -->
-  <div id="app">
+  <!-- == BLOCK: app-wrapper == -->
+  <div class="app-wrapper">
 
-    <!-- ============================================================
-         SIDEBAR: 左侧导航
-    ============================================================ -->
-    <nav id="sidebar" class="sidebar glass">
-      <!-- Logo -->
-      <div class="sidebar-logo">
-        <span class="logo-icon">✦</span>
-        <div class="logo-text">
-          <span class="logo-name">Aetheria</span>
-          <span class="logo-sub">by shadow</span>
-        </div>
-      </div>
+    <!-- == BLOCK: sidebar == -->
+    <nav class="nav-sidebar" role="navigation" aria-label="主导航">
+      <div class="nav-logo">✦ Just For U</div>
 
-      <!-- 导航菜单 -->
-      <ul class="nav-list">
-        <li class="nav-item active" data-page="home">
-          <span class="nav-icon">🌙</span>
-          <span class="nav-label">主页</span>
-        </li>
-        <li class="nav-item" data-page="destroy">
-          <span class="nav-icon">💥</span>
-          <span class="nav-label">销毁室</span>
-        </li>
-        <li class="nav-item" data-page="wheel">
-          <span class="nav-icon">🎡</span>
-          <span class="nav-label">决策轮盘</span>
-        </li>
-        <li class="nav-item" data-page="tarot">
-          <span class="nav-icon">🔮</span>
-          <span class="nav-label">占卜</span>
-        </li>
-        <li class="nav-item" data-page="daily">
-          <span class="nav-icon">📓</span>
-          <span class="nav-label">每日中心</span>
-        </li>
-        <li class="nav-item" data-page="settings">
-          <span class="nav-icon">⚙️</span>
-          <span class="nav-label">设置</span>
-        </li>
-      </ul>
+      <button class="nav-item active" data-section="home" aria-label="首页">
+        <span class="nav-icon" aria-hidden="true">🏠</span>
+        <span>首页</span>
+      </button>
+      <button class="nav-item" data-section="divination" aria-label="占卜">
+        <span class="nav-icon" aria-hidden="true">🔮</span>
+        <span>占卜</span>
+      </button>
+      <button class="nav-item" data-section="wheel" aria-label="决策转盘">
+        <span class="nav-icon" aria-hidden="true">🎡</span>
+        <span>转盘</span>
+      </button>
+      <button class="nav-item" data-section="destroy" aria-label="负能量销毁室">
+        <span class="nav-icon" aria-hidden="true">💥</span>
+        <span>销毁</span>
+      </button>
+      <button class="nav-item" data-section="daily" aria-label="每日中心">
+        <span class="nav-icon" aria-hidden="true">📅</span>
+        <span>每日</span>
+      </button>
 
-      <!-- 主题切换 -->
-      <div class="theme-switcher">
-        <span class="theme-label">主题</span>
-        <div class="theme-dots">
-          <button class="theme-dot active" data-theme="moon" title="深夜月光"></button>
-          <button class="theme-dot" data-theme="sakura" title="樱花晨雾"></button>
-          <button class="theme-dot" data-theme="forest" title="暗林呼吸"></button>
-          <button class="theme-dot" data-theme="void" title="虚空黑"></button>
-        </div>
-      </div>
+      <div class="nav-spacer"></div>
+
+      <button class="nav-item" data-section="settings" aria-label="设置">
+        <span class="nav-icon" aria-hidden="true">⚙️</span>
+        <span>设置</span>
+      </button>
     </nav>
-    <!-- END SIDEBAR -->
+    <!-- == END: sidebar == -->
 
-    <!-- ============================================================
-         MAIN: 内容区域
-    ============================================================ -->
-    <main id="main-content">
+    <!-- == BLOCK: main-content == -->
+    <main class="main-content" id="mainContent">
 
-      <!-- ============================================================
-           PAGE: 主页
-      ============================================================ -->
-      <section class="page active" id="page-home">
-        <div class="page-header">
-          <h1 class="page-title">欢迎回来</h1>
-          <p class="page-subtitle" id="home-greeting"></p>
-        </div>
-
-        <div class="home-grid">
-          <!-- 时间卡片 -->
-          <div class="glass-card card-time">
-            <div class="time-display" id="clock"></div>
-            <div class="date-display" id="date"></div>
-          </div>
-
-          <!-- 快捷入口卡片 -->
-          <div class="glass-card card-shortcuts">
-            <h3 class="card-title">快速进入</h3>
-            <div class="shortcut-grid">
-              <button class="shortcut-btn" data-page="destroy">
-                <span>💥</span><span>销毁室</span>
-              </button>
-              <button class="shortcut-btn" data-page="wheel">
-                <span>🎡</span><span>轮盘</span>
-              </button>
-              <button class="shortcut-btn" data-page="tarot">
-                <span>🔮</span><span>占卜</span>
-              </button>
-              <button class="shortcut-btn" data-page="daily">
-                <span>📓</span><span>今日</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- 今日情绪预览卡片 -->
-          <div class="glass-card card-mood-preview">
-            <h3 class="card-title">今日状态</h3>
-            <div class="mood-preview-content" id="mood-preview">
-              <span class="mood-empty">今天还没有记录</span>
-            </div>
-            <button class="btn-ghost" data-page="daily">去记录 →</button>
-          </div>
-
-          <!-- 每日一言卡片 -->
-          <div class="glass-card card-quote">
-            <div class="quote-mark">"</div>
-            <p class="quote-text" id="daily-quote">在混沌中寻找你自己的星轨。</p>
-          </div>
-        </div>
+      <!-- == BLOCK: section-home == -->
+      <section class="section-panel active" id="section-home" aria-label="首页">
+        <div id="home-root"></div>
       </section>
-      <!-- END PAGE: 主页 -->
+      <!-- == END: section-home == -->
 
-      <!-- ============================================================
-           PAGE: 占位页（其他模块后续填充）
-      ============================================================ -->
-      <section class="page" id="page-destroy">
-        <div class="page-header">
-          <h1 class="page-title">负能量销毁室</h1>
-          <p class="page-subtitle">写下它，然后让它消失</p>
-        </div>
-        <div class="coming-soon glass-card">
-          <span class="coming-icon">💥</span>
-          <p>模块建设中</p>
-        </div>
+      <!-- == BLOCK: section-divination == -->
+      <section class="section-panel" id="section-divination" aria-label="占卜">
+        <div id="divination-root"></div>
       </section>
+      <!-- == END: section-divination == -->
 
-      <section class="page" id="page-wheel">
-        <div class="page-header">
-          <h1 class="page-title">决策轮盘</h1>
-          <p class="page-subtitle">交给命运</p>
-        </div>
-        <div class="coming-soon glass-card">
-          <span class="coming-icon">🎡</span>
-          <p>模块建设中</p>
-        </div>
+      <!-- == BLOCK: section-wheel == -->
+      <section class="section-panel" id="section-wheel" aria-label="决策转盘">
+        <div id="wheel-root"></div>
       </section>
+      <!-- == END: section-wheel == -->
 
-      <section class="page" id="page-tarot">
-        <div class="page-header">
-          <h1 class="page-title">占卜</h1>
-          <p class="page-subtitle">塔罗 · 雷诺曼</p>
-        </div>
-        <div class="coming-soon glass-card">
-          <span class="coming-icon">🔮</span>
-          <p>模块建设中</p>
-        </div>
+      <!-- == BLOCK: section-destroy == -->
+      <section class="section-panel" id="section-destroy" aria-label="负能量销毁室">
+        <div id="destroy-root"></div>
       </section>
+      <!-- == END: section-destroy == -->
 
-      <section class="page" id="page-daily">
-        <div class="page-header">
-          <h1 class="page-title">每日中心</h1>
-          <p class="page-subtitle">情绪 · 任务 · 习惯</p>
-        </div>
-        <div class="coming-soon glass-card">
-          <span class="coming-icon">📓</span>
-          <p>模块建设中</p>
-        </div>
+      <!-- == BLOCK: section-daily == -->
+      <section class="section-panel" id="section-daily" aria-label="每日中心">
+        <div id="daily-root"></div>
       </section>
+      <!-- == END: section-daily == -->
 
-      <section class="page" id="page-settings">
-        <div class="page-header">
-          <h1 class="page-title">设置</h1>
-          <p class="page-subtitle">个性化你的 Aetheria</p>
-        </div>
-        <div class="coming-soon glass-card">
-          <span class="coming-icon">⚙️</span>
-          <p>模块建设中</p>
-        </div>
+      <!-- == BLOCK: section-settings == -->
+      <section class="section-panel" id="section-settings" aria-label="设置">
+        <div id="settings-root"></div>
       </section>
-      <!-- END PAGE: 占位页 -->
+      <!-- == END: section-settings == -->
 
     </main>
-    <!-- END MAIN -->
+    <!-- == END: main-content == -->
+
+    <!-- == BLOCK: nav-bottom == -->
+    <nav class="nav-bottom" role="navigation" aria-label="底部导航">
+      <button class="nav-item active" data-section="home" aria-label="首页">
+        <span class="nav-icon" aria-hidden="true">🏠</span>
+        <span>首页</span>
+      </button>
+      <button class="nav-item" data-section="divination" aria-label="占卜">
+        <span class="nav-icon" aria-hidden="true">🔮</span>
+        <span>占卜</span>
+      </button>
+      <button class="nav-item" data-section="wheel" aria-label="转盘">
+        <span class="nav-icon" aria-hidden="true">🎡</span>
+        <span>转盘</span>
+      </button>
+      <button class="nav-item" data-section="destroy" aria-label="销毁">
+        <span class="nav-icon" aria-hidden="true">💥</span>
+        <span>销毁</span>
+      </button>
+      <button class="nav-item" data-section="daily" aria-label="每日">
+        <span class="nav-icon" aria-hidden="true">📅</span>
+        <span>每日</span>
+      </button>
+      <button class="nav-item" data-section="settings" aria-label="设置">
+        <span class="nav-icon" aria-hidden="true">⚙️</span>
+        <span>设置</span>
+      </button>
+    </nav>
+    <!-- == END: nav-bottom == -->
 
   </div>
-  <!-- END APP SHELL -->
+  <!-- == END: app-wrapper == -->
 
-  <!-- ============================================================
-       SCRIPTS
-  ============================================================ -->
+  <!-- == BLOCK: toast-container == -->
+  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+  <!-- == END: toast-container == -->
+
+  <!-- == BLOCK: scripts == -->
+  <script src="js/api.js"></script>
+  <script src="js/tarot.js"></script>
+  <script src="js/wheel.js"></script>
+  <script src="js/destroy.js"></script>
+  <script src="js/daily.js"></script>
   <script src="js/app.js"></script>
-  <!-- END SCRIPTS -->
+  <!-- == END: scripts == -->
 
 </body>
 </html>

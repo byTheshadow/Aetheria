@@ -1,26 +1,17 @@
-/* ============================================================
-   THEME: Void — 虚空黑
-============================================================ */
+/* == BLOCK: theme-void == */
 [data-theme="void"] {
-  --bg-base:        #080808;
-  --bg-surface:     rgba(255, 255, 255, 0.03);
-  --bg-elevated:    rgba(255, 255, 255, 0.06);
-
-  --glass-bg:       rgba(18, 18, 18, 0.6);
-  --glass-border:   rgba(255, 255, 255, 0.08);
-  --glass-blur:     20px;
-  --glass-shadow:   0 8px 32px rgba(0, 0, 0, 0.6);
-
-  --text-primary:   rgba(240, 240, 240, 0.9);
-  --text-secondary: rgba(180, 180, 180, 0.55);
-  --text-muted:     rgba(120, 120, 120, 0.35);
-
-  --accent-1:       #e2e2e2;
-  --accent-2:       #a0a0a0;
-  --accent-glow:    rgba(220, 220, 220, 0.15);
-
-  --orb-1:          rgba(40, 40, 40, 0.6);
-  --orb-2:          rgba(25, 25, 25, 0.5);
-  --orb-3:          rgba(60, 60, 60, 0.3);
+  --bg:          #080808;
+  --surface:     #111111;
+  --accent:      #e2e8f0;
+  --text:        #e2e8f0;
+  --text-muted:  #64748b;
+  --glass-bg:    rgba(226, 232, 240, 0.04);
+  --glass-border:rgba(226, 232, 240, 0.08);
 }
-/* END THEME: Void */
+
+[data-theme="void"] .bg-mesh::before,
+[data-theme="void"] .bg-mesh::after {
+  opacity: 0.08;
+}
+/* == END: theme-void == */
+

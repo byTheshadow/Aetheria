@@ -342,4 +342,85 @@
     grid-row: auto;
   }
 }
+/* == BLOCK: theme-grid == */
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.theme-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 8px;
+  border-radius: 14px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  transition: all var(--transition);
+  cursor: pointer;
+}
+
+.theme-btn span:first-child { font-size: 1.4rem; }
+
+.theme-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.theme-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+/* home page layout */
+.home-greeting {
+  text-align: center;
+  padding: 32px 0 28px;
+}
+
+.greeting-emoji {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.greeting-text {
+  font-size: 1.6rem;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.greeting-date {
+  font-size: 0.85rem;
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 600px) {
+  .home-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.home-tarot-slot {
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-header {
+  margin-bottom: 4px;
+}
+/* == END: theme-grid == */
+
 /* END RESPONSIVE */
