@@ -1,16 +1,16 @@
 /* == BLOCK: theme-void == */
 [data-theme="void"] {
-  --bg:           #080808;
-  --surface:      #111111;
+  --bg:           #050505;
+  --surface:      #0f0f0f;
   --accent:       #e2e8f0;
-  --accent-glow:  rgba(226, 232, 240, 0.15);
+  --accent-glow:  rgba(226, 232, 240, 0.08);
   --text:         #e2e8f0;
-  --text-muted:   #444444;
-  --glass-bg:     rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --mesh-a:       #111111;
-  --mesh-b:       #080808;
-  --mesh-c:       #0f0f0f;
-  --mesh-d:       #050505;
+  --text-muted:   rgba(226, 232, 240, 0.3);
+  --glass-bg:     rgba(255, 255, 255, 0.025);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --orb-a:        rgba(255, 255, 255, 0.04);
+  --orb-b:        rgba(150, 150, 150, 0.05);
+  --orb-c:        rgba(200, 200, 200, 0.03);
 }
 /* == END: theme-void == */
+
