@@ -1,0 +1,578 @@
+[
+  {
+    "id": 1,
+    "name": { "zh": "骑士", "en": "Rider" },
+    "emoji": "🐴",
+    "nature": "neutral",
+    "keywords": { "zh": ["消息", "行动", "迅速", "变化", "新开始"], "en": ["news", "action", "speed", "change", "new start"] },
+    "core": { "zh": "事件即将发生新变化，消息来临，移动迅速，自由与活力", "en": "New changes are coming, news arrives, swift movement, freedom and vitality" },
+    "meanings": {
+      "work": { "zh": "工作出现新变动，需要快速行动，可能转换部门，期待的答复即将来临", "en": "New changes at work, need for quick action, possible department transfer, expected reply coming" },
+      "love": { "zh": "新的开始，会遇到心仪对象，新感情或友情的开始", "en": "New beginning, meeting someone you like, start of new romance or friendship" },
+      "health": { "zh": "腿部、关节、急性病，注意膝盖与筋骨", "en": "Legs, joints, acute illness, watch knees and tendons" },
+      "money": { "zh": "会有新的财经消息，可能收到支票或账单", "en": "New financial news, may receive check or bill" },
+      "advice": { "zh": "提升效率，开始行动，继续前进", "en": "Improve efficiency, take action, keep moving forward" }
+    },
+    "time": { "zh": "快速，一天，一月，一个月的第一天", "en": "Fast, one day, January, first day of month" }
+  },
+  {
+    "id": 2,
+    "name": { "zh": "幸运草", "en": "Clover" },
+    "emoji": "🍀",
+    "nature": "positive",
+    "keywords": { "zh": ["好运", "机会", "短暂", "轻松", "惊喜"], "en": ["luck", "opportunity", "brief", "ease", "surprise"] },
+    "core": { "zh": "出乎意料的转机降临，好运与机会，但时间短暂", "en": "Unexpected turn of fortune, luck and opportunity, but brief" },
+    "meanings": {
+      "work": { "zh": "好机会降临，升等，顺心的成果，困难将成为过去", "en": "Good opportunity arrives, promotion, satisfying results, difficulties become past" },
+      "love": { "zh": "突然的相遇，第二次机会，开心的感情，但不一定长久", "en": "Sudden encounter, second chance, happy romance, but may not last" },
+      "health": { "zh": "一切将好转，即将康复，多吃蔬菜，接触自然", "en": "Everything improving, recovery coming, eat more vegetables, connect with nature" },
+      "money": { "zh": "意外之财，有成果的投资，财经正在恢复", "en": "Unexpected windfall, fruitful investment, finances recovering" },
+      "advice": { "zh": "保持正面态度，抓住机会，食疗散心", "en": "Stay positive, seize opportunities, food therapy and relaxation" }
+    },
+    "time": { "zh": "短暂，两天，二月，一个月的第二天", "en": "Brief, two days, February, second day of month" }
+  },
+  {
+    "id": 3,
+    "name": { "zh": "船", "en": "Ship" },
+    "emoji": "⛵",
+    "nature": "neutral",
+    "keywords": { "zh": ["旅行", "远方", "离开", "贸易", "转变"], "en": ["travel", "distance", "departure", "trade", "transition"] },
+    "core": { "zh": "离开旧有模式，有所准备地进入新状态，旅行与距离", "en": "Leaving old patterns, prepared entry into new state, travel and distance" },
+    "meanings": {
+      "work": { "zh": "出差，去异地工作，离开原有单位，需要转移或更改现状", "en": "Business trip, working in another city, leaving current position, need to shift" },
+      "love": { "zh": "外地恋情，长距离恋爱，旅行能获得恋情，转变可重燃火花", "en": "Long-distance romance, travel may bring love, change can reignite spark" },
+      "health": { "zh": "循环系统，排泄系统，肝脏，膀胱", "en": "Circulatory system, excretory system, liver, bladder" },
+      "money": { "zh": "清算，外出预算，贸易钱财，转账，可能有遗产", "en": "Settlement, travel budget, trade money, transfer, possible inheritance" },
+      "advice": { "zh": "需要自由，旅行，尝试离开某种状态", "en": "Need freedom, travel, try leaving a certain state" }
+    },
+    "time": { "zh": "三天，三星期，三个月，三月", "en": "Three days, three weeks, three months, March" }
+  },
+  {
+    "id": 4,
+    "name": { "zh": "房子", "en": "House" },
+    "emoji": "🏠",
+    "nature": "neutral",
+    "keywords": { "zh": ["家庭", "安稳", "舒适", "基础", "保护"], "en": ["family", "stability", "comfort", "foundation", "protection"] },
+    "core": { "zh": "熟悉的模式继续稳定进行，家庭与安全感", "en": "Familiar patterns continue stably, family and security" },
+    "meanings": {
+      "work": { "zh": "安全安稳的环境，舒适的状态，在家工作，家庭企业", "en": "Safe and stable environment, comfortable state, work from home, family business" },
+      "love": { "zh": "安定的关系，定下来成家，家人非常重要", "en": "Settled relationship, establishing a home, family very important" },
+      "health": { "zh": "骨骼，关节，身体体态，平和的状态", "en": "Bones, joints, body posture, peaceful state" },
+      "money": { "zh": "安全安稳的财经状况，不要冒险，投资房地产", "en": "Safe and stable finances, don't take risks, invest in real estate" },
+      "advice": { "zh": "保持现有优势继续发展，保持本性", "en": "Maintain current advantages, stay true to yourself" }
+    },
+    "time": { "zh": "四天，四星期，四个月，四月", "en": "Four days, four weeks, four months, April" }
+  },
+  {
+    "id": 5,
+    "name": { "zh": "树", "en": "Tree" },
+    "emoji": "🌳",
+    "nature": "neutral",
+    "keywords": { "zh": ["健康", "成长", "耐心", "长期", "灵性"], "en": ["health", "growth", "patience", "long-term", "spirituality"] },
+    "core": { "zh": "行为与思维惯性，长期存在的问题，需要耐心成长", "en": "Behavioral and mental inertia, long-standing issues, need patient growth" },
+    "meanings": {
+      "work": { "zh": "缓慢但持续增加进度，医疗灵性工作，建议同行业发展", "en": "Slow but steady progress, medical/spiritual work, stay in same industry" },
+      "love": { "zh": "耐心是重点，灵魂伴侣，很深的爱心，缘分注定", "en": "Patience is key, soulmate, deep love, destined connection" },
+      "health": { "zh": "心理健康，神经精神类问题，注意多休息", "en": "Mental health, neurological issues, need more rest" },
+      "money": { "zh": "长线投资，稳定收益，多管道收入", "en": "Long-term investment, stable returns, multiple income streams" },
+      "advice": { "zh": "按部就班，耕耘为先，放松冥想，接触自然", "en": "Step by step, cultivate first, relax and meditate, connect with nature" }
+    },
+    "time": { "zh": "五星期，五个月，五月，成长缓慢", "en": "Five weeks, five months, May, slow growth" }
+  },
+  {
+    "id": 6,
+    "name": { "zh": "乌云", "en": "Clouds" },
+    "emoji": "☁️",
+    "nature": "negative",
+    "keywords": { "zh": ["困惑", "不确定", "混乱", "忧郁", "模糊"], "en": ["confusion", "uncertainty", "chaos", "melancholy", "vague"] },
+    "core": { "zh": "混沌混乱的状态，看不清方向，疑惑与不安", "en": "Chaotic and confused state, unclear direction, doubt and unease" },
+    "meanings": {
+      "work": { "zh": "不愉快的工作环境，方向不明确，案子还没定下来", "en": "Unpleasant work environment, unclear direction, projects unsettled" },
+      "love": { "zh": "灰蒙蒙的感情，事情有问题，脾气可能火爆", "en": "Gloomy relationship, problems exist, temper may flare" },
+      "health": { "zh": "肺部，口鼻，躁郁，头晕，上瘾症，呼吸气管相关", "en": "Lungs, nose/mouth, bipolar, dizziness, addiction, respiratory" },
+      "money": { "zh": "负债，莫名损失，财经有困难", "en": "Debt, unexplained losses, financial difficulties" },
+      "advice": { "zh": "做清理，复盘经历，做个了断，深呼吸放松", "en": "Do cleanup, review experiences, make a clean break, breathe deeply" }
+    },
+    "time": { "zh": "六天，六星期，六个月，六月", "en": "Six days, six weeks, six months, June" }
+  },
+  {
+    "id": 7,
+    "name": { "zh": "蛇", "en": "Snake" },
+    "emoji": "🐍",
+    "nature": "negative",
+    "keywords": { "zh": ["复杂", "欺骗", "女性", "嫉妒", "智慧"], "en": ["complexity", "deception", "female", "jealousy", "wisdom"] },
+    "core": { "zh": "事件错综复杂，进展难以顺利，背后有隐藏原因", "en": "Situation is complex, progress difficult, hidden reasons behind" },
+    "meanings": {
+      "work": { "zh": "挫折，背信弃义，有人在背后搞鬼，繁琐的状况", "en": "Setbacks, betrayal, someone scheming behind, complicated situation" },
+      "love": { "zh": "嫉妒，背叛，不诚实，感情有谎言或第三者", "en": "Jealousy, betrayal, dishonesty, lies or third party in relationship" },
+      "health": { "zh": "肠胃，消化系统，头发问题，小生病", "en": "Stomach, digestive system, hair issues, minor illness" },
+      "money": { "zh": "小损失，坏的投资，债务，远离风险投资", "en": "Small losses, bad investments, debts, avoid risky investments" },
+      "advice": { "zh": "保留实力，不露锋芒，小心信任的人", "en": "Preserve strength, stay low-key, be careful who you trust" }
+    },
+    "time": { "zh": "七天，七星期，七个月，七月", "en": "Seven days, seven weeks, seven months, July" }
+  },
+  {
+    "id": 8,
+    "name": { "zh": "棺材", "en": "Coffin" },
+    "emoji": "⚰️",
+    "nature": "negative",
+    "keywords": { "zh": ["结束", "终止", "转变", "休息", "重生"], "en": ["ending", "termination", "transformation", "rest", "rebirth"] },
+    "core": { "zh": "某事终结，一个阶段的结束，痛苦但也意味新开始", "en": "Something ends, a phase concludes, painful but implies new beginning" },
+    "meanings": {
+      "work": { "zh": "结束就业，关店，失去工作，辞去无聊的工作", "en": "End of employment, closing shop, losing job, quitting boring work" },
+      "love": { "zh": "爱情已死，心灰意冷，痛苦的结束，分手或离婚", "en": "Love is dead, heartbroken, painful ending, breakup or divorce" },
+      "health": { "zh": "精神状态萎靡，慢性病，卧床不起，需要休息", "en": "Low spirits, chronic illness, bedridden, need rest" },
+      "money": { "zh": "巨大损失，破产，财经崩溃，需要重新开始", "en": "Huge losses, bankruptcy, financial collapse, need to restart" },
+      "advice": { "zh": "停顿休整，休息，待在家里", "en": "Pause and rest, stay home" }
+    },
+    "time": { "zh": "八天，八星期，八个月，八月", "en": "Eight days, eight weeks, eight months, August" }
+  },
+  {
+    "id": 9,
+    "name": { "zh": "花束", "en": "Bouquet" },
+    "emoji": "💐",
+    "nature": "positive",
+    "keywords": { "zh": ["幸福", "礼物", "美丽", "惊喜", "和谐"], "en": ["happiness", "gift", "beauty", "surprise", "harmony"] },
+    "core": { "zh": "某事进展顺利，状态和谐，欢乐与美丽降临", "en": "Things progress smoothly, harmonious state, joy and beauty arrive" },
+    "meanings": {
+      "work": { "zh": "得到推荐，有吸引力的提案，气氛好的工作环境", "en": "Getting recommended, attractive proposal, good work atmosphere" },
+      "love": { "zh": "热恋期，收到礼物，互生好感，绽放中的感情", "en": "Honeymoon phase, receiving gifts, mutual attraction, blooming romance" },
+      "health": { "zh": "康复回复，注意皮肤类疾病，花粉过敏", "en": "Recovery, watch for skin issues, pollen allergies" },
+      "money": { "zh": "状况很好，财经优势将出现，收入稳定有额外收获", "en": "Good situation, financial advantages emerging, stable income with bonuses" },
+      "advice": { "zh": "要开心，要美化，学习满足于现状", "en": "Be happy, beautify things, learn to be content" }
+    },
+    "time": { "zh": "春天，九天，九个月，九月", "en": "Spring, nine days, nine months, September" }
+  },
+  {
+    "id": 10,
+    "name": { "zh": "镰刀", "en": "Scythe" },
+    "emoji": "⚔️",
+    "nature": "negative",
+    "keywords": { "zh": ["突然", "切断", "意外", "决定", "危险"], "en": ["sudden", "cut", "accident", "decision", "danger"] },
+    "core": { "zh": "某事忽然被中断，突然的决定和行动，需要警惕", "en": "Something suddenly interrupted, sudden decisions and actions, stay alert" },
+    "meanings": {
+      "work": { "zh": "离职裁员，快速判断止损，终止工作，谈判破裂", "en": "Layoff, quick judgment to cut losses, work termination, negotiation breakdown" },
+      "love": { "zh": "分手，痛苦分离，拒绝，危险的关系", "en": "Breakup, painful separation, rejection, dangerous relationship" },
+      "health": { "zh": "意外伤害，动手术，骨折，切伤，牙痛", "en": "Accidental injury, surgery, fracture, cuts, toothache" },
+      "money": { "zh": "资金链断，大笔支出，亏损，减薪", "en": "Capital chain break, large expenses, losses, pay cut" },
+      "advice": { "zh": "快速做出利于自己的决定，不要犹豫", "en": "Make decisions quickly in your favor, don't hesitate" }
+    },
+    "time": { "zh": "瞬间，秋天，十天，十月", "en": "Instant, autumn, ten days, October" }
+  },
+  {
+    "id": 11,
+    "name": { "zh": "鞭子", "en": "Whip" },
+    "emoji": "🏇",
+    "nature": "negative",
+    "keywords": { "zh": ["争吵", "重复", "运动", "热情", "冲突"], "en": ["argument", "repetition", "exercise", "passion", "conflict"] },
+    "core": { "zh": "事件反复调整，争吵与冲突，也意味着高目标性与热情", "en": "Events repeatedly adjusting, arguments and conflicts, also means high ambition and passion" },
+    "meanings": {
+      "work": { "zh": "高强度高要求的工作，大量重复性事件，情绪紧绷", "en": "High intensity demanding work, lots of repetitive tasks, tense emotions" },
+      "love": { "zh": "反复强调自我需求，争执，激情澎湃", "en": "Repeatedly emphasizing own needs, disputes, passionate" },
+      "health": { "zh": "炎症，旧病复发，生殖类疾病，肌肉拉伤", "en": "Inflammation, relapse, reproductive issues, muscle strain" },
+      "money": { "zh": "金钱纠纷，财务紧张，不饱和的财务安全感", "en": "Money disputes, financial tension, insufficient financial security" },
+      "advice": { "zh": "反复确认方向和立场，先想再说，运动释放", "en": "Repeatedly confirm direction and stance, think before speaking, exercise" }
+    },
+    "time": { "zh": "一次又一次，十一天，十一月", "en": "Again and again, eleven days, November" }
+  },
+  {
+    "id": 12,
+    "name": { "zh": "小鸟", "en": "Birds" },
+    "emoji": "🐦",
+    "nature": "neutral",
+    "keywords": { "zh": ["沟通", "交流", "伴侣", "紧张", "八卦"], "en": ["communication", "exchange", "couple", "anxiety", "gossip"] },
+    "core": { "zh": "某事尚未出结果，待商榷，沟通与交流是关键", "en": "Matter not yet concluded, pending discussion, communication is key" },
+    "meanings": {
+      "work": { "zh": "咨询行业，不断确认信息沟通交流，谈好的事仍有变化", "en": "Consulting industry, constant information confirmation, agreed matters may change" },
+      "love": { "zh": "交流频繁，有共同话题，伴侣指示牌，需要继续了解", "en": "Frequent communication, shared topics, couple indicator, need more understanding" },
+      "health": { "zh": "喉咙，喉咙发炎，扁桃腺", "en": "Throat, throat inflammation, tonsils" },
+      "money": { "zh": "钱财来来去去，买卖，收入支出相差不离", "en": "Money comes and goes, trading, income and expenses roughly equal" },
+      "advice": { "zh": "多沟通，了解全面信息再下决定，说出来", "en": "Communicate more, understand full picture before deciding, speak up" }
+    },
+    "time": { "zh": "现在，进行中，十二天，十二月", "en": "Now, in progress, twelve days, December" }
+  },
+  {
+    "id": 13,
+    "name": { "zh": "小孩", "en": "Child" },
+    "emoji": "👶",
+    "nature": "neutral",
+    "keywords": { "zh": ["新开始", "天真", "渺小", "好奇", "简单"], "en": ["new start", "innocence", "small", "curiosity", "simple"] },
+    "core": { "zh": "某事处在萌芽阶段，新状态发生，天真与纯粹", "en": "Something in its infancy, new state emerging, innocence and purity" },
+    "meanings": {
+      "work": { "zh": "新生意，新任务，与小孩有关的工作，可能缺乏经验", "en": "New business, new task, child-related work, may lack experience" },
+      "love": { "zh": "新恋情，兴奋的时光，一步一步慢慢来", "en": "New romance, exciting times, take it step by step" },
+      "health": { "zh": "易感类疾病，小感冒，怀孕，疫苗", "en": "Susceptible illnesses, minor cold, pregnancy, vaccination" },
+      "money": { "zh": "小投资，零头，小财，新冒险", "en": "Small investment, small change, minor income, new venture" },
+      "advice": { "zh": "释放赤子之心，用天真态度面对问题，简单轻松积极", "en": "Release your inner child, face problems with innocence, simple and positive" }
+    },
+    "time": { "zh": "十三天，十三个星期，一年", "en": "Thirteen days, thirteen weeks, one year" }
+  },
+  {
+    "id": 14,
+    "name": { "zh": "狐狸", "en": "Fox" },
+    "emoji": "🦊",
+    "nature": "negative",
+    "keywords": { "zh": ["工作", "狡猾", "欺骗", "聪明", "谨慎"], "en": ["work", "cunning", "deception", "clever", "caution"] },
+    "core": { "zh": "事情形式可能因环境而变化，需要警惕欺骗，也是工作指示牌", "en": "Situation may change with environment, beware deception, also work indicator" },
+    "meanings": {
+      "work": { "zh": "工作指示牌，大量日常重复工作，小心诈欺与背叛", "en": "Work indicator, lots of daily routine, beware fraud and betrayal" },
+      "love": { "zh": "感情有欺瞒，引诱中带有秘密，不诚实", "en": "Deception in relationship, seduction with secrets, dishonesty" },
+      "health": { "zh": "错误诊断，需要更多调查，存在误诊可能", "en": "Misdiagnosis, need more investigation, possible wrong diagnosis" },
+      "money": { "zh": "不诚信的投资，需要小心被骗，远离风险", "en": "Dishonest investments, beware of scams, avoid risks" },
+      "advice": { "zh": "需要防备警惕，不要信任表面，运用才智", "en": "Stay alert and cautious, don't trust appearances, use your wits" }
+    },
+    "time": { "zh": "下午，十四天，差了几个月", "en": "Afternoon, fourteen days, a few months off" }
+  },
+  {
+    "id": 15,
+    "name": { "zh": "熊", "en": "Bear" },
+    "emoji": "🐻",
+    "nature": "neutral",
+    "keywords": { "zh": ["力量", "财富", "权力", "保护", "母性"], "en": ["strength", "wealth", "power", "protection", "maternal"] },
+    "core": { "zh": "某事影响力变大，存在不容小觑的第三方力量，权力与财富", "en": "Influence of something growing, significant third-party force, power and wealth" },
+    "meanings": {
+      "work": { "zh": "老板领导的指示牌，需要保护关照，高层主管", "en": "Boss/leader indicator, need protection and care, senior management" },
+      "love": { "zh": "实在巩固的关系，稳固守护，但可能过于保护或占有欲强", "en": "Solid relationship, stable protection, but may be overprotective or possessive" },
+      "health": { "zh": "营养饮食，体重控制，食物过敏，肌肉系统", "en": "Nutrition, weight control, food allergies, muscular system" },
+      "money": { "zh": "繁荣舒适，庞大财富，优厚薪资，有收获的投资", "en": "Prosperity and comfort, great wealth, good salary, profitable investments" },
+      "advice": { "zh": "坚定自己的立场，不要退缩，把控自己的生活", "en": "Stand firm, don't retreat, take control of your life" }
+    },
+    "time": { "zh": "十五天，六到八月", "en": "Fifteen days, June to August" }
+  },
+  {
+    "id": 16,
+    "name": { "zh": "星星", "en": "Stars" },
+    "emoji": "⭐",
+    "nature": "positive",
+    "keywords": { "zh": ["希望", "梦想", "指引", "名望", "灵感"], "en": ["hope", "dreams", "guidance", "fame", "inspiration"] },
+    "core": { "zh": "有清晰的目标，但达到目标还需努力，积极的影响与新机会", "en": "Clear goals but still need effort, positive influence and new opportunities" },
+    "meanings": {
+      "work": { "zh": "信息技术，网络工程，按部就班朝目标前进，夜班", "en": "IT, network engineering, steady progress toward goals, night shift" },
+      "love": { "zh": "幸福和平的关系，真诚的关系，坠入爱情", "en": "Happy peaceful relationship, sincere connection, falling in love" },
+      "health": { "zh": "疗育希望，康复，皮肤问题，失眠", "en": "Healing hope, recovery, skin issues, insomnia" },
+      "money": { "zh": "不用担心钱财问题，一切平稳顺畅，精密计划", "en": "No need to worry about money, everything smooth, precise planning" },
+      "advice": { "zh": "确立目标，满怀希望，计划领导梦想", "en": "Set goals, be hopeful, plan and lead your dreams" }
+    },
+    "time": { "zh": "夜晚，永恒，十六天", "en": "Night, eternity, sixteen days" }
+  },
+  {
+    "id": 17,
+    "name": { "zh": "鹳", "en": "Stork" },
+    "emoji": "🦢",
+    "nature": "positive",
+    "keywords": { "zh": ["转变", "进步", "提升", "更新", "迁移"], "en": ["change", "progress", "elevation", "renewal", "migration"] },
+    "core": { "zh": "事物在之前基础上迎来新转折点，通常是积极面", "en": "Things reach a new turning point from previous foundation, usually positive" },
+    "meanings": {
+      "work": { "zh": "晋升提升，跳槽，找工作会有好的回响", "en": "Promotion, job change, good response when job hunting" },
+      "love": { "zh": "感情迎来新阶段转折点，还想有更好的选择", "en": "Relationship reaches new turning point, wanting better options" },
+      "health": { "zh": "会有所改进，腿部，双腿健康", "en": "Will improve, legs, leg health" },
+      "money": { "zh": "薪水提升，往更好的状态转变", "en": "Salary increase, transitioning to better state" },
+      "advice": { "zh": "等待时机，积极转变，往前往上看", "en": "Wait for timing, actively transform, look forward and up" }
+    },
+    "time": { "zh": "三月，十七天，春天，季节转换", "en": "March, seventeen days, spring, seasonal change" }
+  },
+  {
+    "id": 18,
+    "name": { "zh": "狗", "en": "Dog" },
+    "emoji": "🐕",
+    "nature": "positive",
+    "keywords": { "zh": ["忠诚", "友情", "信任", "帮助", "陪伴"], "en": ["loyalty", "friendship", "trust", "help", "companionship"] },
+    "core": { "zh": "需要主动寻求帮助才能达到预想成绩，忠诚与友情", "en": "Need to actively seek help to achieve goals, loyalty and friendship" },
+    "meanings": {
+      "work": { "zh": "友善完美的工作环境，有人帮忙关注，寻求人脉帮助", "en": "Friendly perfect work environment, someone helping, seek network help" },
+      "love": { "zh": "灵魂伴侣，建立在友情上的关系，信任与归属感", "en": "Soulmate, relationship built on friendship, trust and belonging" },
+      "health": { "zh": "鼻子，味觉，口腔，请教医师", "en": "Nose, taste, oral, consult a doctor" },
+      "money": { "zh": "维持平衡稳定，朋友会帮助，财政援助", "en": "Maintain balance and stability, friends will help, financial aid" },
+      "advice": { "zh": "注意人际问题，展露值得信赖的一面，帮助他人", "en": "Pay attention to relationships, show trustworthy side, help others" }
+    },
+    "time": { "zh": "不会很快，十八天", "en": "Not soon, eighteen days" }
+  },
+  {
+    "id": 19,
+    "name": { "zh": "高塔", "en": "Tower" },
+    "emoji": "🏛️",
+    "nature": "neutral",
+    "keywords": { "zh": ["机构", "权威", "孤独", "法律", "野心"], "en": ["institution", "authority", "solitude", "law", "ambition"] },
+    "core": { "zh": "凸显事物的结构性、程序上的问题，权力与边界", "en": "Highlights structural and procedural issues, power and boundaries" },
+    "meanings": {
+      "work": { "zh": "高等职位，升等，政府职位，在医院或大公司", "en": "High position, promotion, government post, hospital or large company" },
+      "love": { "zh": "稳定认真的感情，但可能被困住或令人窒息", "en": "Stable serious relationship, but may feel trapped or suffocating" },
+      "health": { "zh": "脊椎与背，免疫系统，医疗中心", "en": "Spine and back, immune system, medical center" },
+      "money": { "zh": "在银行安全，可以投资，长期投资收益", "en": "Safe in bank, can invest, long-term investment returns" },
+      "advice": { "zh": "提高专业技能，设立界限，注意结构性问题", "en": "Improve professional skills, set boundaries, watch structural issues" }
+    },
+    "time": { "zh": "十九天，十九个星期", "en": "Nineteen days, nineteen weeks" }
+  },
+  {
+    "id": 20,
+    "name": { "zh": "花园", "en": "Garden" },
+    "emoji": "🌺",
+    "nature": "neutral",
+    "keywords": { "zh": ["社交", "聚会", "公众", "人脉", "传播"], "en": ["social", "gathering", "public", "network", "spread"] },
+    "core": { "zh": "某事具备传播性质，会扩大影响面，志趣相投", "en": "Something has spreading nature, will expand influence, like-minded" },
+    "meanings": {
+      "work": { "zh": "公关社交关系，广告节目设计，职业进展顺利", "en": "PR social relations, advertising, career progressing smoothly" },
+      "love": { "zh": "在聚会中认识新欢，新的相遇，可能定不下心", "en": "Meeting someone new at gatherings, new encounters, may be indecisive" },
+      "health": { "zh": "免疫系统，传染病，需要新鲜空气", "en": "Immune system, infectious diseases, need fresh air" },
+      "money": { "zh": "繁荣，可以寻觅好的财务项目机会", "en": "Prosperity, can find good financial project opportunities" },
+      "advice": { "zh": "四处看看，参加聚会，多社交", "en": "Look around, attend gatherings, socialize more" }
+    },
+    "time": { "zh": "下午，下个月，二十天", "en": "Afternoon, next month, twenty days" }
+  },
+  {
+    "id": 21,
+    "name": { "zh": "山", "en": "Mountain" },
+    "emoji": "⛰️",
+    "nature": "negative",
+    "keywords": { "zh": ["阻碍", "延迟", "挑战", "固执", "坚持"], "en": ["obstacle", "delay", "challenge", "stubborn", "persistence"] },
+    "core": { "zh": "某事一成不变，难以改变，长期处在一种状态中", "en": "Something unchanging, hard to change, stuck in one state long-term" },
+    "meanings": {
+      "work": { "zh": "没有前途的职位，面对挫折障碍，冻结招聘", "en": "Dead-end position, facing setbacks and obstacles, hiring freeze" },
+      "love": { "zh": "停顿的感情，僵持状态，冷淡与僵化", "en": "Stalled relationship, deadlock, coldness and rigidity" },
+      "health": { "zh": "脊椎，骨头，盆骨，便秘，阻塞", "en": "Spine, bones, pelvis, constipation, blockage" },
+      "money": { "zh": "收入遇到瓶颈期，负债重重，金钱挣扎", "en": "Income hits bottleneck, heavy debts, financial struggle" },
+      "advice": { "zh": "超越之前的自己，沉淀一段时间，坚持努力", "en": "Surpass your past self, settle for a while, keep trying" }
+    },
+    "time": { "zh": "延迟，二十一天，三个月，冬天", "en": "Delayed, twenty-one days, three months, winter" }
+  },
+  {
+    "id": 22,
+    "name": { "zh": "路径", "en": "Crossroads" },
+    "emoji": "🔀",
+    "nature": "neutral",
+    "keywords": { "zh": ["选择", "决定", "分岔", "自由", "犹豫"], "en": ["choice", "decision", "fork", "freedom", "hesitation"] },
+    "core": { "zh": "某事具备可替换性，面临选择与决定", "en": "Something has alternatives, facing choices and decisions" },
+    "meanings": {
+      "work": { "zh": "需要做决策，面临新机会或选择，有好几个公司可考虑", "en": "Need to make decisions, facing new opportunities, several companies to consider" },
+      "love": { "zh": "感情走到临界点，需要思考意义，可能有多人", "en": "Relationship at critical point, need to think about meaning, may involve multiple people" },
+      "health": { "zh": "脖子，神经，血脉，淋巴，循环系统", "en": "Neck, nerves, blood vessels, lymph, circulatory system" },
+      "money": { "zh": "有额外收入，许多投资机会，财务决策", "en": "Extra income, many investment opportunities, financial decisions" },
+      "advice": { "zh": "寻求备选方案，做好两手准备，做决定开始行动", "en": "Seek alternatives, prepare backup plans, decide and take action" }
+    },
+    "time": { "zh": "与二有关，两星期，两个月，春天", "en": "Related to two, two weeks, two months, spring" }
+  },
+  {
+    "id": 23,
+    "name": { "zh": "老鼠", "en": "Mice" },
+    "emoji": "🐭",
+    "nature": "negative",
+    "keywords": { "zh": ["损失", "压力", "焦虑", "偷窃", "消耗"], "en": ["loss", "stress", "anxiety", "theft", "drain"] },
+    "core": { "zh": "因细节问题造成小损失，焦虑的关系，消耗与压力", "en": "Small losses from detail issues, anxious relationships, drain and stress" },
+    "meanings": {
+      "work": { "zh": "琐碎细节挤压，消磨耐心，充满压力的工作环境", "en": "Trivial details piling up, wearing patience, stressful work environment" },
+      "love": { "zh": "不稳定的感情，痴迷，耗费精神，秘密交往", "en": "Unstable relationship, obsession, draining, secret dating" },
+      "health": { "zh": "耳朵，口腔溃疡，皮肤溃烂，神经系统，传染病", "en": "Ears, mouth ulcers, skin sores, nervous system, infectious disease" },
+      "money": { "zh": "判断错误致使损失，被偷窃，金钱损失", "en": "Losses from wrong judgment, theft, money loss" },
+      "advice": { "zh": "注意细节，低调处事，不要张扬，坚持不要杞人忧天", "en": "Watch details, stay low-key, don't show off, persist without worrying" }
+    },
+    "time": { "zh": "现在，很短，几小时，几天", "en": "Now, very short, hours, days" }
+  },
+  {
+    "id": 24,
+    "name": { "zh": "爱心", "en": "Heart" },
+    "emoji": "❤️",
+    "nature": "positive",
+    "keywords": { "zh": ["爱", "热情", "幸福", "满足", "浪漫"], "en": ["love", "passion", "happiness", "satisfaction", "romance"] },
+    "core": { "zh": "某事令人满意，心仪的对象或有爱的过程，心情与感受", "en": "Something satisfying, someone you like or loving process, feelings and emotions" },
+    "meanings": {
+      "work": { "zh": "令人满意的工作，工作结果如愿，找到热爱的工作", "en": "Satisfying work, results as wished, finding work you love" },
+      "love": { "zh": "充满热情的爱，新恋情，真爱，幸福与希望", "en": "Passionate love, new romance, true love, happiness and hope" },
+      "health": { "zh": "心脏，心血管相关", "en": "Heart, cardiovascular related" },
+      "money": { "zh": "舒适的财经状况，满意的收入", "en": "Comfortable finances, satisfying income" },
+      "advice": { "zh": "以平和状态面对事物，凭心选择和前进，去爱", "en": "Face things peacefully, choose and move forward by heart, love" }
+    },
+    "time": { "zh": "二十四天，春天，夏天", "en": "Twenty-four days, spring, summer" }
+  },
+  {
+    "id": 25,
+    "name": { "zh": "戒指", "en": "Ring" },
+    "emoji": "💍",
+    "nature": "positive",
+    "keywords": { "zh": ["承诺", "合约", "循环", "婚姻", "忠诚"], "en": ["commitment", "contract", "cycle", "marriage", "loyalty"] },
+    "core": { "zh": "体现某事价值共性，承诺关系的状态，确定与联系", "en": "Reflects shared value, state of commitment, certainty and connection" },
+    "meanings": {
+      "work": { "zh": "合约契约，公司融合，祥和的工作环境，重复替换的工作", "en": "Contracts, company merger, harmonious work environment, repetitive work" },
+      "love": { "zh": "幸福，遇见新对象，坚定的感情，订婚", "en": "Happiness, meeting new partner, firm relationship, engagement" },
+      "health": { "zh": "定期检查，复健，循环系统，淋巴腺", "en": "Regular checkups, rehabilitation, circulatory system, lymph glands" },
+      "money": { "zh": "稳定的阶段，财经合约，合并资产", "en": "Stable phase, financial contracts, merging assets" },
+      "advice": { "zh": "尊重承诺关系，投入答应，养成习惯并坚持", "en": "Respect commitments, commit and agree, form habits and persist" }
+    },
+    "time": { "zh": "二十五天，重复的循环", "en": "Twenty-five days, repeating cycle" }
+  },
+  {
+    "id": 26,
+    "name": { "zh": "书", "en": "Book" },
+    "emoji": "📖",
+    "nature": "neutral",
+    "keywords": { "zh": ["秘密", "知识", "学习", "隐藏", "发现"], "en": ["secret", "knowledge", "study", "hidden", "discovery"] },
+    "core": { "zh": "表面阶段，实则内有乾坤，存在隐藏问题", "en": "Surface level, but deeper issues exist, hidden problems" },
+    "meanings": {
+      "work": { "zh": "文书教育类工作，遇到潜在问题，需要进修深造", "en": "Clerical/educational work, encountering hidden issues, need further study" },
+      "love": { "zh": "秘密恋情，暗恋，关系中存在不可知信息", "en": "Secret romance, unrequited love, unknown information in relationship" },
+      "health": { "zh": "记忆力，认知问题，大脑，隐性疾病", "en": "Memory, cognitive issues, brain, hidden illness" },
+      "money": { "zh": "钱财条文有疏漏，潜在风险，奖学金", "en": "Financial terms have gaps, potential risks, scholarships" },
+      "advice": { "zh": "进修学习，研究，安静不要说出来", "en": "Further study, research, stay quiet and don't reveal" }
+    },
+    "time": { "zh": "慢慢的，二十六天，不确定", "en": "Slowly, twenty-six days, uncertain" }
+  },
+  {
+    "id": 27,
+    "name": { "zh": "信", "en": "Letter" },
+    "emoji": "✉️",
+    "nature": "neutral",
+    "keywords": { "zh": ["消息", "文件", "信息", "沟通", "通知"], "en": ["message", "document", "information", "communication", "notice"] },
+    "core": { "zh": "表现事件客观信息的状态，消息与文件", "en": "Shows objective information state of events, messages and documents" },
+    "meanings": {
+      "work": { "zh": "处理大量文书信息，合约文本，Offer本身", "en": "Processing lots of paperwork, contract texts, the offer itself" },
+      "love": { "zh": "短信回复，情书，网络恋情，感情中交流的状态", "en": "Text replies, love letters, online romance, communication state in relationship" },
+      "health": { "zh": "手和手指，药方，检测结果", "en": "Hands and fingers, prescriptions, test results" },
+      "money": { "zh": "支票或请款单，银行账表，账单", "en": "Checks or invoices, bank statements, bills" },
+      "advice": { "zh": "不要错漏任何可掌握的信息，写作，列下要做的事", "en": "Don't miss any available information, write, list things to do" }
+    },
+    "time": { "zh": "短暂，会很快，二十七天", "en": "Brief, will be quick, twenty-seven days" }
+  },
+  {
+    "id": 28,
+    "name": { "zh": "男人", "en": "Man" },
+    "emoji": "👨",
+    "nature": "neutral",
+    "keywords": { "zh": ["男性", "力量", "自我", "理性", "行动"], "en": ["male", "strength", "self", "rational", "action"] },
+    "core": { "zh": "问题相关的男性人物或问主，代表男性能源", "en": "Male figure related to the question or querent, represents masculine energy" },
+    "meanings": {
+      "work": { "zh": "在工作环境有重要地位的男性", "en": "Male with important position in work environment" },
+      "love": { "zh": "爱人，男朋友，先生，对男人有兴趣", "en": "Lover, boyfriend, husband, interested in a man" },
+      "health": { "zh": "男性器官，男性荷尔蒙", "en": "Male organs, male hormones" },
+      "money": { "zh": "财经与男人有关", "en": "Finances related to a man" },
+      "advice": { "zh": "多用逻辑分析事物", "en": "Use more logic to analyze things" }
+    },
+    "time": { "zh": "七月，二十八天", "en": "July, twenty-eight days" }
+  },
+  {
+    "id": 29,
+    "name": { "zh": "女人", "en": "Woman" },
+    "emoji": "👩",
+    "nature": "neutral",
+    "keywords": { "zh": ["女性", "感性", "直觉", "温柔", "母性"], "en": ["female", "emotional", "intuition", "gentle", "maternal"] },
+    "core": { "zh": "问题相关的女性人物或问主，代表女性能源", "en": "Female figure related to the question or querent, represents feminine energy" },
+    "meanings": {
+      "work": { "zh": "在工作环境有影响力的女性", "en": "Female with influence in work environment" },
+      "love": { "zh": "爱人，女朋友，妻子，未婚妻", "en": "Lover, girlfriend, wife, fiancée" },
+      "health": { "zh": "女性荷尔蒙，右脑相关", "en": "Female hormones, right brain related" },
+      "money": { "zh": "有关女性的财经", "en": "Finances related to a woman" },
+      "advice": { "zh": "用感性与直觉", "en": "Use emotion and intuition" }
+    },
+    "time": { "zh": "五月，二十九天", "en": "May, twenty-nine days" }
+  },
+  {
+    "id": 30,
+    "name": { "zh": "百合花", "en": "Lily" },
+    "emoji": "⚜️",
+    "nature": "neutral",
+    "keywords": { "zh": ["成熟", "智慧", "耐心", "平静", "长期"], "en": ["maturity", "wisdom", "patience", "calm", "long-term"] },
+    "core": { "zh": "事件进入酝酿期，需要等待发酵时机，静待时机", "en": "Event entering brewing period, need to wait for right timing" },
+    "meanings": {
+      "work": { "zh": "长期平稳可靠的工作，按部就班，需要耐心", "en": "Long-term stable reliable work, step by step, need patience" },
+      "love": { "zh": "年长的爱人，旧爱，长情但平淡，日久生情", "en": "Older lover, old flame, long-lasting but plain, love grows over time" },
+      "health": { "zh": "衰老症，反应迟钝，肾脏", "en": "Aging conditions, slow reactions, kidneys" },
+      "money": { "zh": "长期没有突破，稳定收益但不见涨", "en": "No breakthrough long-term, stable returns but no growth" },
+      "advice": { "zh": "需要耐心，运用智慧，不争一时之能", "en": "Need patience, use wisdom, don't compete for short-term gains" }
+    },
+    "time": { "zh": "冬天，长时间，三十天", "en": "Winter, long time, thirty days" }
+  },
+  {
+    "id": 31,
+    "name": { "zh": "太阳", "en": "Sun" },
+    "emoji": "☀️",
+    "nature": "positive",
+    "keywords": { "zh": ["成功", "光明", "活力", "自信", "胜利"], "en": ["success", "brightness", "vitality", "confidence", "victory"] },
+    "core": { "zh": "扩大某事的积极影响，成功与个人能力得到认可", "en": "Amplifies positive influence, success and personal ability recognized" },
+    "meanings": {
+      "work": { "zh": "工作成绩瞩目，担任重要角色，前途光明", "en": "Outstanding work results, important role, bright future" },
+      "love": { "zh": "轰轰烈烈的热情恋爱，极其吸引你的重要人物", "en": "Passionate intense romance, extremely attractive important person" },
+      "health": { "zh": "眼睛，精神面貌，生命力，充满活力", "en": "Eyes, mental outlook, vitality, full of energy" },
+      "money": { "zh": "收入令人艳羡，财运好，成功赚取钱财", "en": "Enviable income, good fortune, successfully earning money" },
+      "advice": { "zh": "积极展现自己的能力，做自己，要有自信", "en": "Actively show your abilities, be yourself, be confident" }
+    },
+    "time": { "zh": "夏天，早晨至下午，三十一天", "en": "Summer, morning to afternoon, thirty-one days" }
+  },
+  {
+    "id": 32,
+    "name": { "zh": "月亮", "en": "Moon" },
+    "emoji": "🌙",
+    "nature": "positive",
+    "keywords": { "zh": ["名望", "创意", "感性", "直觉", "浪漫"], "en": ["fame", "creativity", "emotional", "intuition", "romance"] },
+    "core": { "zh": "突出某事结果后的评价与声名，隐性机会与个人满足", "en": "Highlights reputation after results, hidden opportunities and personal fulfillment" },
+    "meanings": {
+      "work": { "zh": "创造性文艺的工作，成绩带来新机会，发挥个人才能", "en": "Creative artistic work, achievements bring new opportunities, use personal talents" },
+      "love": { "zh": "得到滋养的感情，善于考虑对方情绪，自我认可感", "en": "Nourishing relationship, considerate of partner's emotions, self-recognition" },
+      "health": { "zh": "女性类疾病，下腹问题，激素内分泌", "en": "Female conditions, lower abdomen issues, hormones and endocrine" },
+      "money": { "zh": "财运偏好，但有些许起伏", "en": "Good fortune trend, but slight fluctuations" },
+      "advice": { "zh": "考虑他人情绪，寻求让彼此舒适的方案", "en": "Consider others' emotions, seek solutions comfortable for both" }
+    },
+    "time": { "zh": "下午到深夜，一个月内", "en": "Afternoon to late night, within a month" }
+  },
+  {
+    "id": 33,
+    "name": { "zh": "钥匙", "en": "Key" },
+    "emoji": "🔑",
+    "nature": "positive",
+    "keywords": { "zh": ["关键", "解答", "成功", "确定", "突破"], "en": ["key", "answer", "success", "certainty", "breakthrough"] },
+    "core": { "zh": "突出问题中某个关键信息，进入最关键步骤，成功与解决方案", "en": "Highlights key information in problem, entering crucial step, success and solutions" },
+    "meanings": {
+      "work": { "zh": "即将出现关键信息，具备解决能力，重要的工作职位", "en": "Key information about to appear, capable of solving, important work position" },
+      "love": { "zh": "能开启心门的良好关系，关键的人，可能是正缘", "en": "Good relationship that opens heart, key person, may be destined partner" },
+      "health": { "zh": "健康问题都可顺利解决，视力与集中注意力", "en": "Health issues can be resolved smoothly, vision and concentration" },
+      "money": { "zh": "重复的投资成功，财经优渥，点子能增加钱财", "en": "Repeated investment success, prosperous finances, ideas can increase wealth" },
+      "advice": { "zh": "注意最突出的信息点，开始行动，争取机会", "en": "Focus on most prominent information, take action, seize opportunities" }
+    },
+    "time": { "zh": "再一个月，就是现在，三十三天", "en": "Another month, right now, thirty-three days" }
+  },
+  {
+    "id": 34,
+    "name": { "zh": "鱼", "en": "Fish" },
+    "emoji": "🐟",
+    "nature": "positive",
+    "keywords": { "zh": ["财富", "自由", "流动", "生意", "独立"], "en": ["wealth", "freedom", "flow", "business", "independence"] },
+    "core": { "zh": "发展方向暂不确定，存在多面可能，流动与自由", "en": "Direction uncertain, multiple possibilities exist, flow and freedom" },
+    "meanings": {
+      "work": { "zh": "多个机会选择，资源型岗位，自由业创业", "en": "Multiple opportunity choices, resource-based position, freelance/startup" },
+      "love": { "zh": "隐藏需求未被满足，不想被束缚的想法", "en": "Hidden needs unmet, thoughts of not wanting to be bound" },
+      "health": { "zh": "膀胱，肾，腹泻，多喝水，游泳", "en": "Bladder, kidneys, diarrhea, drink more water, swimming" },
+      "money": { "zh": "财运指示牌，财务正常流动，利润收入增加", "en": "Financial indicator, normal cash flow, profits and income increasing" },
+      "advice": { "zh": "给自己选择空间，深入了解需求，相信直觉", "en": "Give yourself space to choose, understand needs deeply, trust intuition" }
+    },
+    "time": { "zh": "日出或日落，满月，很多时间", "en": "Sunrise or sunset, full moon, lots of time" }
+  },
+  {
+    "id": 35,
+    "name": { "zh": "锚", "en": "Anchor" },
+    "emoji": "⚓",
+    "nature": "positive",
+    "keywords": { "zh": ["稳定", "安全", "目标", "坚持", "可靠"], "en": ["stability", "safety", "goal", "persistence", "reliable"] },
+    "core": { "zh": "某事按既定方向持续稳定发展，有安全保障", "en": "Something developing steadily in set direction, with security guarantee" },
+    "meanings": {
+      "work": { "zh": "成功的事业，稳定的工作环境，达成目标，永久职位", "en": "Successful career, stable work environment, achieving goals, permanent position" },
+      "love": { "zh": "安稳的感情，认真可依靠，信任，长期坚定", "en": "Stable relationship, serious and reliable, trust, long-term commitment" },
+      "health": { "zh": "骨盆，状况稳定", "en": "Pelvis, condition stable" },
+      "money": { "zh": "安稳不变的收入，安全的财经状况，长期投资", "en": "Stable unchanging income, safe finances, long-term investment" },
+      "advice": { "zh": "确定定位，坚持前进，相信自己可以", "en": "Confirm positioning, keep moving forward, believe in yourself" }
+    },
+    "time": { "zh": "未来几个月，很缓慢，长期，可能一年以上", "en": "Next few months, very slow, long-term, possibly over a year" }
+  },
+  {
+    "id": 36,
+    "name": { "zh": "十字架", "en": "Cross" },
+    "emoji": "✝️",
+    "nature": "negative",
+    "keywords": { "zh": ["负担", "痛苦", "命运", "考验", "信仰"], "en": ["burden", "suffering", "fate", "trial", "faith"] },
+    "core": { "zh": "强烈的负面威压，心理上的责难，长期如此，但更强调心魔", "en": "Strong negative pressure, psychological blame, long-lasting, emphasizes inner demons" },
+    "meanings": {
+      "work": { "zh": "工作现况致使巨大障碍感，有逃避心理，受到责难", "en": "Current work causing huge sense of obstacle, avoidance mentality, being blamed" },
+      "love": { "zh": "负能量缠身的关系，虐恋且三观不合，人格受打压", "en": "Negative energy relationship, toxic and incompatible values, personality suppressed" },
+      "health": { "zh": "长期骨架酸痛，风湿，慢性疾病，疼痛", "en": "Long-term bone pain, rheumatism, chronic diseases, pain" },
+      "money": { "zh": "负债，财务匮乏感重，贫穷，错误投资", "en": "Debt, heavy financial scarcity, poverty, wrong investments" },
+      "advice": { "zh": "寻求心理和现实世界的平衡，心理重建，祈祷", "en": "Seek balance between mind and reality, psychological rebuilding, pray" }
+    },
+    "time": { "zh": "比预期还快（负面），需要耐心（承受）", "en": "Faster than expected (negative), need patience (enduring)" }
+  }
+]

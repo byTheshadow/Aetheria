@@ -81,17 +81,105 @@
         </section>
 
         <!-- ====== DIVINATION ====== -->
-        <section class="page" id="page-divination">
-            <div class="page-scroll">
-                <div class="page-header">
-                    <h2 class="page-title" data-i18n="nav_divination">占卜</h2>
-                    <p class="page-desc" data-i18n="div_desc">选择你的牌阵，聆听宇宙的低语</p>
-                </div>
-                <div class="placeholder-content glass-card">
-                    <div class="placeholder-icon">🔮</div>
-                    <p data-i18n="coming_soon">即将开放</p>
-                </div></div>
-        </section>
+        <!-- == BLOCK: page-divination == -->
+<section id="page-divination" class="page"><div class="page-scroll">
+
+    <!-- Header -->
+    <div class="page-header">
+      <h2 class="page-title" data-i18n="div_title">占卜</h2>
+      <p class="page-desc" data-i18n="div_desc">选择你的牌阵，聆听宇宙的低语</p>
+    </div>
+
+    <!-- System Tabs -->
+    <div class="div-tabs glass-card glass-card--flat">
+      <button class="div-tab div-tab--active" data-system="lenormand">
+        <span class="div-tab-emoji">🔮</span>
+        <span data-i18n="div_tab_lenormand">雷诺曼</span>
+      </button>
+      <button class="div-tab" data-system="tarot" disabled>
+        <span class="div-tab-emoji">🃏</span>
+        <span data-i18n="div_tab_tarot">塔罗</span>
+        <span class="div-tab-badge" data-i18n="coming_soon">即将开放</span>
+      </button></div>
+
+    <!-- Spread Selection -->
+    <div class="div-spread-section" id="divSpreadSection">
+      <p class="div-section-label mono" data-i18n="div_choose_spread">选择牌阵</p>
+      <div class="div-spread-grid">
+        <button class="div-spread-card glass-card" data-spread="single">
+          <div class="div-spread-icon">🎴</div>
+          <div class="div-spread-name" data-i18n="div_spread_single">每日一卡</div>
+          <div class="div-spread-count mono">× 1</div>
+        </button>
+        <button class="div-spread-card glass-card" data-spread="three">
+          <div class="div-spread-icon">🎴🎴🎴</div>
+          <div class="div-spread-name" data-i18n="div_spread_three">三张牌阵</div>
+          <div class="div-spread-count mono">× 3</div>
+        </button>
+        <button class="div-spread-card glass-card" data-spread="five">
+          <div class="div-spread-icon">✦</div>
+          <div class="div-spread-name" data-i18n="div_spread_five">十字牌阵</div>
+          <div class="div-spread-count mono">× 5</div>
+        </button>
+        <button class="div-spread-card glass-card" data-spread="nine">
+          <div class="div-spread-icon">▦</div>
+          <div class="div-spread-name" data-i18n="div_spread_nine">九宫格</div>
+          <div class="div-spread-count mono">× 9</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Question Input -->
+    <div class="div-question-section glass-card" id="divQuestionSection" style="display:none;">
+      <p class="div-section-label mono" data-i18n="div_question_label">你想问什么？（可选）</p>
+      <input type="text" class="input div-question-input" id="divQuestionInput" data-i18n-placeholder="div_question_ph" placeholder="在心中默念你的问题...">
+      <div class="div-topic-tags">
+        <button class="div-topic-tag" data-topic="work" data-i18n="div_topic_work">事业</button>
+        <button class="div-topic-tag" data-topic="love" data-i18n="div_topic_love">爱情</button>
+        <button class="div-topic-tag" data-topic="health" data-i18n="div_topic_health">健康</button>
+        <button class="div-topic-tag" data-topic="money" data-i18n="div_topic_money">财运</button>
+        <button class="div-topic-tag" data-topic="general" data-i18n="div_topic_general">综合</button>
+      </div>
+      <button class="btn-primary div-draw-btn" id="divDrawBtn" data-i18n="div_draw_btn">开始抽牌</button>
+    </div>
+
+    <!-- Card Stage (draw animation area) -->
+    <div class="div-stage" id="divStage" style="display:none;">
+      <!-- Deck -->
+      <div class="div-deck" id="divDeck">
+        <div class="div-deck-card glass-card">
+          <span class="div-deck-symbol">✦</span>
+        </div>
+      </div>
+      <!-- Spread Layout -->
+      <div class="div-layout" id="divLayout"></div>
+    </div>
+
+    <!-- Reading Result -->
+    <div class="div-reading" id="divReading" style="display:none;">
+      <p class="div-section-label mono" data-i18n="div_reading_title">牌面解读</p>
+      <div class="div-cards-summary" id="divCardsSummary"></div>
+
+      <!-- AI Interpret -->
+      <div class="div-ai-section" id="divAISection" style="display:none;">
+        <button class="btn btn--ghost div-ai-btn" id="divAIBtn">
+          <span class="div-ai-icon">✨</span>
+          <span data-i18n="div_ai_btn">AI 深度解读</span>
+        </button>
+        <div class="div-ai-result glass-card" id="divAIResult" style="display:none;">
+          <div class="div-ai-loading" id="divAILoading" style="display:none;">
+            <div class="div-ai-dots"><span></span><span></span><span></span></div>
+            <span data-i18n="div_ai_loading">宇宙正在解读...</span>
+          </div><div class="div-ai-text" id="divAIText"></div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="div-actions">
+        <button class="btn btn--ghost" id="divAgainBtn" data-i18n="div_again_btn">重新抽牌</button></div>
+    </div></div>
+</section>
+<!-- == END: page-divination == -->
 
         <!-- ====== WHEEL ====== -->
 <!-- ====== WHEEL ====== -->
@@ -350,5 +438,7 @@
     <script src="js/app.js"></script>
     <script src="js/destroy.js"></script>
     <script src="js/wheel.js"></script> 
+    <script src="js/api.js"></script>
+    <script src="js/tarot.js"></script>
 </body>
 </html>
