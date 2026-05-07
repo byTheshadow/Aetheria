@@ -42,7 +42,7 @@ const I18N = {
         toast_ai_saved: 'AI 配置已保存',
         toast_exported: '数据已导出',
         toast_cleared: '所有数据已清除',
-        toast_confirm_clear: '再次点击确认清除所有数据'
+        toast_confirm_clear: '再次点击确认清除所有数据',
         destroy_title: '负能量销毁室',
 destroy_desc: '写下困扰你的一切，然后看着它们灰飞烟灭。',
 destroy_placeholder: '把你的负能量写在这里...',
@@ -97,7 +97,7 @@ destroy_toast_empty: '请先写点什么再销毁',
         toast_ai_saved: 'AI config saved',
         toast_exported: 'Data exported',
         toast_cleared: 'All data cleared',
-        toast_confirm_clear: 'Click again to confirm clearing all data'
+        toast_confirm_clear: 'Click again to confirm clearing all data',
         destroy_title: 'Negativity Destroyer',
 destroy_desc: 'Write down everything that bothers you, then watch it vanish.',
 destroy_placeholder: 'Write your negativity here...',
