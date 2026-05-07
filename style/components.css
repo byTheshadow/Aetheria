@@ -765,4 +765,173 @@
 }
 
 /* == END: destroy == */
+/* == BLOCK: wheel == */
+
+/* 输入卡片 */
+.wheel-input-card {
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.wheel-input-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+}
+
+/* 选项列表 */
+.wheel-options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+    min-height: 0;
+}
+
+.wheel-option-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    animation: fadeInUp 0.2s ease;
+}
+
+.wheel-option-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.wheel-option-label {
+    flex: 1;
+    font-size: 14px;
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wheel-option-del {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+}
+
+.wheel-option-del:hover {
+    opacity: 1;
+    color: var(--text);
+}
+
+/* 添加行 */
+.wheel-add-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.wheel-add-input {
+    flex: 1;
+}
+
+/* 提示文字 */
+.wheel-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 10px;
+    opacity: 0.7;
+}
+
+/* 转盘容器 */
+.wheel-canvas-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px auto 16px;
+    width: 320px;
+    height: 340px;
+}
+
+#wheelCanvas {
+    display: block;
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.06);
+}
+
+/* 指针 */
+.wheel-pointer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 22px;
+    line-height: 1;
+    color: var(--accent);
+    filter: drop-shadow(0 2px 6px var(--accent-glow));
+    z-index: 2;
+    pointer-events: none;
+    text-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* 旋转按钮 */
+.wheel-spin-btn {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 20px;
+    padding: 14px;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+}
+
+/* 结果卡片 */
+.wheel-result {
+    text-align: center;
+    padding: 28px 24px;
+    margin-bottom: 20px;
+    animation: fadeInUp 0.4s ease;
+}
+
+.wheel-result-icon {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.wheel-result-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+}
+
+.wheel-result-text {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--accent);
+    text-shadow: 0 0 20px var(--accent-glow);
+    margin-bottom: 20px;
+    word-break: break-all;
+}
+
+.wheel-result-btns {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* == END: wheel == */
 

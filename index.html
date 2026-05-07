@@ -94,18 +94,60 @@
         </section>
 
         <!-- ====== WHEEL ====== -->
-        <section class="page" id="page-wheel">
-            <div class="page-scroll">
-                <div class="page-header">
-                    <h2 class="page-title" data-i18n="nav_wheel">转盘</h2>
-                    <p class="page-desc" data-i18n="wheel_desc">把选择交给命运</p>
-                </div>
-                <div class="placeholder-content glass-card">
-                    <div class="placeholder-icon">🎡</div>
-                    <p data-i18n="coming_soon">即将开放</p>
-                </div>
+<!-- ====== WHEEL ====== -->
+<!-- == BLOCK: page-wheel == -->
+<section class="page" id="page-wheel">
+    <div class="page-scroll">
+
+        <div class="page-header">
+            <h2 class="page-title" data-i18n="nav_wheel">转盘</h2>
+            <p class="page-desc" data-i18n="wheel_desc">把选择交给命运</p>
+        </div>
+
+        <!-- 选项输入区 -->
+        <div class="glass-card wheel-input-card" id="wheelInputCard">
+            <p class="wheel-input-label" data-i18n="wheel_input_label">输入选项</p>
+            <div class="wheel-options-list" id="wheelOptionsList"></div>
+            <div class="wheel-add-row">
+                <input
+                    type="text"
+                    class="input wheel-add-input"
+                    id="wheelAddInput"
+                    data-i18n-placeholder="wheel_add_ph"
+                    placeholder="输入一个选项..."
+                    maxlength="20"
+                >
+                <button class="btn btn--ghost btn--sm" id="wheelAddBtn" data-i18n="wheel_add_btn">添加</button>
             </div>
-        </section>
+            <p class="wheel-hint mono" id="wheelHint" data-i18n="wheel_hint">至少输入 2 个选项</p>
+        </div>
+
+        <!-- 转盘区 -->
+        <div class="wheel-canvas-wrap" id="wheelCanvasWrap">
+            <div class="wheel-pointer" id="wheelPointer">▼</div>
+            <canvas id="wheelCanvas" width="320" height="320"></canvas>
+        </div>
+
+        <!-- 旋转按钮 -->
+        <button class="btn-primary wheel-spin-btn" id="wheelSpinBtn" data-i18n="wheel_spin_btn" disabled>
+            旋转命运
+        </button>
+
+        <!-- 结果卡片 -->
+        <div class="glass-card wheel-result" id="wheelResult" style="display:none;">
+            <div class="wheel-result-icon">🎯</div>
+            <p class="wheel-result-label mono" data-i18n="wheel_result_label">命运选择了</p>
+            <p class="wheel-result-text" id="wheelResultText"></p>
+            <div class="wheel-result-btns">
+                <button class="btn btn--ghost btn--sm" id="wheelAgainBtn" data-i18n="wheel_again_btn">再转一次</button>
+                <button class="btn btn--ghost btn--sm" id="wheelResetBtn" data-i18n="wheel_reset_btn">重置选项</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- == END: page-wheel == -->
+
 
         <!-- ====== DESTROY ====== -->
         <!-- == BLOCK: page-destroy == -->
@@ -307,5 +349,6 @@
     <!-- Scripts -->
     <script src="js/app.js"></script>
     <script src="js/destroy.js"></script>
+    <script src="js/wheel.js"></script> 
 </body>
 </html>
