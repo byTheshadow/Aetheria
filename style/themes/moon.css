@@ -1,0 +1,17 @@
+/* == BLOCK: theme-moon == */
+[data-theme="moon"] {
+  --bg:           #0d0d1a;
+  --surface:      #13132a;
+  --accent:       #a78bfa;
+  --accent-glow:  rgba(167, 139, 250, 0.25);
+  --text:         #e8e8f0;
+  --text-muted:   #6b6b8a;
+  --glass-bg:     rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(167, 139, 250, 0.15);
+  --mesh-a:       #1a0a3a;
+  --mesh-b:       #0a0a2a;
+  --mesh-c:       #2a0a4a;
+  --mesh-d:       #0d0d1a;
+}
+/* == END: theme-moon == */
+
