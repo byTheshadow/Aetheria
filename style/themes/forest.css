@@ -1,0 +1,16 @@
+/* == BLOCK: theme-forest == */
+[data-theme="forest"] {
+  --bg:           #0a1a0f;
+  --surface:      #0f2318;
+  --accent:       #6ee7b7;
+  --accent-glow:  rgba(110, 231, 183, 0.22);
+  --text:         #d1fae5;
+  --text-muted:   #4a7a60;
+  --glass-bg:     rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(110, 231, 183, 0.15);
+  --mesh-a:       #0a2a14;
+  --mesh-b:       #0a1a0f;
+  --mesh-c:       #0f3020;
+  --mesh-d:       #071510;
+}
+/* == END: theme-forest == */
