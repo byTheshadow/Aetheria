@@ -1,0 +1,16 @@
+/* == BLOCK: theme-void == */
+[data-theme="void"] {
+  --bg:           #080808;
+  --surface:      #111111;
+  --accent:       #e2e8f0;
+  --accent-glow:  rgba(226, 232, 240, 0.15);
+  --text:         #e2e8f0;
+  --text-muted:   #444444;
+  --glass-bg:     rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --mesh-a:       #111111;
+  --mesh-b:       #080808;
+  --mesh-c:       #0f0f0f;
+  --mesh-d:       #050505;
+}
+/* == END: theme-void == */
