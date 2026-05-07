@@ -1,0 +1,26 @@
+/* ============================================================
+   THEME: Forest — 暗林呼吸
+============================================================ */
+[data-theme="forest"] {
+  --bg-base:        #060f0a;
+  --bg-surface:     rgba(200, 255, 220, 0.04);
+  --bg-elevated:    rgba(200, 255, 220, 0.08);
+
+  --glass-bg:       rgba(10, 28, 18, 0.58);
+  --glass-border:   rgba(110, 231, 183, 0.15);
+  --glass-blur:     20px;
+  --glass-shadow:   0 8px 32px rgba(0, 0, 0, 0.45);
+
+  --text-primary:   rgba(220, 255, 235, 0.92);
+  --text-secondary: rgba(180, 230, 200, 0.6);
+  --text-muted:     rgba(140, 195, 165, 0.35);
+
+  --accent-1:       #6ee7b7;
+  --accent-2:       #34d399;
+  --accent-glow:    rgba(110, 231, 183, 0.3);
+
+  --orb-1:          rgba(6, 78, 59, 0.45);
+  --orb-2:          rgba(16, 185, 129, 0.2);
+  --orb-3:          rgba(52, 211, 153, 0.15);
+}
+/* END THEME: Forest */
