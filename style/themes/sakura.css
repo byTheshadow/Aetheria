@@ -1,16 +1,16 @@
 /* == BLOCK: theme-sakura == */
 [data-theme="sakura"] {
-  --bg:           #fff0f5;
-  --surface:      #ffe4ef;
-  --accent:       #f472b6;
-  --accent-glow:  rgba(244, 114, 182, 0.22);
-  --text:         #3d1a2e;
-  --text-muted:   #b07090;
-  --glass-bg:     rgba(255, 255, 255, 0.45);
-  --glass-border: rgba(244, 114, 182, 0.2);
-  --mesh-a:       #ffd6e8;
-  --mesh-b:       #fff0f5;
-  --mesh-c:       #fce7f3;
-  --mesh-d:       #fbcfe8;
+  --bg:           #0d080b;
+  --surface:      #180d12;
+  --accent:       #f9a8d4;
+  --accent-glow:  rgba(249, 168, 212, 0.12);
+  --text:         #fdf0f5;
+  --text-muted:   rgba(253, 240, 245, 0.35);
+  --glass-bg:     rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --orb-a:        rgba(220, 80, 130, 0.10);
+  --orb-b:        rgba(180, 60, 100, 0.08);
+  --orb-c:        rgba(255, 180, 210, 0.06);
 }
 /* == END: theme-sakura == */
+
