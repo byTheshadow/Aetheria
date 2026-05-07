@@ -1,0 +1,26 @@
+/* ============================================================
+   THEME: Void — 虚空黑
+============================================================ */
+[data-theme="void"] {
+  --bg-base:        #080808;
+  --bg-surface:     rgba(255, 255, 255, 0.03);
+  --bg-elevated:    rgba(255, 255, 255, 0.06);
+
+  --glass-bg:       rgba(18, 18, 18, 0.6);
+  --glass-border:   rgba(255, 255, 255, 0.08);
+  --glass-blur:     20px;
+  --glass-shadow:   0 8px 32px rgba(0, 0, 0, 0.6);
+
+  --text-primary:   rgba(240, 240, 240, 0.9);
+  --text-secondary: rgba(180, 180, 180, 0.55);
+  --text-muted:     rgba(120, 120, 120, 0.35);
+
+  --accent-1:       #e2e2e2;
+  --accent-2:       #a0a0a0;
+  --accent-glow:    rgba(220, 220, 220, 0.15);
+
+  --orb-1:          rgba(40, 40, 40, 0.6);
+  --orb-2:          rgba(25, 25, 25, 0.5);
+  --orb-3:          rgba(60, 60, 60, 0.3);
+}
+/* END THEME: Void */
