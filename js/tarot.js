@@ -433,8 +433,9 @@ function divGetTopicLabel(topic) {
 
 /* == BLOCK: divination-ai == */
 function divRequestAI() {
-        if (!isAIConfigured()) {
+    if (!isAIConfigured()) {
         showToast('ai_not_configured');
+        // 跳转到设置页
         setTimeout(function() { navigateTo('settings'); }, 1500);
         return;
     }
