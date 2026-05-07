@@ -108,18 +108,71 @@
         </section>
 
         <!-- ====== DESTROY ====== -->
-        <section class="page" id="page-destroy">
-            <div class="page-scroll">
-                <div class="page-header">
-                    <h2 class="page-title" data-i18n="nav_destroy">销毁</h2>
-                    <p class="page-desc" data-i18n="destroy_desc">写下你想摧毁的一切</p>
-                </div>
-                <div class="placeholder-content glass-card">
-                    <div class="placeholder-icon">💥</div>
-                    <p data-i18n="coming_soon">即将开放</p>
-                </div>
-            </div>
-        </section>
+        <!-- == BLOCK: page-destroy == -->
+<section id="page-destroy" class="page">
+  <div class="page-scroll">
+
+    <div class="page-header">
+      <h2data-i18n="destroy_title">负能量销毁室</h2>
+      <p data-i18n="destroy_desc">写下困扰你的一切，然后看着它们灰飞烟灭。</p>
+    </div>
+
+    <!--输入区-->
+    <div class="glass-card destroy-input-card">
+      <textarea
+        id="destroyInput"
+        class="destroy-textarea"
+        data-i18n-placeholder="destroy_placeholder"
+        placeholder="把你的负能量写在这里..."
+        maxlength="500"
+      ></textarea>
+      <div class="destroy-char-count">
+        <span id="destroyCharCount">0</span> / 500
+      </div></div>
+
+    <!-- 模式选择 -->
+    <div class="glass-card destroy-mode-card">
+      <p class="destroy-mode-label" data-i18n="destroy_mode_label">选择销毁方式</p>
+      <div class="destroy-modes">
+        <button class="destroy-mode-btn active" data-mode="fire" aria-label="Fire">
+          <span class="destroy-mode-icon">🔥</span>
+          <span class="destroy-mode-name" data-i18n="destroy_mode_fire">焚烧</span>
+        </button>
+        <button class="destroy-mode-btn" data-mode="water" aria-label="Water">
+          <span class="destroy-mode-icon">💧</span>
+          <span class="destroy-mode-name" data-i18n="destroy_mode_water">溶解</span>
+        </button>
+        <button class="destroy-mode-btn" data-mode="wind" aria-label="Wind">
+          <span class="destroy-mode-icon">💨</span>
+          <span class="destroy-mode-name" data-i18n="destroy_mode_wind">风化</span>
+        </button>
+        <button class="destroy-mode-btn" data-mode="void" aria-label="Void">
+          <span class="destroy-mode-icon">🌀</span>
+          <span class="destroy-mode-name" data-i18n="destroy_mode_void">黑洞</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 销毁按钮 -->
+    <button id="destroyBtn" class="btn-primary destroy-btn" data-i18n="destroy_btn" disabled>
+      销毁它
+    </button>
+
+    <!-- Canvas 动画层 -->
+    <div id="destroyCanvasWrap" class="destroy-canvas-wrap" style="display:none;">
+      <canvas id="destroyCanvas"></canvas>
+    </div>
+
+    <!-- 销毁完成 — 治愈语 -->
+    <div id="destroyResult" class="glass-card destroy-result" style="display:none;">
+      <div class="destroy-result-icon">✨</div>
+      <p id="destroyResultText" class="destroy-result-text"></p>
+      <button id="destroyAgainBtn" class="btn-secondary" data-i18n="destroy_again">再来一次</button>
+    </div>
+
+  </div>
+</section>
+<!-- == END: page-destroy == -->
 
         <!-- ====== DAILY====== -->
         <section class="page" id="page-daily">
@@ -250,5 +303,6 @@
 
     <!-- Scripts -->
     <script src="js/app.js"></script>
+    <script src="js/destroy.js"></script>
 </body>
 </html>

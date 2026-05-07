@@ -43,6 +43,17 @@ const I18N = {
         toast_exported: '数据已导出',
         toast_cleared: '所有数据已清除',
         toast_confirm_clear: '再次点击确认清除所有数据'
+        destroy_title: '负能量销毁室',
+destroy_desc: '写下困扰你的一切，然后看着它们灰飞烟灭。',
+destroy_placeholder: '把你的负能量写在这里...',
+destroy_mode_label: '选择销毁方式',
+destroy_mode_fire: '焚烧',
+destroy_mode_water: '溶解',
+destroy_mode_wind: '风化',
+destroy_mode_void: '黑洞',
+destroy_btn: '销毁它',
+destroy_again: '再来一次',
+destroy_toast_empty: '请先写点什么再销毁',
     },
     en: {
         nav_home: 'Home',
@@ -87,6 +98,17 @@ const I18N = {
         toast_exported: 'Data exported',
         toast_cleared: 'All data cleared',
         toast_confirm_clear: 'Click again to confirm clearing all data'
+        destroy_title: 'Negativity Destroyer',
+destroy_desc: 'Write down everything that bothers you, then watch it vanish.',
+destroy_placeholder: 'Write your negativity here...',
+destroy_mode_label: 'Choose destruction mode',
+destroy_mode_fire: 'Burn',
+destroy_mode_water: 'Dissolve',
+destroy_mode_wind: 'Erode',
+destroy_mode_void: 'Black Hole',
+destroy_btn: 'DESTROY',
+destroy_again: 'One More Time',
+destroy_toast_empty: 'Write something before destroying',
     }
 };
 /* == END: i18n == */

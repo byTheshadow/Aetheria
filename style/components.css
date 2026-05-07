@@ -417,6 +417,7 @@
     gap: 10px;
 }
 
+
 .settings-or {
     font-size: 0.75rem;
     color: var(--text-muted);
@@ -569,3 +570,199 @@
     }
 }
 /* == END: responsive == */
+/* == BLOCK: destroy == */
+
+/* -- 输入区 -- */
+.destroy-textarea {
+    width: 100%;
+    min-height: 160px;
+    max-height: 280px;
+    padding: 20px;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    border-radius: calc(var(--radius) - 4px);
+    color: var(--text);
+    font-family: 'Noto Sans SC', 'Inter', sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.destroy-textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.destroy-textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+
+.destroy-char-count {
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* -- 模式选择 -- */
+.destroy-mode-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.destroy-modes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.destroy-mode-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 8px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: calc(var(--radius) - 4px);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.destroy-mode-btn:hover {
+    border-color: var(--accent);
+    color: var(--text);
+    transform: translateY(-2px);
+}
+
+.destroy-mode-btn.active {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+    color: var(--text);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.destroy-mode-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.destroy-mode-name {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+/* -- 销毁按钮 -- */
+.destroy-btn {
+    width: 100%;
+    margin-top: 8px;
+    padding: 16px;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.destroy-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.destroy-btn:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--accent-glow);
+}
+
+/* -- Canvas 动画层 -- */
+.destroy-canvas-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.85);
+    animation: destroyFadeIn 0.4s ease;
+}
+
+.destroy-canvas-wrap canvas {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes destroyFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* -- 结果/ 治愈语 -- */
+.destroy-result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px 24px;
+    gap: 24px;
+}
+
+.destroy-result-icon {
+    font-size: 3rem;
+    animation: destroyPulse 2s ease-in-out infinite;
+}
+
+@keyframes destroyPulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50%{ transform: scale(1.15); opacity: 1; }
+}
+
+.destroy-result-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text);
+    max-width: 320px;
+}
+
+.destroy-result-enter {
+    animation: destroyResultIn 0.6s ease;
+}
+
+@keyframes destroyResultIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* -- 响应式 -- */
+@media (max-width: 480px) {
+    .destroy-modes {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .destroy-textarea {
+        min-height: 120px;font-size: 0.95rem;
+    }
+
+    .destroy-result-text {
+        font-size: 1.05rem;
+    }
+}
+
+/* == END: destroy == */
+
