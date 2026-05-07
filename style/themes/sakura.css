@@ -1,0 +1,16 @@
+/* == BLOCK: theme-sakura == */
+[data-theme="sakura"] {
+  --bg:           #fff0f5;
+  --surface:      #ffe4ef;
+  --accent:       #f472b6;
+  --accent-glow:  rgba(244, 114, 182, 0.22);
+  --text:         #3d1a2e;
+  --text-muted:   #b07090;
+  --glass-bg:     rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(244, 114, 182, 0.2);
+  --mesh-a:       #ffd6e8;
+  --mesh-b:       #fff0f5;
+  --mesh-c:       #fce7f3;
+  --mesh-d:       #fbcfe8;
+}
+/* == END: theme-sakura == */
