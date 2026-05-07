@@ -1,5 +1,5 @@
 /* == BLOCK: bottom-nav == */
-bottom-nav {
+.bottom-nav {
   position: fixed;
   bottom: 28px;
   left: 50%;
@@ -17,9 +17,9 @@ bottom-nav {
   border-radius: var(--radius-pill);
   box-shadow: 0 20px 60px rgba(0,0,0,0.5);
   animation: fadeUp 1.2s ease-out 0.3s both;
-  /* prevent shrinking on small screens */
   width: min(92vw, 420px);
 }
+
 
 .nav-item {
   display: flex;
