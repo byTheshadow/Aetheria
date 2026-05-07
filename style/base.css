@@ -1,0 +1,239 @@
+/* ============================================================
+   BASE: CSS 变量系统 + Reset
+============================================================ */
+
+/* --- 全局 CSS 变量（由主题覆盖） --- */
+:root {
+  /* 背景色层 */
+  --bg-base:        #0d0d1a;
+  --bg-surface:     rgba(255, 255, 255, 0.04);
+  --bg-elevated:    rgba(255, 255, 255, 0.08);
+
+  /* 毛玻璃 */
+  --glass-bg:       rgba(255, 255, 255, 0.06);
+  --glass-border:   rgba(255, 255, 255, 0.12);
+  --glass-blur:     20px;
+  --glass-shadow:   0 8px 32px rgba(0, 0, 0, 0.3);
+
+  /* 文字 */
+  --text-primary:   rgba(255, 255, 255, 0.92);
+  --text-secondary: rgba(255, 255, 255, 0.55);
+  --text-muted:     rgba(255, 255, 255, 0.28);
+
+  /* 强调色 */
+  --accent-1:       #a78bfa;
+  --accent-2:       #818cf8;
+  --accent-glow:    rgba(167, 139, 250, 0.35);
+
+  /* Mesh 背景球颜色 */
+  --orb-1:          rgba(139, 92, 246, 0.25);
+  --orb-2:          rgba(99, 102, 241, 0.2);
+  --orb-3:          rgba(167, 139, 250, 0.15);
+
+  /* 主题点颜色（用于切换器） */
+  --dot-moon:       #a78bfa;
+  --dot-sakura:     #f9a8d4;
+  --dot-forest:     #6ee7b7;
+  --dot-void:       #6b7280;
+
+  /* 间距 */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  40px;
+
+  /* 圆角 */
+  --radius-sm:  8px;
+  --radius-md:  16px;
+  --radius-lg:  24px;
+  --radius-xl:  32px;
+
+  /* 过渡 */
+  --transition-fast:   0.15s ease;
+  --transition-base:   0.3s ease;
+  --transition-slow:   0.6s ease;
+
+  /* 侧边栏宽度 */
+  --sidebar-width: 220px;
+}
+/* END 全局 CSS 变量 */
+
+/* ============================================================
+   RESET
+============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+               'Segoe UI', system-ui, sans-serif;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color var(--transition-slow);
+}
+
+ul { list-style: none; }
+button { cursor: pointer; border: none; background: none; font: inherit; color: inherit; }
+a { color: inherit; text-decoration: none; }
+input, textarea { font: inherit; color: inherit; }
+/* END RESET */
+
+/* ============================================================
+   LAYOUT: App 整体布局
+============================================================ */
+#app {
+  display: flex;
+  min-height: 100vh;
+}
+
+#main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  padding: var(--space-xl);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* 页面切换 */
+.page {
+  display: none;
+  animation: pageFadeIn 0.4s ease;
+}
+.page.active {
+  display: block;
+}
+/* END LAYOUT */
+
+/* ============================================================
+   BACKGROUND: Mesh 渐变背景
+============================================================ */
+.bg-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--bg-base);
+  overflow: hidden;
+}
+
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.7;
+  animation: orbFloat 12s ease-in-out infinite;
+}
+
+.orb-1 {
+  width: 600px;
+  height: 600px;
+  background: var(--orb-1);
+  top: -200px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 500px;
+  height: 500px;
+  background: var(--orb-2);
+  bottom: -150px;
+  right: -100px;
+  animation-delay: -4s;
+}
+
+.orb-3 {
+  width: 400px;
+  height: 400px;
+  background: var(--orb-3);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: -8s;
+}
+/* END BACKGROUND */
+
+/* ============================================================
+   GLASS: 毛玻璃基础类
+============================================================ */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  transition: transform var(--transition-base),
+              box-shadow var(--transition-base),
+              background var(--transition-base);
+}
+
+.glass-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4),
+              0 0 0 1px var(--glass-border);
+  background: var(--bg-elevated);
+}
+/* END GLASS */
+
+/* ============================================================
+   PAGE HEADER
+============================================================ */
+.page-header {
+  margin-bottom: var(--space-xl);
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--text-primary), var(--accent-1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-subtitle {
+  margin-top: var(--space-xs);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+/* END PAGE HEADER */
+
+/* ============================================================
+   COMING SOON: 占位卡片
+============================================================ */
+.coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  min-height: 300px;
+  color: var(--text-secondary);
+}
+
+.coming-icon {
+  font-size: 3rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+/* END COMING SOON */
