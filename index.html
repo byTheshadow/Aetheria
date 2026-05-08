@@ -401,18 +401,87 @@
 <!-- == END: page-destroy == -->
 
         <!-- ====== DAILY====== -->
-        <section class="page" id="page-daily">
-            <div class="page-scroll">
-                <div class="page-header">
-                    <h2 class="page-title" data-i18n="nav_daily">日常</h2>
-                    <p class="page-desc" data-i18n="daily_desc">记录你的每一天</p>
-                </div>
-                <div class="placeholder-content glass-card">
-                    <div class="placeholder-icon">📅</div>
-                    <p data-i18n="coming_soon">即将开放</p>
-                </div>
-            </div>
-        </section>
+        <!-- == BLOCK: page-daily == -->
+<section class="page" id="page-daily">
+  <div class="page-scroll">
+
+    <div class="page-header">
+      <h1 class="page-title" data-i18n="daily_title">日常中心</h1>
+      <p class="page-desc" data-i18n="daily_desc">记录每一天</p>
+    </div>
+
+    <!-- == BLOCK: daily-tabs == -->
+    <div class="daily-tab-bar glass-card glass-card--flat">
+      <button class="daily-tab daily-tab--active" data-tab="mood" data-i18n="daily_tab_mood">心情</button>
+      <button class="daily-tab" data-tab="todo"    data-i18n="daily_tab_todo">待办</button>
+      <button class="daily-tab" data-tab="habit"   data-i18n="daily_tab_habit">习惯</button>
+      <button class="daily-tab" data-tab="calendar" data-i18n="daily_tab_calendar">日程</button>
+    </div>
+    <!-- == END: daily-tabs == -->
+
+    <!-- == BLOCK: daily-mood == -->
+    <div class="daily-panel" id="daily-panel-mood">
+
+      <div class="glass-card mood-input-card">
+        <div class="mood-input-header">
+          <span class="mood-input-title" data-i18n="mood_how_today">今天感觉如何？</span>
+          <span class="mood-time-hint" id="moodTimeHint"></span>
+        </div>
+        <div class="mood-emoji-row" id="moodEmojiRow">
+          <button class="mood-emoji-btn" data-emoji="😄" data-label-zh="开心"  data-label-en="Happy">😄</button>
+          <button class="mood-emoji-btn" data-emoji="🥰" data-label-zh="幸福"  data-label-en="Bliss">🥰</button>
+          <button class="mood-emoji-btn" data-emoji="😊" data-label-zh="平静"  data-label-en="Calm">😊</button>
+          <button class="mood-emoji-btn" data-emoji="😐" data-label-zh="一般"  data-label-en="Meh">😐</button>
+          <button class="mood-emoji-btn" data-emoji="😴" data-label-zh="疲惫"  data-label-en="Tired">😴</button>
+          <button class="mood-emoji-btn" data-emoji="😤" data-label-zh="烦躁"  data-label-en="Annoyed">😤</button>
+          <button class="mood-emoji-btn" data-emoji="😔" data-label-zh="低落"  data-label-en="Down">😔</button>
+          <button class="mood-emoji-btn" data-emoji="😢" data-label-zh="难过"  data-label-en="Sad">😢</button>
+        </div>
+        <textarea class="input mood-note-input" id="moodNoteInput"
+          data-i18n-placeholder="mood_note_placeholder"
+          placeholder="写点什么…（可选）" rows="2"></textarea>
+        <button class="btn btn--primary mood-save-btn" id="moodSaveBtn" data-i18n="mood_save">记录心情</button>
+      </div>
+
+      <div class="glass-card mood-calendar-card">
+        <div class="mood-cal-header">
+          <button class="btn btn--ghost btn--sm mood-cal-nav" id="moodCalPrev">‹</button>
+          <span class="mood-cal-title" id="moodCalTitle"></span>
+          <button class="btn btn--ghost btn--sm mood-cal-nav" id="moodCalNext">›</button>
+        </div>
+        <div class="mood-cal-weekdays" id="moodCalWeekdays"></div>
+        <div class="mood-cal-grid" id="moodCalGrid"></div>
+      </div>
+
+      <div class="glass-card mood-detail-card" id="moodDetailCard" style="display:none;">
+        <div class="mood-detail-header">
+          <span class="mood-detail-date" id="moodDetailDate"></span>
+          <button class="btn btn--ghost btn--sm" id="moodDetailClose">✕</button>
+        </div>
+        <div class="mood-detail-list" id="moodDetailList"></div>
+      </div>
+
+    </div>
+    <!-- == END: daily-mood == -->
+
+    <!-- 其他 panel 占位，后续模块填充 -->
+    <!-- == BLOCK: daily-todo == -->
+    <div class="daily-panel" id="daily-panel-todo" style="display:none;"></div>
+    <!-- == END: daily-todo == -->
+
+    <!-- == BLOCK: daily-habit == -->
+    <div class="daily-panel" id="daily-panel-habit" style="display:none;"></div>
+    <!-- == END: daily-habit == -->
+
+    <!-- == BLOCK: daily-calendar == -->
+    <div class="daily-panel" id="daily-panel-calendar" style="display:none;"></div>
+    <!-- == END: daily-calendar == -->
+
+  </div>
+</section>
+<!-- == END: page-daily == -->
+
+
 
         <!-- ====== SETTINGS ====== -->
         <section class="page" id="page-settings">

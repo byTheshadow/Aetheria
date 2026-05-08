@@ -1845,4 +1845,300 @@
 }
 
 /* == END: tarot == */
+/* == BLOCK: daily-layout == */
+.daily-tab-bar {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.35rem;
+  margin-bottom: 1rem;
+}
 
+.daily-tab {
+  flex: 1;
+  padding: 0.5rem 0;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.daily-tab--active {
+  background: var(--glass-highlight);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.daily-panel {
+  display: block;
+}
+/* == END: daily-layout == */
+
+/* == BLOCK: mood-input-card == */
+.mood-input-card {
+  margin-bottom: 1rem;
+}
+
+.mood-input-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.mood-input-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.mood-time-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.mood-emoji-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.mood-emoji-btn {
+  flex: 1;
+  aspect-ratio: 1;
+  font-size: 1.4rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  background: var(--glass-bg);
+  cursor: pointer;
+  transition: transform var(--transition), border-color var(--transition), background var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.mood-emoji-btn:hover {
+  transform: scale(1.12);
+  background: var(--glass-highlight);
+}
+
+.mood-emoji-btn--active {
+  border-color: var(--accent);
+  background: var(--glass-highlight);
+  transform: scale(1.15);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.mood-note-input {
+  width: 100%;
+  resize: none;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.mood-save-btn {
+  width: 100%;
+}
+/* == END: mood-input-card == */
+
+/* == BLOCK: mood-calendar-card == */
+.mood-calendar-card {
+  margin-bottom: 1rem;
+}
+
+.mood-cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.mood-cal-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.mood-cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 0.4rem;
+}
+
+.mood-cal-weekday {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  padding: 0.2rem 0;
+}
+
+.mood-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.3rem;
+}
+
+.mood-cal-cell {
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform var(--transition), background var(--transition);
+  overflow: hidden;
+}
+
+.mood-cal-cell:hover {
+  transform: scale(1.08);
+  background: var(--glass-highlight);
+}
+
+.mood-cal-cell--empty {
+  background: transparent;
+  border-color: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+.mood-cal-cell--today {
+  box-shadow: 0 0 0 2px var(--accent), 0 0 8px var(--accent-glow);
+}
+
+.mood-cal-cell--has-mood {
+  background: color-mix(in srgb, var(--cell-mood-color) 25%, var(--glass-bg));
+  border-color: color-mix(in srgb, var(--cell-mood-color) 40%, var(--glass-border));
+}
+
+.mood-cal-day {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.mood-cal-emoji {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.mood-cal-badge {
+  position: absolute;
+  top: 2px;
+  right: 3px;
+  font-size: 0.55rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 999px;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+/* == END: mood-calendar-card == */
+
+/* == BLOCK: mood-detail-card == */
+.mood-detail-card {
+  margin-bottom: 1rem;
+  animation: fadeSlideUp 0.25s ease;
+}
+
+.mood-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.mood-detail-date {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.mood-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mood-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  position: relative;
+}
+
+.mood-detail-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.mood-detail-emoji {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.mood-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.mood-detail-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.mood-detail-time {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.mood-detail-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+  padding-left: 2.2rem;
+  line-height: 1.5;
+}
+
+.mood-detail-del {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  opacity: 0.4;
+  transition: opacity var(--transition);
+}
+
+.mood-detail-del:hover {
+  opacity: 1;
+}
+
+.mood-detail-empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 1rem 0;
+  margin: 0;
+}
+/* == END: mood-detail-card == */
+
+/* == BLOCK: mood-color-vars == */

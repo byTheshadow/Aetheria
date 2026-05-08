@@ -31,6 +31,24 @@ img { max-width: 100%; display: block; }
     font-family: 'JetBrains Mono','Courier New', monospace;
 }
 /* == END: reset == */
+.btn--primary {
+    background: var(--accent);
+    border: 1px solid var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+.btn--primary:hover {
+    background: var(--accent);
+    filter: brightness(1.15);
+    box-shadow: 0 6px 28px var(--accent-glow);
+}
+
+.btn--primary:active {
+    transform: scale(0.96);
+    filter: brightness(0.95);
+}
+
 
 /* == BLOCK: css-variables-default == */
 :root {
@@ -49,6 +67,15 @@ img { max-width: 100%; display: block; }
     --radius-pill: 40px;
     --nav-height: 80px;
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 加进 base.css 的 :root 块 */
+--mood-happy:   #FFD700;
+--mood-bliss:   #FF8FAB;
+--mood-calm:    #A8D8EA;
+--mood-meh:     #8888AA;
+--mood-tired:   #9B8EA8;
+--mood-annoyed: #FF7043;
+--mood-down:    #7986CB;
+--mood-sad:     #4FC3F7;
 }
 /* == END: css-variables-default == */
 
