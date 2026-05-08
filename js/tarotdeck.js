@@ -539,10 +539,10 @@ function tarotShowReading() {
 
     // AI 按钮
     var aiSection = $('#tarotAISection');
-    if (aiSection) {
-        aiSection.style.display = (typeof isAIConfigured === 'function' && isAIConfigured())
-            ? 'block' : 'none';
-    }
+if (aiSection) {
+    aiSection.style.display = 'block';
+}
+
 
     // 滚动到解读区
     setTimeout(function() {
