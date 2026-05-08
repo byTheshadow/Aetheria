@@ -151,8 +151,6 @@ todo_added:             '任务已添加',
 todo_deleted:           '已删除',
 todo_cleared:           '已清除完成的任务',
 todo_input_empty:       '请输入任务内容',
-
->>>>>>> e8cd87777fcade32b5c437e07f23e5a61d00aed3
 },
     en: {
         nav_home: 'Home',
@@ -304,7 +302,6 @@ todo_added:             'Task added',
 todo_deleted:           'Deleted',
 todo_cleared:           'Cleared completed tasks',
 todo_input_empty:       'Please enter a task',
->>>>>>> e8cd87777fcade32b5c437e07f23e5a61d00aed3
     }
 };
 /* == END: i18n == */
