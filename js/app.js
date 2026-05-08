@@ -714,6 +714,7 @@ function init() {
 
     // Setup settings
     setupSettings();
+    initDaily();
 }
 
 // DOM Ready
