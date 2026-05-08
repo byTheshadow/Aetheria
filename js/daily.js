@@ -352,6 +352,7 @@ function initDaily() {
   moodInitInput();
   moodInitCalendar();
   todoInit(); // 新增
+>>>>>>> e8cd87777fcade32b5c437e07f23e5a61d00aed3
 
   var closeBtn = $('#moodDetailClose');
   if (closeBtn) {
@@ -566,5 +567,6 @@ function todoInit() {
 }
 /* == END: todo-init == */
 
+>>>>>>> e8cd87777fcade32b5c437e07f23e5a61d00aed3
 /* == END: daily-module == */
 
