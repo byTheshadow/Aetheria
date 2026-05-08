@@ -566,5 +566,403 @@ function todoInit() {
   todoRender();
 }
 /* == END: todo-init == */
+/* == BLOCK: habit-storage == */
+function habitLoadHabits() {
+  var raw = localStorage.getItem('aetheria_daily_habits');
+  return raw ? JSON.parse(raw) : [];
+}
+
+function habitSaveHabits(list) {
+  localStorage.setItem('aetheria_daily_habits', JSON.stringify(list));
+}
+
+function habitLoadLogs() {
+  var raw = localStorage.getItem('aetheria_daily_habit_logs');
+  return raw ? JSON.parse(raw) : {};
+}
+
+function habitSaveLogs(logs) {
+  localStorage.setItem('aetheria_daily_habit_logs', JSON.stringify(logs));
+}
+
+// logs 结构: { "habitId_YYYY-MM-DD": true }
+function habitLogKey(habitId, dateKey) {
+  return habitId + '_' + dateKey;
+}
+
+function habitIsChecked(habitId, dateKey) {
+  var logs = habitLoadLogs();
+  return !!logs[habitLogKey(habitId, dateKey)];
+}
+
+function habitGetTodayKey() {
+  var now = new Date();
+  var y = now.getFullYear();
+  var m = String(now.getMonth() + 1).padStart(2, '0');
+  var d = String(now.getDate()).padStart(2, '0');
+  return y + '-' + m + '-' + d;
+}
+
+function habitGetDateKey(date) {
+  var y = date.getFullYear();
+  var m = String(date.getMonth() + 1).padStart(2, '0');
+  var d = String(date.getDate()).padStart(2, '0');
+  return y + '-' + m + '-' + d;
+}
+/* == END: habit-storage == */
+
+/* == BLOCK: habit-streak == */
+function habitCalcStreak(habitId) {
+  var logs    = habitLoadLogs();
+  var streak  = 0;
+  var cursor  = new Date();
+
+  // 从昨天开始往前数
+  cursor.setDate(cursor.getDate() - 1);
+
+  for (var i = 0; i < 365; i++) {
+    var key = habitLogKey(habitId, habitGetDateKey(cursor));
+    if (logs[key]) {
+      streak++;
+      cursor.setDate(cursor.getDate() - 1);
+    } else {
+      break;
+    }
+  }
+  return streak;
+}
+
+function habitCalcTotal(habitId) {
+  var logs  = habitLoadLogs();
+  var total = 0;
+  var prefix = habitId + '_';
+  for (var key in logs) {
+    if (logs.hasOwnProperty(key) && key.indexOf(prefix) === 0) {
+      total++;
+    }
+  }
+  return total;
+}
+/* == END: habit-streak == */
+
+/* == BLOCK: habit-render == */
+function habitRenderToday() {
+  var listEl  = $('#habitTodayList');
+  var emptyEl = $('#habitEmpty');
+  var dateEl  = $('#habitTodayDate');
+  if (!listEl) return;
+
+  var habits  = habitLoadHabits();
+  var todayKey = habitGetTodayKey();
+  var lang    = (typeof currentLang !== 'undefined') ? currentLang : 'zh';
+
+  // 今日日期显示
+  if (dateEl) {
+    var now = new Date();
+    dateEl.textContent = lang === 'zh'
+      ? (now.getMonth() + 1) + '月' + now.getDate() + '日'
+      : (now.getMonth() + 1) + '/' + now.getDate();
+  }
+
+  // 清空旧条目
+  var oldItems = listEl.querySelectorAll('.habit-today-item');
+  for (var i = 0; i < oldItems.length; i++) oldItems[i].remove();
+
+  if (habits.length === 0) {
+    if (emptyEl) emptyEl.style.display = 'block';
+    return;
+  }
+  if (emptyEl) emptyEl.style.display = 'none';
+
+  for (var j = 0; j < habits.length; j++) {
+    listEl.appendChild(habitBuildTodayItem(habits[j], todayKey));
+  }
+}
+
+function habitBuildTodayItem(habit, todayKey) {
+  var checked = habitIsChecked(habit.id, todayKey);
+  var streak  = habitCalcStreak(habit.id);
+
+  var item = document.createElement('div');
+  item.className = 'habit-today-item' + (checked ? ' habit-today-item--checked' : '');
+  item.dataset.id = habit.id;
+
+  // 左侧：emoji + 名称 + streak
+  var left = document.createElement('div');
+  left.className = 'habit-today-left';
+
+  var emojiSpan = document.createElement('span');
+  emojiSpan.className = 'habit-today-emoji';
+  emojiSpan.textContent = habit.emoji;
+
+  var info = document.createElement('div');
+  info.className = 'habit-today-info';
+
+  var nameSpan = document.createElement('span');
+  nameSpan.className = 'habit-today-name';
+  nameSpan.textContent = habit.name;
+
+  var streakSpan = document.createElement('span');
+  streakSpan.className = 'habit-today-streak';
+  var lang = (typeof currentLang !== 'undefined') ? currentLang : 'zh';
+  streakSpan.textContent = lang === 'zh'
+    ? '🔥 ' + streak + ' 天连续'
+    : '🔥 ' + streak + ' day streak';
+
+  info.appendChild(nameSpan);
+  info.appendChild(streakSpan);
+  left.appendChild(emojiSpan);
+  left.appendChild(info);
+
+  // 右侧：打卡按钮 + 详情按钮
+  var right = document.createElement('div');
+  right.className = 'habit-today-right';
+
+  var checkBtn = document.createElement('button');
+  checkBtn.className = 'habit-check-btn' + (checked ? ' habit-check-btn--checked' : '');
+  checkBtn.setAttribute('aria-label', checked ? 'Uncheck' : 'Check in');
+  checkBtn.innerHTML = checked ? '✓' : '';
+  checkBtn.dataset.id = habit.id;
+  checkBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    habitToggleCheck(parseInt(this.dataset.id));
+  });
+
+  var detailBtn = document.createElement('button');
+  detailBtn.className = 'btn btn--ghost btn--sm';
+  detailBtn.textContent = '···';
+  detailBtn.dataset.id = habit.id;
+  detailBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    habitShowDetail(parseInt(this.dataset.id));
+  });
+
+  right.appendChild(checkBtn);
+  right.appendChild(detailBtn);
+
+  item.appendChild(left);
+  item.appendChild(right);
+
+  return item;
+}
+
+function habitRenderHeatmap(habitId) {
+  var heatmap = $('#habitHeatmap');
+  if (!heatmap) return;
+
+  var logs = habitLoadLogs();
+  heatmap.innerHTML = '';
+
+  // 最近30天，从今天往前
+  var today = new Date();
+  for (var i = 29; i >= 0; i--) {
+    var d = new Date(today);
+    d.setDate(d.getDate() - i);
+    var dateKey = habitGetDateKey(d);
+    var key     = habitLogKey(habitId, dateKey);
+    var checked = !!logs[key];
+
+    var dot = document.createElement('div');
+    dot.className = 'habit-heatmap-dot' + (checked ? ' habit-heatmap-dot--on' : '');
+    dot.title = dateKey;
+
+    // 今天加边框
+    if (i === 0) dot.classList.add('habit-heatmap-dot--today');
+
+    heatmap.appendChild(dot);
+  }
+}
+/* == END: habit-render == */
+
+/* == BLOCK: habit-actions == */
+function habitToggleCheck(habitId) {
+  var todayKey = habitGetTodayKey();
+  var logs     = habitLoadLogs();
+  var key      = habitLogKey(habitId, todayKey);
+
+  if (logs[key]) {
+    delete logs[key];
+    showToast('habit_unchecked');
+  } else {
+    logs[key] = true;
+    showToast('habit_checked');
+  }
+
+  habitSaveLogs(logs);
+  habitRenderToday();
+
+  // 如果详情面板正在显示这个习惯，刷新热力图和数据
+  var detailCard = $('#habitDetailCard');
+  if (detailCard && detailCard.style.display !== 'none' &&
+      detailCard.dataset.habitId == habitId) {
+    habitRefreshDetail(habitId);
+  }
+}
+
+function habitAdd() {
+  var nameInput  = $('#habitNameInput');
+  var name = nameInput ? nameInput.value.trim() : '';
+  if (!name) {
+    showToast('habit_name_empty');
+    return;
+  }
+
+  var habits = habitLoadHabits();
+  var habit  = {
+    id:        Date.now(),
+    name:      name,
+    emoji:     habitCurrentEmoji,
+    createdAt: Date.now()
+  };
+  habits.push(habit);
+  habitSaveHabits(habits);
+
+  // 重置输入
+  if (nameInput) nameInput.value = '';
+  habitCurrentEmoji = '🌱';
+  var emojiBtn = $('#habitEmojiBtn');
+  if (emojiBtn) emojiBtn.textContent = '🌱';
+  var panel = $('#habitEmojiPanel');
+  if (panel) panel.style.display = 'none';
+
+  showToast('habit_added');
+  habitRenderToday();
+}
+
+function habitDelete(habitId) {
+  var lang = (typeof currentLang !== 'undefined') ? currentLang : 'zh';
+  var msg  = lang === 'zh'
+    ? '确定删除这个习惯吗？历史记录也会清除。'
+    : 'Delete this habit? All history will be lost.';
+
+  if (!confirm(msg)) return;
+
+  // 删除习惯
+  var habits = habitLoadHabits();
+  for (var i = 0; i < habits.length; i++) {
+    if (habits[i].id === habitId) { habits.splice(i, 1); break; }
+  }
+  habitSaveHabits(habits);
+
+  // 清除该习惯的所有打卡记录
+  var logs   = habitLoadLogs();
+  var prefix = habitId + '_';
+  for (var key in logs) {
+    if (logs.hasOwnProperty(key) && key.indexOf(prefix) === 0) {
+      delete logs[key];
+    }
+  }
+  habitSaveLogs(logs);
+
+  showToast('habit_deleted');
+
+  // 关闭详情面板
+  var detailCard = $('#habitDetailCard');
+  if (detailCard) detailCard.style.display = 'none';
+
+  habitRenderToday();
+}
+/* == END: habit-actions == */
+
+/* == BLOCK: habit-detail == */
+function habitShowDetail(habitId) {
+  var habits = habitLoadHabits();
+  var habit  = null;
+  for (var i = 0; i < habits.length; i++) {
+    if (habits[i].id === habitId) { habit = habits[i]; break; }
+  }
+  if (!habit) return;
+
+  var detailCard = $('#habitDetailCard');
+  if (!detailCard) return;
+
+  detailCard.dataset.habitId = habitId;
+  detailCard.style.display   = 'block';
+
+  var nameEl = $('#habitDetailName');
+  if (nameEl) nameEl.textContent = habit.emoji + ' ' + habit.name;
+
+  habitRefreshDetail(habitId);
+  detailCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+  // 绑定删除按钮
+  var delBtn = $('#habitDeleteBtn');
+  if (delBtn) {
+    // 移除旧监听，防止重复绑定
+    var newDelBtn = delBtn.cloneNode(true);
+    delBtn.parentNode.replaceChild(newDelBtn, delBtn);
+    newDelBtn.addEventListener('click', function() {
+      habitDelete(habitId);
+    });
+  }
+}
+
+function habitRefreshDetail(habitId) {
+  var streakEl = $('#habitStreakNum');
+  var totalEl  = $('#habitTotalNum');
+  if (streakEl) streakEl.textContent = habitCalcStreak(habitId);
+  if (totalEl)  totalEl.textContent  = habitCalcTotal(habitId);
+  habitRenderHeatmap(habitId);
+}
+/* == END: habit-detail == */
+
+/* == BLOCK: habit-emoji-picker == */
+var habitCurrentEmoji = '🌱';
+
+function habitInitEmojiPicker() {
+  var emojiBtn   = $('#habitEmojiBtn');
+  var emojiPanel = $('#habitEmojiPanel');
+  if (!emojiBtn || !emojiPanel) return;
+
+  emojiBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    var isOpen = emojiPanel.style.display !== 'none';
+    emojiPanel.style.display = isOpen ? 'none' : 'flex';
+  });
+
+  var opts = $$('.habit-emoji-opt');
+  for (var i = 0; i < opts.length; i++) {
+    opts[i].addEventListener('click', function() {
+      habitCurrentEmoji    = this.dataset.emoji;
+      emojiBtn.textContent = this.dataset.emoji;
+      emojiPanel.style.display = 'none';
+    });
+  }
+
+  // 点击外部关闭
+  document.addEventListener('click', function() {
+    if (emojiPanel) emojiPanel.style.display = 'none';
+  });
+}
+/* == END: habit-emoji-picker == */
+
+/* == BLOCK: habit-init == */
+function habitInit() {
+  habitInitEmojiPicker();
+
+  var addBtn = $('#habitAddBtn');
+  if (addBtn) {
+    addBtn.addEventListener('click', habitAdd);
+  }
+
+  var nameInput = $('#habitNameInput');
+  if (nameInput) {
+    nameInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') habitAdd();
+    });
+  }
+
+  var closeBtn = $('#habitDetailClose');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function() {
+      var card = $('#habitDetailCard');
+      if (card) card.style.display = 'none';
+    });
+  }
+
+  habitRenderToday();
+}
+/* == END: habit-init == */
+
 /* == END: daily-module == */
 
