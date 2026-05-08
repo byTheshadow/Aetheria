@@ -390,7 +390,22 @@ const QUOTES = {
         '允许自己不开心，也允许自己重新快乐。',
         '你的存在本身就是一件美好的事。',
         '慢慢来，花总会开的。',
-        '今天也是值得被记住的一天。'
+        '今天也是值得被记住的一天。',
+        '你就是你人生的绝对主角。',
+        '不是所有事都需要一个答案，有些感受只需要被接住。',
+        '你已经撑过了所有曾以为撑不过去的日子。',
+        '对自己好一点，就像对待你最爱的人那样。',
+        '不必把每件事都做到完美，做到真实就够了。',
+        '你有权利改变主意，有权利重新选择。',
+        '疲惫的时候停下来，不是放弃，是尊重自己。',
+        '你不需要解释自己为什么需要休息。',
+        '有些事情慢慢想清楚就好，不用急。',
+        '你值得拥有一个让你感到安全的地方。',
+        '今天哪怕只做了一件小事，也算数。',
+        '你的节奏就是你的节奏，不需要和任何人比。',
+        '被人爱着，也要记得爱自己。',
+        '你不是在浪费时间，你是在充电。',
+        '每一个低谷都是下一段旅程的起点。'
     ],
     en: [
         'You don\'t have to be anyone else. You are enough.',
@@ -407,10 +422,26 @@ const QUOTES = {
         'It\'s okay to feel sad. It\'s also okay to feel joy again.',
         'Your existence itself is a beautiful thing.',
         'Take your time. Flowers always bloom eventually.',
-        'Today is a day worth remembering.'
+        'Today is a day worth remembering.',
+        'You are the undisputed main character of your own life.',
+        'Not everything needs an answer. Some feelings just need to be held.',
+        'You have survived every hard day you thought you couldn\'t.',
+        'Be as kind to yourself as you are to the people you love most.',
+        'You don\'t have to be perfect. Being real is enough.',
+        'You are allowed to change your mind. You are allowed to choose again.',
+        'Stopping when you\'re tired isn\'t giving up — it\'s self-respect.',
+        'You don\'t owe anyone an explanation for needing rest.',
+        'Some things just need time to become clear. That\'s okay.',
+        'You deserve a place where you feel safe.',
+        'Even if you only did one small thing today, it counts.',
+        'Your pace is your pace. You don\'t need to keep up with anyone.',
+        'You are loved — and don\'t forget to love yourself too.',
+        'You\'re not wasting time. You\'re recharging.',
+        'Every low point is the starting line for what comes next.'
     ]
 };
 /* == END: quotes == */
+
 
 /* == BLOCK: state == */
 var currentLang = localStorage.getItem('aetheria_lang') || 'zh';
