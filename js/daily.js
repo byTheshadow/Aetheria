@@ -353,6 +353,11 @@ function initDaily() {
   moodInitCalendar();
   todoInit(); // 新增
   habitInit();
+  // 日程模块
+if (typeof initSchedule === 'function') {
+    initSchedule();
+}
+
 
   var closeBtn = $('#moodDetailClose');
   if (closeBtn) {

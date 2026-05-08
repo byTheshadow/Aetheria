@@ -2510,3 +2510,431 @@
   width: 100%;
 }
 /* == END: habit == */
+/* == BLOCK: schedule == */
+
+/* ── 容器 ── */
+.sch-view {
+  animation: fadeSlideUp 0.25s ease;
+}
+
+/* ── 月视图卡片 ── */
+.sch-month-card {
+  margin-bottom: 1rem;
+}
+
+.sch-cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.sch-cal-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.sch-cal-nav {
+  min-width: 2rem;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* 星期头 */
+.sch-cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 0.4rem;
+}
+
+.sch-cal-wd {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  padding: 0.2rem 0;
+  font-weight: 500;
+}
+
+/* 日期格子网格 */
+.sch-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+}
+
+.sch-cal-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.4rem 0.15rem 0.35rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition);
+  min-height: 2.8rem;
+  position: relative;
+}
+
+.sch-cal-cell:hover {
+  background: var(--glass-highlight);
+}
+
+.sch-cal-cell--empty {
+  cursor: default;
+  pointer-events: none;
+}
+
+.sch-cal-cell--today .sch-cal-num {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.sch-cal-num {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  transition: background var(--transition), color var(--transition);
+  flex-shrink: 0;
+}
+
+/* 事件色点行 */
+.sch-cal-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.18rem;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.sch-cal-dot {
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.sch-cal-dot-more {
+  font-size: 0.55rem;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+/* ── 日视图 ── */
+.sch-day-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sch-day-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.sch-day-date {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.sch-day-weekday {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* 时间轴卡片 */
+.sch-timeline-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-height: 6rem;
+}
+
+.sch-day-empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 2rem 0;
+  margin: 0;
+}
+
+/* 时间轴条目 */
+.sch-timeline-item {
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
+  padding: 0.65rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  transition: background var(--transition);
+}
+
+.sch-timeline-item:hover {
+  background: var(--glass-highlight);
+}
+
+/* 左侧色条 */
+.sch-timeline-bar {
+  width: 3px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  align-self: stretch;
+  min-height: 1.5rem;
+}
+
+/* 内容区 */
+.sch-timeline-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.sch-timeline-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sch-timeline-time {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.sch-timeline-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* 编辑按钮 */
+.sch-timeline-edit {
+  flex-shrink: 0;
+  align-self: flex-start;
+  opacity: 0.4;
+  transition: opacity var(--transition);
+  font-size: 0.9rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.sch-timeline-edit:hover {
+  opacity: 1;
+}
+
+/* ── 浮动添加按钮 ── */
+.sch-fab {
+  position: fixed;
+  bottom: calc(var(--nav-height) + 1.25rem);
+  right: 1.25rem;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px var(--accent-glow), 0 2px 8px rgba(0,0,0,0.3);
+  transition: transform var(--transition), box-shadow var(--transition);
+  z-index: 200;
+}
+
+.sch-fab:hover {
+  transform: scale(1.08) rotate(90deg);
+  box-shadow: 0 6px 28px var(--accent-glow), 0 2px 12px rgba(0,0,0,0.35);
+}
+
+.sch-fab:active {
+  transform: scale(0.95) rotate(90deg);
+}
+
+/* ── 抽屉遮罩 ── */
+.sch-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 300;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.sch-drawer-overlay--visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── 底部抽屉 ── */
+.sch-drawer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 400;
+  background: var(--surface);
+  border-top: 1px solid var(--glass-border);
+  border-radius: var(--radius) var(--radius) 0 0;
+  padding: 0 1.25rem calc(env(safe-area-inset-bottom, 0px) + 1.5rem);
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 90dvh;
+  overflow-y: auto;
+}
+
+.sch-drawer--open {
+  transform: translateY(0);
+}
+
+/* 拖拽把手 */
+.sch-drawer-handle {
+  width: 2.5rem;
+  height: 0.25rem;
+  background: var(--glass-border);
+  border-radius: 999px;
+  margin: 0.75rem auto 0;
+}
+
+.sch-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0 0.75rem;
+}
+
+.sch-drawer-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.sch-drawer-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* 表单行 */
+.sch-form-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sch-form-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  min-width: 2.5rem;
+}
+
+/* 时间行 */
+.sch-time-row {
+  gap: 0.5rem;
+}
+
+.sch-time-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.sch-time-sep {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+/* 输入框尺寸微调 */
+.sch-input {
+  margin: 0;
+}
+
+.sch-input--date,
+.sch-input--time {
+  flex: 1;
+  min-width: 0;
+  /* 修正 date/time input 在深色主题下的颜色 */
+  color-scheme: dark;
+}
+
+.sch-input--note {
+  resize: none;
+}
+
+/* 颜色选择器 */
+.sch-color-picker {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.sch-color-dot {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  flex-shrink: 0;
+}
+
+.sch-color-dot:hover {
+  transform: scale(1.15);
+}
+
+.sch-color-dot--active {
+  border-color: #fff;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.4), 0 0 10px rgba(255,255,255,0.2);
+  transform: scale(1.1);
+}
+
+/* 抽屉操作按钮行 */
+.sch-drawer-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0.25rem;
+}
+
+.sch-drawer-save {
+  min-width: 5rem;
+}
+
+.sch-drawer-delete {
+  margin-right: auto;
+}
+
+/* Sakura 主题 date/time input 用浅色方案 */
+[data-theme="sakura"] .sch-input--date,
+[data-theme="sakura"] .sch-input--time {
+  color-scheme: light;
+}
+
+/* == END: schedule == */
+
