@@ -507,9 +507,80 @@
 <!-- == END: daily-todo == -->
 
 
-    <!-- == BLOCK: daily-habit == -->
-    <div class="daily-panel" id="daily-panel-habit" style="display:none;"></div>
-    <!-- == END: daily-habit == -->
+   <!-- == BLOCK: daily-habit == -->
+<div class="daily-panel" id="daily-panel-habit" style="display:none;">
+
+  <!-- 添加习惯 -->
+  <div class="glass-card habit-add-card">
+    <div class="card-header">
+      <span data-i18n="habit_add_title">新增习惯</span>
+    </div>
+    <div class="habit-add-row">
+      <button class="btn btn--ghost habit-emoji-picker-btn" id="habitEmojiBtn">🌱</button>
+      <input class="input habit-name-input" id="habitNameInput"
+        type="text"
+        data-i18n-placeholder="habit_name_placeholder"
+        placeholder="习惯名称…"
+        maxlength="20"
+      />
+      <button class="btn btn--primary habit-add-btn" id="habitAddBtn" data-i18n="habit_add">添加</button>
+    </div>
+    <!-- emoji 选择面板 -->
+<div class="habit-emoji-panel" id="habitEmojiPanel" style="display:none;">
+  <button class="habit-emoji-opt" data-emoji="🌱">🌱</button>
+  <button class="habit-emoji-opt" data-emoji="💪">💪</button>
+  <button class="habit-emoji-opt" data-emoji="📚">📚</button>
+  <button class="habit-emoji-opt" data-emoji="🏃">🏃</button>
+  <button class="habit-emoji-opt" data-emoji="💧">💧</button>
+  <button class="habit-emoji-opt" data-emoji="🧘">🧘</button>
+  <button class="habit-emoji-opt" data-emoji="✍️">✍️</button>
+  <button class="habit-emoji-opt" data-emoji="🎨">🎨</button>
+  <button class="habit-emoji-opt" data-emoji="🎵">🎵</button>
+  <button class="habit-emoji-opt" data-emoji="🌙">🌙</button>
+  <button class="habit-emoji-opt" data-emoji="☀️">☀️</button>
+  <button class="habit-emoji-opt" data-emoji="🍎">🍎</button>
+  <button class="habit-emoji-opt" data-emoji="😴">😴</button>
+  <button class="habit-emoji-opt" data-emoji="🧹">🧹</button>
+  <button class="habit-emoji-opt" data-emoji="💊">💊</button>
+  <button class="habit-emoji-opt" data-emoji="🐾">🐾</button>
+</div>
+  </div>
+
+  <!-- 今日打卡 -->
+  <div class="glass-card habit-today-card">
+    <div class="card-header">
+      <span data-i18n="habit_today_title">今日打卡</span>
+      <span class="habit-today-date" id="habitTodayDate"></span>
+    </div>
+    <div class="habit-today-list" id="habitTodayList">
+      <p class="habit-empty" id="habitEmpty" data-i18n="habit_empty">还没有习惯，添加一个吧 🌱</p>
+    </div>
+  </div>
+
+  <!-- 习惯详情列表 -->
+  <div class="glass-card habit-detail-card" id="habitDetailCard" style="display:none;">
+    <div class="card-header">
+      <span class="habit-detail-name" id="habitDetailName"></span>
+      <button class="btn btn--ghost btn--sm" id="habitDetailClose">✕</button>
+    </div>
+    <div class="habit-streak-row">
+      <div class="habit-streak-block">
+        <span class="habit-streak-num" id="habitStreakNum">0</span>
+        <span class="habit-streak-label" data-i18n="habit_streak">连续天数</span>
+      </div>
+      <div class="habit-streak-block">
+        <span class="habit-streak-num" id="habitTotalNum">0</span>
+        <span class="habit-streak-label" data-i18n="habit_total">累计打卡</span>
+      </div>
+    </div>
+    <!-- 最近30天热力图 -->
+    <div class="habit-heatmap" id="habitHeatmap"></div>
+    <button class="btn btn--danger btn--sm habit-delete-btn" id="habitDeleteBtn" data-i18n="habit_delete">删除此习惯</button>
+  </div>
+
+</div>
+<!-- == END: daily-habit == -->
+
 
     <!-- == BLOCK: daily-calendar == -->
     <div class="daily-panel" id="daily-panel-calendar" style="display:none;"></div>
