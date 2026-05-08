@@ -81,6 +81,8 @@
         </section>
 
         <!-- ====== DIVINATION ====== -->
+        
+                <!-- ====== DIVINATION ====== -->
         <!-- == BLOCK: page-divination == -->
 <section id="page-divination" class="page"><div class="page-scroll">
 
@@ -96,11 +98,15 @@
         <span class="div-tab-emoji">🔮</span>
         <span data-i18n="div_tab_lenormand">雷诺曼</span>
       </button>
-      <button class="div-tab" data-system="tarot" disabled>
+      <button class="div-tab" data-system="tarot">
         <span class="div-tab-emoji">🃏</span>
         <span data-i18n="div_tab_tarot">塔罗</span>
-        <span class="div-tab-badge" data-i18n="coming_soon">即将开放</span>
-      </button></div>
+      </button>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         雷诺曼区域
+    ══════════════════════════════════════ -->
 
     <!-- Spread Selection -->
     <div class="div-spread-section" id="divSpreadSection">
@@ -143,15 +149,13 @@
       <button class="btn-primary div-draw-btn" id="divDrawBtn" data-i18n="div_draw_btn">开始抽牌</button>
     </div>
 
-    <!-- Card Stage (draw animation area) -->
+    <!-- Card Stage -->
     <div class="div-stage" id="divStage" style="display:none;">
-      <!-- Deck -->
       <div class="div-deck" id="divDeck">
         <div class="div-deck-card glass-card">
           <span class="div-deck-symbol">✦</span>
         </div>
       </div>
-      <!-- Spread Layout -->
       <div class="div-layout" id="divLayout"></div>
     </div>
 
@@ -159,8 +163,6 @@
     <div class="div-reading" id="divReading" style="display:none;">
       <p class="div-section-label mono" data-i18n="div_reading_title">牌面解读</p>
       <div class="div-cards-summary" id="divCardsSummary"></div>
-
-      <!-- AI Interpret -->
       <div class="div-ai-section" id="divAISection" style="display:none;">
         <button class="btn btn--ghost div-ai-btn" id="divAIBtn">
           <span class="div-ai-icon">✨</span>
@@ -170,15 +172,109 @@
           <div class="div-ai-loading" id="divAILoading" style="display:none;">
             <div class="div-ai-dots"><span></span><span></span><span></span></div>
             <span data-i18n="div_ai_loading">宇宙正在解读...</span>
-          </div><div class="div-ai-text" id="divAIText"></div>
+          </div>
+          <div class="div-ai-text" id="divAIText"></div>
         </div>
       </div>
-
-      <!-- Action Buttons -->
       <div class="div-actions">
-        <button class="btn btn--ghost" id="divAgainBtn" data-i18n="div_again_btn">重新抽牌</button></div>
-    </div></div>
-</section>
+        <button class="btn btn--ghost" id="divAgainBtn" data-i18n="div_again_btn">重新抽牌</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         塔罗区域
+    ══════════════════════════════════════ -->
+
+    <!-- == BLOCK: tarot-spread-section == -->
+    <div class="tarot-spread-section" id="tarotSpreadSection" style="display:none;">
+      <p class="div-section-label mono" data-i18n="div_choose_spread">选择牌阵</p>
+      <div class="tarot-spread-grid" id="tarotSpreadGrid">
+        <button class="tarot-spread-card" data-spread="single">
+          <div class="tarot-spread-icon">🎴</div>
+          <div class="tarot-spread-name" data-i18n="tarot_spread_single">每日一卡</div>
+          <div class="tarot-spread-desc" data-i18n="tarot_spread_single_desc">今日指引 ×1</div>
+        </button>
+        <button class="tarot-spread-card" data-spread="three">
+          <div class="tarot-spread-icon">🎴🎴🎴</div>
+          <div class="tarot-spread-name" data-i18n="tarot_spread_three">时间之流</div>
+          <div class="tarot-spread-desc" data-i18n="tarot_spread_three_desc">过去 / 现在 / 未来 ×3</div>
+        </button>
+        <button class="tarot-spread-card" data-spread="five">
+          <div class="tarot-spread-icon">📚</div>
+          <div class="tarot-spread-name" data-i18n="tarot_spread_five">学业之路</div>
+          <div class="tarot-spread-desc" data-i18n="tarot_spread_five_desc">学业专属 ×5</div>
+        </button>
+        <button class="tarot-spread-card" data-spread="six">
+          <div class="tarot-spread-icon">💞</div>
+          <div class="tarot-spread-name" data-i18n="tarot_spread_six">关系之镜</div>
+          <div class="tarot-spread-desc" data-i18n="tarot_spread_six_desc">两人关系 ×6</div>
+        </button>
+        <button class="tarot-spread-card" data-spread="seven">
+          <div class="tarot-spread-icon">⭐</div>
+          <div class="tarot-spread-name" data-i18n="tarot_spread_seven">指引之星</div>
+          <div class="tarot-spread-desc" data-i18n="tarot_spread_seven_desc">通用深度 ×7</div>
+        </button>
+        <button class="tarot-spread-card" data-spread="ten">
+          <div class="tarot-spread-icon">✦</div>
+          <div class="tarot-spread-name" data-i18n="tarot_spread_ten">凯尔特十字</div>
+          <div class="tarot-spread-desc" data-i18n="tarot_spread_ten_desc">经典深度 ×10</div>
+        </button>
+      </div>
+    </div>
+    <!-- == END: tarot-spread-section == -->
+
+    <!-- == BLOCK: tarot-question-section == -->
+    <div class="div-question-section glass-card" id="tarotQuestionSection" style="display:none;">
+      <p class="div-section-label mono" data-i18n="tarot_question_label">你想问什么？（可选）</p>
+      <input type="text" class="input tarot-question-input" id="tarotQuestionInput"
+             data-i18n-placeholder="tarot_question_ph"
+             placeholder="描述你的问题或情境...">
+      <div class="div-topic-tags" id="tarotTopicTags">
+        <button class="div-topic-tag" data-topic="work"    data-i18n="tarot_topic_work">事业</button>
+        <button class="div-topic-tag" data-topic="love"    data-i18n="tarot_topic_love">爱情</button>
+        <button class="div-topic-tag" data-topic="study"   data-i18n="tarot_topic_study">学业</button>
+        <button class="div-topic-tag" data-topic="money"   data-i18n="tarot_topic_money">财运</button>
+        <button class="div-topic-tag" data-topic="general" data-i18n="tarot_topic_general">综合</button>
+      </div>
+      <button class="btn-primary tarot-draw-btn" id="tarotDrawBtn" data-i18n="tarot_draw_btn">开始抽牌</button>
+    </div>
+    <!-- == END: tarot-question-section == -->
+
+    <!-- == BLOCK: tarot-stage == -->
+    <div class="div-stage" id="tarotStage" style="display:none;">
+      <div class="div-deck" id="tarotDeck">
+        <div class="div-deck-card glass-card">
+          <span class="div-deck-symbol">🃏</span>
+        </div>
+      </div>
+      <div class="tarot-layout" id="tarotLayout"></div>
+    </div>
+    <!-- == END: tarot-stage == -->
+
+    <!-- == BLOCK: tarot-reading == -->
+    <div class="tarot-reading" id="tarotReading" style="display:none;">
+      <p class="div-section-label mono" data-i18n="tarot_reading_title">牌面解读</p>
+      <div class="tarot-cards-summary" id="tarotCardsSummary"></div>
+      <div class="div-ai-section" id="tarotAISection" style="display:none;">
+        <button class="btn btn--ghost tarot-ai-btn" id="tarotAIBtn">
+          <span class="div-ai-icon">✨</span>
+          <span data-i18n="tarot_ai_btn">AI 深度解读</span>
+        </button>
+        <div class="div-ai-result glass-card" id="tarotAIResult" style="display:none;">
+          <div class="div-ai-loading" id="tarotAILoading" style="display:none;">
+            <div class="div-ai-dots"><span></span><span></span><span></span></div>
+            <span data-i18n="div_ai_loading">宇宙正在解读...</span>
+          </div>
+          <div class="div-ai-text" id="tarotAIText"></div>
+        </div>
+      </div>
+      <div class="div-actions">
+        <button class="btn btn--ghost" id="tarotAgainBtn" data-i18n="tarot_again_btn">重新抽牌</button>
+      </div>
+    </div>
+    <!-- == END: tarot-reading == -->
+
+</div></section>
 <!-- == END: page-divination == -->
 
         <!-- ====== WHEEL ====== -->
@@ -440,6 +536,7 @@
 <script src="js/wheel.js"></script>
 <script src="js/api.js"></script>
 <script src="js/tarot.js"></script>
+<script src="js/tarotdeck.js"></script>
 
 </body>
 </html>
