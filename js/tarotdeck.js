@@ -137,7 +137,7 @@ function bindEventsTarot() {
                 for (var k = 0; k < all.length; k++) {
                     all[k].classList.remove('active');
                 }
-                tag.classList.add('active');
+                tag.classList.add('div-topic-tag--active');
                 tarotState.topic = tag.getAttribute('data-topic');
             });
         })(topicTags[j]);
@@ -830,7 +830,7 @@ function t(key) {
                     for (var j = 0; j < allTabs.length; j++) {
                         allTabs[j].classList.remove('active');
                     }
-                    newTab.classList.add('active');
+                    newTab.classList.add('div-tab--active');
 
                     // 切换系统
                     if (system === 'tarot') {
