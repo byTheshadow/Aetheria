@@ -466,8 +466,46 @@
 
     <!-- 其他 panel 占位，后续模块填充 -->
     <!-- == BLOCK: daily-todo == -->
-    <div class="daily-panel" id="daily-panel-todo" style="display:none;"></div>
-    <!-- == END: daily-todo == -->
+<div class="daily-panel" id="daily-panel-todo" style="display:none;">
+
+  <!-- 进度概览 -->
+  <div class="glass-card todo-progress-card">
+    <div class="todo-progress-header">
+      <span class="todo-progress-label" id="todoProgressLabel">0 / 0 已完成</span>
+      <span class="todo-progress-pct" id="todoProgressPct">0%</span>
+    </div>
+    <div class="todo-progress-bar">
+      <div class="todo-progress-fill" id="todoProgressFill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- 输入区 -->
+  <div class="glass-card todo-input-card">
+    <div class="todo-input-row">
+      <input class="input todo-input" id="todoInput"
+        type="text"
+        data-i18n-placeholder="todo_input_placeholder"
+        placeholder="添加新任务…"
+        maxlength="100"
+      />
+      <button class="btn btn--primary todo-add-btn" id="todoAddBtn" data-i18n="todo_add">添加</button>
+    </div>
+  </div>
+
+  <!-- 任务列表 -->
+  <div class="glass-card todo-list-card">
+    <div class="card-header">
+      <span data-i18n="todo_list_title">任务清单</span>
+      <button class="btn btn--ghost btn--sm" id="todoClearDoneBtn" data-i18n="todo_clear_done">清除已完成</button>
+    </div>
+    <div class="todo-list" id="todoList">
+      <p class="todo-empty" id="todoEmpty" data-i18n="todo_empty">还没有任务，添加一个吧 ✨</p>
+    </div>
+  </div>
+
+</div>
+<!-- == END: daily-todo == -->
+
 
     <!-- == BLOCK: daily-habit == -->
     <div class="daily-panel" id="daily-panel-habit" style="display:none;"></div>

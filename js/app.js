@@ -141,6 +141,17 @@ mood_saved:           '心情已记录 ✨',
 mood_select_first:    '请先选择一个心情',
 mood_deleted:         '已删除',
 mood_weekdays_zh:     '日,一,二,三,四,五,六',
+// I18N.zh
+todo_input_placeholder: '添加新任务…',
+todo_add:               '添加',
+todo_list_title:        '任务清单',
+todo_clear_done:        '清除已完成',
+todo_empty:             '还没有任务，添加一个吧 ✨',
+todo_added:             '任务已添加',
+todo_deleted:           '已删除',
+todo_cleared:           '已清除完成的任务',
+todo_input_empty:       '请输入任务内容',
+
 },
     en: {
         nav_home: 'Home',
@@ -283,6 +294,15 @@ mood_saved:           'Mood logged ✨',
 mood_select_first:    'Pick a mood first',
 mood_deleted:         'Deleted',
 mood_weekdays_zh:     'Sun,Mon,Tue,Wed,Thu,Fri,Sat',
+todo_input_placeholder: 'Add a new task…',
+todo_add:               'Add',
+todo_list_title:        'Tasks',
+todo_clear_done:        'Clear Done',
+todo_empty:             'No tasks yet, add one ✨',
+todo_added:             'Task added',
+todo_deleted:           'Deleted',
+todo_cleared:           'Cleared completed tasks',
+todo_input_empty:       'Please enter a task',
     }
 };
 /* == END: i18n == */

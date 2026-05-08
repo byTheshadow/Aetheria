@@ -351,6 +351,7 @@ function initDaily() {
   dailyInitTabs();
   moodInitInput();
   moodInitCalendar();
+  todoInit(); // 新增
 
   var closeBtn = $('#moodDetailClose');
   if (closeBtn) {
@@ -361,6 +362,209 @@ function initDaily() {
   }
 }
 /* == END: daily-init == */
+/* == BLOCK: todo-storage == */
+function todoLoadAll() {
+  var raw = localStorage.getItem('aetheria_daily_todo');
+  return raw ? JSON.parse(raw) : [];
+}
+
+function todoSaveAll(list) {
+  localStorage.setItem('aetheria_daily_todo', JSON.stringify(list));
+}
+/* == END: todo-storage == */
+
+/* == BLOCK: todo-render == */
+function todoRender() {
+  var listEl   = $('#todoList');
+  var emptyEl  = $('#todoEmpty');
+  if (!listEl) return;
+
+  var list = todoLoadAll();
+  var lang = (typeof currentLang !== 'undefined') ? currentLang : 'zh';
+
+  // 清空现有条目（保留 empty 提示）
+  var items = listEl.querySelectorAll('.todo-item');
+  for (var i = 0; i < items.length; i++) {
+    items[i].remove();
+  }
+
+  // 未完成在前，已完成在后
+  var pending  = [];
+  var done     = [];
+  for (var j = 0; j < list.length; j++) {
+    if (list[j].done) { done.push(list[j]); }
+    else              { pending.push(list[j]); }
+  }
+  var sorted = pending.concat(done);
+
+  if (sorted.length === 0) {
+    if (emptyEl) emptyEl.style.display = 'block';
+    todoUpdateProgress(0, 0);
+    return;
+  }
+  if (emptyEl) emptyEl.style.display = 'none';
+
+  for (var k = 0; k < sorted.length; k++) {
+    listEl.appendChild(todoBuiltItemEl(sorted[k], lang));
+  }
+
+  todoUpdateProgress(done.length, list.length);
+}
+
+function todoBuiltItemEl(task, lang) {
+  var item = document.createElement('div');
+  item.className = 'todo-item' + (task.done ? ' todo-item--done' : '');
+  item.dataset.id = task.id;
+
+  // 勾选框
+  var checkbox = document.createElement('button');
+  checkbox.className = 'todo-checkbox' + (task.done ? ' todo-checkbox--checked' : '');
+  checkbox.setAttribute('aria-label', task.done ? 'Mark incomplete' : 'Mark complete');
+  checkbox.innerHTML = task.done ? '✓' : '';
+  checkbox.addEventListener('click', function() {
+    todoToggle(parseInt(this.closest('.todo-item').dataset.id));
+  });
+
+  // 文字
+  var text = document.createElement('span');
+  text.className = 'todo-text';
+  text.textContent = task.text;
+
+  // 时间
+  var meta = document.createElement('span');
+  meta.className = 'todo-meta';
+  var d = new Date(task.createdAt);
+  var dateStr = (d.getMonth() + 1) + '/' + d.getDate();
+  meta.textContent = task.done
+    ? (lang === 'zh' ? '已完成' : 'Done')
+    : dateStr;
+
+  // 删除按钮
+  var delBtn = document.createElement('button');
+  delBtn.className = 'btn btn--ghost btn--sm todo-del';
+  delBtn.setAttribute('aria-label', 'Delete task');
+  delBtn.textContent = '✕';
+  delBtn.addEventListener('click', function() {
+    todoDelete(parseInt(this.closest('.todo-item').dataset.id));
+  });
+
+  item.appendChild(checkbox);
+  item.appendChild(text);
+  item.appendChild(meta);
+  item.appendChild(delBtn);
+
+  return item;
+}
+
+function todoUpdateProgress(doneCount, total) {
+  var labelEl = $('#todoProgressLabel');
+  var pctEl   = $('#todoProgressPct');
+  var fillEl  = $('#todoProgressFill');
+  if (!labelEl) return;
+
+  var lang = (typeof currentLang !== 'undefined') ? currentLang : 'zh';
+  var pct  = total === 0 ? 0 : Math.round((doneCount / total) * 100);
+
+  labelEl.textContent = lang === 'zh'
+    ? doneCount + ' / ' + total + ' 已完成'
+    : doneCount + ' / ' + total + ' done';
+  if (pctEl)  pctEl.textContent  = pct + '%';
+  if (fillEl) fillEl.style.width = pct + '%';
+}
+/* == END: todo-render == */
+
+/* == BLOCK: todo-actions == */
+function todoAdd(text) {
+  text = text.trim();
+  if (!text) {
+    showToast('todo_input_empty');
+    return;
+  }
+  var list = todoLoadAll();
+  var task = {
+    id:        Date.now(),
+    text:      text,
+    done:      false,
+    createdAt: Date.now(),
+    doneAt:    null
+  };
+  list.unshift(task); // 新任务插到最前
+  todoSaveAll(list);
+  showToast('todo_added');
+  todoRender();
+}
+
+function todoToggle(id) {
+  var list = todoLoadAll();
+  for (var i = 0; i < list.length; i++) {
+    if (list[i].id === id) {
+      list[i].done   = !list[i].done;
+      list[i].doneAt = list[i].done ? Date.now() : null;
+      break;
+    }
+  }
+  todoSaveAll(list);
+  todoRender();
+}
+
+function todoDelete(id) {
+  var list = todoLoadAll();
+  for (var i = 0; i < list.length; i++) {
+    if (list[i].id === id) {
+      list[i].classList && list[i].classList.add('todo-item--removing');
+      list.splice(i, 1);
+      break;
+    }
+  }
+  todoSaveAll(list);
+  showToast('todo_deleted');
+  todoRender();
+}
+
+function todoClearDone() {
+  var list    = todoLoadAll();
+  var pending = [];
+  for (var i = 0; i < list.length; i++) {
+    if (!list[i].done) pending.push(list[i]);
+  }
+  todoSaveAll(pending);
+  showToast('todo_cleared');
+  todoRender();
+}
+/* == END: todo-actions == */
+
+/* == BLOCK: todo-init == */
+function todoInit() {
+  var input    = $('#todoInput');
+  var addBtn   = $('#todoAddBtn');
+  var clearBtn = $('#todoClearDoneBtn');
+
+  if (addBtn) {
+    addBtn.addEventListener('click', function() {
+      var input = $('#todoInput');
+      if (input) {
+        todoAdd(input.value);
+        input.value = '';
+      }
+    });
+  }
+
+  if (input) {
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        todoAdd(this.value);
+        this.value = '';
+      }
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', todoClearDone);
+  }
+
+  todoRender();
+}
+/* == END: todo-init == */
 
 /* == END: daily-module == */
 
